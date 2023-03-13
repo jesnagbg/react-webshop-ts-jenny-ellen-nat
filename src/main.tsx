@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import App from "./App";
 import "./index.css";
-import Admin from "./pages/admin";
+import Admin from "./pages/Admin";
 import Checkout from "./pages/Checkout";
 import Confirmation from "./pages/Confirmation";
 import Product from "./pages/Product";
