@@ -138,7 +138,7 @@ export const products: Product[] = [
       "${process.env.PUBLIC_URL}/assets/beverlyhillscat2.jpg",
       "${process.env.PUBLIC_URL}/assets/third.jpg",
     ],
-    title: "Beverlyhills cat",
+    title: "Beverly Hills cat",
     description:
       "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
     price: 349,
