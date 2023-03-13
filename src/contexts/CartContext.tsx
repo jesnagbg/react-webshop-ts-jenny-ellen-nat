@@ -23,9 +23,18 @@ export default function CartProvider({ children }: Props) {
     }
   };
 
-  const removeFromCart = () => {};
+  const removeFromCart = (id: string) => {
+    setCartItems(cartItems.filter((item) => item.id !== id));
+  };
 
-  const changeQuantity = () => {};
+  const changeQuantity = (id: string, quantity: number) => {
+    setCartItems(
+      cartItems.map((item) => {
+        if (item.id !== id) return item;
+        return { ...item, quantity: quantity };
+      })
+    );
+  };
 
   return (
     <CartContext.Provider value={{ cartItems }}>
