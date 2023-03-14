@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { CartItem, products } from "../data";
 
 interface ContextValue {
@@ -14,6 +20,17 @@ interface Props {
 
 export default function CartProvider({ children }: Props) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  useEffect(() => {
+    const localCartJSON = localStorage.getItem("pieceByPieceCart");
+    if (localCartJSON) {
+      setCartItems(JSON.parse(localCartJSON));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("pieveByPiecesCart", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = (id: string, quantity: number) => {
     const newItem = products.find((product) => product.id === id);
