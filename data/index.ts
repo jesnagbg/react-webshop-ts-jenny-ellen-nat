@@ -1,5 +1,6 @@
 export interface Product {
   id: string;
+  image: string;
   images: string[];
   title: string;
   description: string;
@@ -13,8 +14,8 @@ export interface CartItem extends Product {
 export const products: Product[] = [
   {
     id: "000001",
+    image: "${process.env.PUBLIC_URL}/assets/calmwoman.jpg",
     images: [
-      "${process.env.PUBLIC_URL}/assets/calmwoman.jpg",
       "${process.env.PUBLIC_URL}/assets/calmwoman2.jpg",
       "${process.env.PUBLIC_URL}/assets/third.jpg",
     ],
@@ -25,8 +26,8 @@ export const products: Product[] = [
   },
   {
     id: "000002",
+    image: "${process.env.PUBLIC_URL}/assets/daisies.jpg",
     images: [
-      "${process.env.PUBLIC_URL}/assets/daisies.jpg",
       "${process.env.PUBLIC_URL}/assets/daisies.jpg",
       "${process.env.PUBLIC_URL}/assets/third.jpg",
     ],
@@ -37,8 +38,8 @@ export const products: Product[] = [
   },
   {
     id: "000003",
+    image: "${process.env.PUBLIC_URL}/assets/moby.jpg",
     images: [
-      "${process.env.PUBLIC_URL}/assets/moby.jpg",
       "${process.env.PUBLIC_URL}/assets/moby2.jpg",
       "${process.env.PUBLIC_URL}/assets/third.jpg",
     ],
@@ -49,8 +50,8 @@ export const products: Product[] = [
   },
   {
     id: "000004",
+    image: "${process.env.PUBLIC_URL}/assets/sunriseferns.jpg",
     images: [
-      "${process.env.PUBLIC_URL}/assets/sunriseferns.jpg",
       "${process.env.PUBLIC_URL}/assets/sunriseferns2.jpg",
       "${process.env.PUBLIC_URL}/assets/third.jpg",
     ],
@@ -61,8 +62,8 @@ export const products: Product[] = [
   },
   {
     id: "000005",
+    image: "${process.env.PUBLIC_URL}/assets/makingfriends.jpg",
     images: [
-      "${process.env.PUBLIC_URL}/assets/makingfriends.jpg",
       "${process.env.PUBLIC_URL}/assets/makingfriends2.jpg",
       "${process.env.PUBLIC_URL}/assets/third.jpg",
     ],
@@ -73,8 +74,8 @@ export const products: Product[] = [
   },
   {
     id: "000006",
+    image: "${process.env.PUBLIC_URL}/assets/checkerboard.jpg",
     images: [
-      "${process.env.PUBLIC_URL}/assets/checkerboard.jpg",
       "${process.env.PUBLIC_URL}/assets/checkerboard2.jpg",
       "${process.env.PUBLIC_URL}/assets/third.jpg",
     ],
@@ -85,8 +86,8 @@ export const products: Product[] = [
   },
   {
     id: "000007",
+    image: "${process.env.PUBLIC_URL}/assets/discoathome.jpg",
     images: [
-      "${process.env.PUBLIC_URL}/assets/discoathome.jpg",
       "${process.env.PUBLIC_URL}/assets/discoathome2.jpg",
       "${process.env.PUBLIC_URL}/assets/third.jpg",
     ],
@@ -97,8 +98,8 @@ export const products: Product[] = [
   },
   {
     id: "000008",
+    image: "${process.env.PUBLIC_URL}/assets/villagefarmersmarket.jpg",
     images: [
-      "${process.env.PUBLIC_URL}/assets/villagefarmersmarket.jpg",
       "${process.env.PUBLIC_URL}/assets/villagefarmersmarket2.jpg",
       "${process.env.PUBLIC_URL}/assets/third.jpg",
     ],
@@ -109,8 +110,8 @@ export const products: Product[] = [
   },
   {
     id: "000009",
+    image: "${process.env.PUBLIC_URL}/assets/californialiving.jpg",
     images: [
-      "${process.env.PUBLIC_URL}/assets/californialiving.jpg",
       "${process.env.PUBLIC_URL}/assets/californialiving2.jpg",
       "${process.env.PUBLIC_URL}/assets/third.jpg",
     ],
@@ -121,8 +122,8 @@ export const products: Product[] = [
   },
   {
     id: "000010",
+    image: "${process.env.PUBLIC_URL}/assets/colorfulrhythm.jpg",
     images: [
-      "${process.env.PUBLIC_URL}/assets/colorfulrhythm.jpg",
       "${process.env.PUBLIC_URL}/assets/colorfulrhythm2.jpg",
       "${process.env.PUBLIC_URL}/assets/third.jpg",
     ],
@@ -133,8 +134,8 @@ export const products: Product[] = [
   },
   {
     id: "000011",
+    image: "${process.env.PUBLIC_URL}/assets/beverlyhillscat.jpg",
     images: [
-      "${process.env.PUBLIC_URL}/assets/beverlyhillscat.jpg",
       "${process.env.PUBLIC_URL}/assets/beverlyhillscat2.jpg",
       "${process.env.PUBLIC_URL}/assets/third.jpg",
     ],
