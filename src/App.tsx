@@ -1,11 +1,15 @@
+import {ThemeProvider} from "@mui/material/styles";
 import {Outlet} from "react-router-dom";
+import {theme} from "./theme";
 
 function App() {
   return (
-    <div>
-      <h1>Hello Students, begin here!</h1>
-      <Outlet />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <h1>Hello Students, begin here!</h1>
+        <Outlet />
+      </div>
+    </ThemeProvider>
   );
 }
 
