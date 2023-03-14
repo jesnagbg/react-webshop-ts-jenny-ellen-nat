@@ -5,13 +5,16 @@ import {
   useEffect,
   useState,
 } from "react";
-import { CartItem, products } from "../data";
+import { CartItem, Product } from "../data";
 
 interface ContextValue {
   cartItems: CartItem[];
+  addToCart: (product: Product, quantity: number) => void;
+  removeFromCart: (id: string) => void;
+  changeQuantity: (id: string, quantity: number) => void;
 }
 
-export const CartContext = createContext<ContextValue>(null as any);
+const CartContext = createContext<ContextValue>(null as any);
 export const useCart = () => useContext(CartContext);
 
 interface Props {
@@ -32,16 +35,17 @@ export default function CartProvider({ children }: Props) {
     localStorage.setItem("pieveByPiecesCart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const addToCart = (id: string, quantity: number) => {
-    const newItem = products.find((product) => product.id === id);
-    if (newItem) {
-      const newCartItem = { ...newItem, quantity: quantity };
-      setCartItems([...cartItems, newCartItem]);
-    }
+  const addToCart = (product: Product, quantity: number) => {
+    const newCartItem: CartItem = { ...product, quantity: quantity };
+    const updatedCartItems = [...cartItems, newCartItem];
+    setCartItems(updatedCartItems);
+    console.log(updatedCartItems);
+    // Toast
   };
 
   const removeFromCart = (id: string) => {
     setCartItems(cartItems.filter((item) => item.id !== id));
+    // Toast
   };
 
   const changeQuantity = (id: string, quantity: number) => {
@@ -54,7 +58,9 @@ export default function CartProvider({ children }: Props) {
   };
 
   return (
-    <CartContext.Provider value={{ cartItems }}>
+    <CartContext.Provider
+      value={{ cartItems, addToCart, removeFromCart, changeQuantity }}
+    >
       {children}
     </CartContext.Provider>
   );

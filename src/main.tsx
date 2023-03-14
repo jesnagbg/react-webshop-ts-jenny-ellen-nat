@@ -1,4 +1,3 @@
-import { Start } from "@mui/icons-material";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
@@ -9,11 +8,14 @@ import {
 } from "react-router-dom";
 import App from "./App";
 import CartProvider from "./contexts/CartContext";
+import OrderProvider from "./contexts/OrderContext";
+import ProductsProvider from "./contexts/ProductsContext";
 import "./index.css";
 import Admin from "./pages/Admin";
 import Checkout from "./pages/Checkout";
 import Confirmation from "./pages/Confirmation";
 import Product from "./pages/Product";
+import Start from "./pages/Start";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -51,8 +53,12 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <CartProvider>
-      <RouterProvider router={router} />
-    </CartProvider>
+    <ProductsProvider>
+      <CartProvider>
+        <OrderProvider>
+          <RouterProvider router={router} />
+        </OrderProvider>
+      </CartProvider>
+    </ProductsProvider>
   </React.StrictMode>
 );
