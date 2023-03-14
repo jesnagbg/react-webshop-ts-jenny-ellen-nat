@@ -11,13 +11,12 @@ import useScrollTrigger from "@mui/material/useScrollTrigger";
 import {FC, ReactElement} from "react";
 import CartIcon from "./CartIcon";
 
-// Define the type for the HideOnScrollProps
-type HideOnScrollProps = {
+interface Props {
   children: ReactElement;
-};
+}
 
 // Define the HideOnScroll component as a function component
-const HideOnScroll: FC<HideOnScrollProps> = ({children}) => {
+const HideOnScroll: FC<Props> = ({children}) => {
   // useScrollTrigger returns a boolean value indicating whether the user has scrolled down the page
   const trigger = useScrollTrigger();
 
