@@ -120,28 +120,4 @@ export const products: Product[] = [
       "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
     price: 349,
   },
-  {
-    id: "000010",
-    image: "${process.env.PUBLIC_URL}/assets/colorfulrhythm.jpg",
-    images: [
-      "${process.env.PUBLIC_URL}/assets/colorfulrhythm2.jpg",
-      "${process.env.PUBLIC_URL}/assets/third.jpg",
-    ],
-    title: "Colorful rhythm",
-    description:
-      "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
-    price: 349,
-  },
-  {
-    id: "000011",
-    image: "${process.env.PUBLIC_URL}/assets/beverlyhillscat.jpg",
-    images: [
-      "${process.env.PUBLIC_URL}/assets/beverlyhillscat2.jpg",
-      "${process.env.PUBLIC_URL}/assets/third.jpg",
-    ],
-    title: "Beverly Hills cat",
-    description:
-      "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
-    price: 349,
-  },
 ];
