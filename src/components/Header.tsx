@@ -34,31 +34,13 @@ const HideOnScroll: FC<Props> = ({children}) => {
 export default function Header() {
   return (
     <HideOnScroll>
-      <AppBar
-        sx={{
-          height: 80,
-          bgcolor: "#fff",
-          marginBottom: "100px",
-          boxShadow: "none",
-        }}
-      >
-        <Container
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            color: "#333",
-            height: "100%",
-          }}
-        >
-          {/* <NavLink to="/">Start page</NavLink> */}
+      <AppBar sx={appBarStyle}>
+        <Container sx={containerStyle}>
           <Typography variant="h6">Piece by Piece</Typography>
           <Box>
             <CartIcon />
             <IconButton>
-              <PersonOutlineOutlinedIcon
-                sx={{color: "#333", fontSize: "1.7rem"}}
-              />
+              <PersonOutlineOutlinedIcon sx={personOutlinedStyle} />
             </IconButton>
           </Box>
         </Container>
@@ -66,3 +48,23 @@ export default function Header() {
     </HideOnScroll>
   );
 }
+
+const appBarStyle = {
+  height: 80,
+  bgcolor: "#fff",
+  marginBottom: "100px",
+  boxShadow: "none",
+};
+
+const containerStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  color: "#333",
+  height: "100%",
+};
+
+const personOutlinedStyle = {
+  color: "#333",
+  fontSize: "1.7rem",
+};
