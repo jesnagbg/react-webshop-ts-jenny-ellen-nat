@@ -1,22 +1,19 @@
-import { Container, Grid, Typography } from "@mui/material";
+import {Container, Grid, Typography} from "@mui/material";
 import Basket from "../components/Basket";
 import CheckoutForm from "../components/CheckoutForm";
 
 export default function Checkout() {
   return (
-    <Container
-      sx={containerWidth}
-      maxWidth={false}
-    >
+    <Container maxWidth={"lg"}>
       <Grid
         container
         spacing={2}
       >
         <Grid
           item
-          width={12}
+          xl={12}
         >
-          <Typography component="h1">CHECKOUT</Typography>
+          <Typography variant="h1">CHECKOUT</Typography>
         </Grid>
         <Grid
           item
@@ -38,7 +35,3 @@ export default function Checkout() {
     </Container>
   );
 }
-
-const containerWidth = {
-  maxWidth: "1400px",
-};
