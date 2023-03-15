@@ -17,6 +17,16 @@ export default function Basket() {
           </Box>
         ))}
       </Stack>
+      <Typography
+        variant="subtitle1"
+        sx={styledTypography}
+      >
+        total: {cartItems.reduce((total, item) => total + item.price, 0)}kr
+      </Typography>
     </Box>
   );
 }
+
+const styledTypography = {
+  textAlign: "right",
+};

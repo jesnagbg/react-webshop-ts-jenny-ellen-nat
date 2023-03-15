@@ -19,6 +19,7 @@ export default function Checkout() {
           item
           sm={12}
           md={6}
+          lg={6}
           xl={6}
         >
           <Basket></Basket>
@@ -27,6 +28,7 @@ export default function Checkout() {
           item
           sm={12}
           md={6}
+          lg={6}
           xl={6}
         >
           <CheckoutForm></CheckoutForm>

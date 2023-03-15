@@ -23,7 +23,7 @@ export default function CheckoutCard({item}: Props) {
         alt="Puzzle thumbnail."
       />
       <Box sx={styledBox}>
-        <CardContent>
+        <CardContent sx={styledCardContent}>
           <Typography variant="h5">{item.title}</Typography>
           <Typography variant="body1">Number pieces?</Typography>
           <Typography variant="body1">Change quantity buttons here.</Typography>
@@ -42,12 +42,16 @@ export default function CheckoutCard({item}: Props) {
 }
 
 const styledCard = {
+  margin: "1rem 0",
   display: "flex",
-  dropShadow: "none",
 };
 
 const styledCardMedia = {
   maxWidth: 0.3,
+};
+
+const styledCardContent = {
+  padding: "0 1rem",
 };
 
 const styledBox = {

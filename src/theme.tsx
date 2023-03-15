@@ -45,6 +45,15 @@ export const theme: Theme = createTheme({
   shape: {
     borderRadius: 0,
   },
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+        },
+      },
+    },
+  },
 });
 
 declare module "@mui/material/styles" {
