@@ -11,21 +11,21 @@ interface Props {
 export default function StartCard({ title, image, price }: Props) {
   return (
     <Box>
-      <Card sx={{ maxWidth: 275 }}>
+      <Card sx={cardStyling}>
         <Box sx={imageBorder}>
-          <CardMedia sx={{ height: 270 }} image={image} title={title} />
+          <CardMedia sx={cardImage} image={image} title={title} />
         </Box>
-        <CardContent>
-          <Typography variant="h5" align="left" sx={titleStyling}>
-            {title}
-          </Typography>
+        <CardContent sx={cardContentStyling}>
           <Grid container justifyContent="space-between" alignItems="center">
-            <Typography variant="h6">
-              {price} SEK
-            </Typography>
-            <IconButton
-              sx={shoppingButton}
-            >
+            <Box>
+              <Typography variant="h5" sx={titleStyling}>
+                {title}
+              </Typography>
+              <Typography variant="h6" sx={priceStyling}>
+                {price} SEK
+              </Typography>
+            </Box>
+            <IconButton sx={shoppingButton}>
               <ShoppingCartOutlinedIcon />
             </IconButton>
           </Grid>
@@ -35,10 +35,25 @@ export default function StartCard({ title, image, price }: Props) {
   );
 }
 
+const cardStyling = {
+  maxWidth: 430,
+  boxShadow: "none",
+}
+
 const imageBorder = {
   backgroundColor: theme.palette.lightGrey.main,
-  padding: "0.5rem 1rem",
-  height: "270px",
+  padding: 1,
+  height: 430,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+const cardImage = {
+  height: "100%",
+  width: "100%",
+  maxWidth: 380,
+  objectFit: "contain",
 };
 
 const shoppingButton = {
@@ -51,9 +66,18 @@ const titleStyling = {
   fontFamily: theme.typography.fontFamily,
   fontWeight: 500,
   fontSize: theme.typography.body1.fontSize,
-  color: theme.typography.h1.color,  
-}
+};
 
 const priceStyling = {
-  
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: 400,
+  fontSize: 14,
+  color: theme.typography.h1.color,
+};
+
+const cardContentStyling = {
+  paddingTop: 1,
+  paddingLeft: 0.2,
+  paddingRight: 0.2,
+  "&:last-child": { paddingBottom: 2 }
 }
