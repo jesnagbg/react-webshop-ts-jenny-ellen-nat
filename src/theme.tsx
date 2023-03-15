@@ -1,6 +1,6 @@
-import {createTheme, ThemeOptions} from "@mui/material";
+import {createTheme, Theme} from "@mui/material";
 
-export const theme: ThemeOptions = createTheme({
+export const theme: Theme = createTheme({
   typography: {
     fontFamily: [
       "DM Sans",
@@ -29,8 +29,20 @@ export const theme: ThemeOptions = createTheme({
     secondary: {
       main: "#C7D8B7",
     },
+    lightGrey: {
+      main: "#F6F6F6",
+    },
   },
   shape: {
     borderRadius: 0,
   },
 });
+
+declare module "@mui/material/styles" {
+  interface Palette {
+    lightGrey: Palette["primary"];
+  }
+  interface PaletteOptions {
+    lightGrey?: PaletteOptions["primary"];
+  }
+}
