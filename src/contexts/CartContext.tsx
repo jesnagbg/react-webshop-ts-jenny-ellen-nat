@@ -1,11 +1,6 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { CartItem, Product } from "../data";
+import {createContext, ReactNode, useContext} from "react";
+import {CartItem, Product} from "../data";
+import {useLocalCart} from "../hooks/useLocalCart";
 
 interface ContextValue {
   cartItems: CartItem[];
@@ -21,22 +16,11 @@ interface Props {
   children: ReactNode;
 }
 
-export default function CartProvider({ children }: Props) {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-
-  useEffect(() => {
-    const localCartJSON = localStorage.getItem("pieceByPieceCart");
-    if (localCartJSON) {
-      setCartItems(JSON.parse(localCartJSON));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("pieveByPiecesCart", JSON.stringify(cartItems));
-  }, [cartItems]);
+export default function CartProvider({children}: Props) {
+  const [cartItems, setCartItems] = useLocalCart();
 
   const addToCart = (product: Product, quantity: number) => {
-    const newCartItem: CartItem = { ...product, quantity: quantity };
+    const newCartItem: CartItem = {...product, quantity: quantity};
     const updatedCartItems = [...cartItems, newCartItem];
     setCartItems(updatedCartItems);
     console.log(updatedCartItems);
@@ -52,14 +36,14 @@ export default function CartProvider({ children }: Props) {
     setCartItems(
       cartItems.map((item) => {
         if (item.id !== id) return item;
-        return { ...item, quantity: quantity };
+        return {...item, quantity: quantity};
       })
     );
   };
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, changeQuantity }}
+      value={{cartItems, addToCart, removeFromCart, changeQuantity}}
     >
       {children}
     </CartContext.Provider>
