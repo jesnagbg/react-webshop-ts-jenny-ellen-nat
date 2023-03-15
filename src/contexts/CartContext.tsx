@@ -35,15 +35,19 @@ export default function CartProvider({children}: Props) {
   };
 
   const changeQuantity = (id: string, quantity: number) => {
-    // Must add functionality here that removes the product if quantity reaches 0.
-    setCartItems(
-      cartItems.map((item) => {
-        if (item.id !== id) return item;
-        return {...item, quantity: item.quantity + quantity};
-      })
-    );
+    const foundItem = cartItems.find((item) => item.id === id);
+    if (!foundItem) return;
+    if (foundItem.quantity + quantity <= 0) {
+      removeFromCart(id);
+    } else {
+      setCartItems(
+        cartItems.map((item) => {
+          if (item.id !== id) return item;
+          return {...item, quantity: item.quantity + quantity};
+        })
+      );
+    }
   };
-
   return (
     <CartContext.Provider
       value={{cartItems, addToCart, removeFromCart, changeQuantity}}
