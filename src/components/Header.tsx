@@ -4,11 +4,13 @@ import {
   Box,
   Container,
   IconButton,
+  Link,
   Slide,
   Typography,
 } from "@mui/material";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import {FC, ReactElement} from "react";
+import {Link as RouterLink} from "react-router-dom";
 import {theme} from "../theme";
 import CartIcon from "./CartIcon";
 
@@ -37,9 +39,11 @@ export default function Header() {
     <HideOnScroll>
       <AppBar sx={styledAppBar}>
         <Container sx={styledContainer}>
-          <Typography variant="h6" sx={styledLogo}>
-            Piece by Piece
-          </Typography>
+          <Link component={RouterLink} to="/" sx={styledLink}>
+            <Typography variant="h6" sx={styledLogo}>
+              Piece by Piece
+            </Typography>
+          </Link>
           <Box>
             <IconButton aria-label="cart">
               <CartIcon />
@@ -67,6 +71,10 @@ const styledContainer = {
   alignItems: "center",
   color: theme.palette.primary.main,
   height: "100%",
+};
+
+const styledLink = {
+  textDecoration: "none",
 };
 
 const styledLogo = {
