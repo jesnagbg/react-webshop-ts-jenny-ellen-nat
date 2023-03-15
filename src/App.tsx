@@ -1,7 +1,7 @@
-import {ThemeProvider} from "@mui/material/styles";
-import {Outlet} from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
+import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
-import {theme} from "./theme";
+import { theme } from "./theme";
 
 function App() {
   return (
