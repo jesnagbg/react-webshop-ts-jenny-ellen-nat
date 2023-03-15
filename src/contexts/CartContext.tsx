@@ -20,10 +20,16 @@ export default function CartProvider({children}: Props) {
   const [cartItems, setCartItems] = useLocalCart();
 
   const addToCart = (product: Product, quantity: number) => {
-    const newCartItem: CartItem = {...product, quantity: quantity};
-    const updatedCartItems = [...cartItems, newCartItem];
-    setCartItems(updatedCartItems);
-    console.log(updatedCartItems);
+    if (!cartItems.find((item) => (item.id = product.id))) {
+      const newCartItem: CartItem = {...product, quantity: quantity};
+      setCartItems([...cartItems, newCartItem]);
+    } else {
+      const updatedCartItems = cartItems.map((item) => {
+        if (item.id !== product.id) return item;
+        return {...item, quantity: item.quantity + quantity};
+      });
+      setCartItems(updatedCartItems);
+    }
     // Toast
   };
 

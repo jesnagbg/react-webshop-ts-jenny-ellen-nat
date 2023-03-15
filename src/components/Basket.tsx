@@ -9,9 +9,9 @@ export default function Basket() {
     <Box>
       <Typography variant="h5">Basket</Typography>
       <Divider />
-      <Stack spacing={2}>
+      <Stack>
         {cartItems.map((item) => (
-          <Box>
+          <Box key={item.id}>
             <CheckoutCard item={item} />
             <Divider />
           </Box>
@@ -21,7 +21,12 @@ export default function Basket() {
         variant="subtitle1"
         sx={styledTypography}
       >
-        total: {cartItems.reduce((total, item) => total + item.price, 0)}kr
+        total:{" "}
+        {cartItems.reduce(
+          (total, item) => total + item.price * item.quantity,
+          0
+        )}
+        kr
       </Typography>
     </Box>
   );

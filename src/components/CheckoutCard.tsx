@@ -7,6 +7,7 @@ import {
   Fab,
   Typography,
 } from "@mui/material";
+import {useCart} from "../contexts/CartContext";
 import {CartItem} from "../data";
 
 interface Props {
@@ -14,6 +15,12 @@ interface Props {
 }
 
 export default function CheckoutCard({item}: Props) {
+  const {removeFromCart} = useCart();
+
+  const removeItem = () => {
+    removeFromCart(item.id);
+  };
+
   return (
     <Card sx={styledCard}>
       <CardMedia
@@ -28,12 +35,14 @@ export default function CheckoutCard({item}: Props) {
           <Typography variant="body1">Number pieces?</Typography>
           <Typography variant="body1">Change quantity buttons here.</Typography>
           <Typography variant="body1">{item.price}kr</Typography>
+          <Typography variant="body1">x{item.quantity}</Typography>
         </CardContent>
       </Box>
       <Fab
         color="primary"
         aria-label="remove"
         size="small"
+        onClick={removeItem}
       >
         <Clear />
       </Fab>
