@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import {FC, ReactElement} from "react";
+import {theme} from "../theme";
 import CartIcon from "./CartIcon";
 
 interface Props {
@@ -34,13 +35,17 @@ const HideOnScroll: FC<Props> = ({children}) => {
 export default function Header() {
   return (
     <HideOnScroll>
-      <AppBar sx={appBarStyle}>
-        <Container sx={containerStyle}>
-          <Typography variant="h6">Piece by Piece</Typography>
+      <AppBar sx={styledAppBar}>
+        <Container sx={styledContainer}>
+          <Typography variant="h6" sx={styledLogo}>
+            Piece by Piece
+          </Typography>
           <Box>
-            <CartIcon />
-            <IconButton>
-              <PersonOutlineOutlinedIcon sx={personOutlinedStyle} />
+            <IconButton aria-label="cart">
+              <CartIcon />
+            </IconButton>
+            <IconButton aria-label="admin">
+              <PersonOutlineOutlinedIcon sx={styledPersonOutlined} />
             </IconButton>
           </Box>
         </Container>
@@ -49,22 +54,26 @@ export default function Header() {
   );
 }
 
-const appBarStyle = {
+const styledAppBar = {
   height: 80,
   bgcolor: "#fff",
   marginBottom: "100px",
   boxShadow: "none",
 };
 
-const containerStyle = {
+const styledContainer = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  color: "#333",
+  color: theme.palette.primary.main,
   height: "100%",
 };
 
-const personOutlinedStyle = {
-  color: "#333",
+const styledLogo = {
+  fontFamily: "Adamina",
+};
+
+const styledPersonOutlined = {
+  color: theme.palette.primary.main,
   fontSize: "1.7rem",
 };

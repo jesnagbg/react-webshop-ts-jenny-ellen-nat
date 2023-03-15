@@ -1,25 +1,27 @@
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import {Badge, BadgeProps, IconButton, styled} from "@mui/material";
+import {Badge, BadgeProps, styled} from "@mui/material";
+import {theme} from "../theme";
 
 export default function CartIcon() {
   return (
-    <IconButton aria-label="cart" sx={{padding: "1rem"}}>
-      <StyledBadge badgeContent={4} sx={{color: "#333"}}>
-        <ShoppingCartOutlinedIcon sx={{color: "#333"}} />
-      </StyledBadge>
-    </IconButton>
+    <StyledBadge badgeContent={4}>
+      <ShoppingCartOutlinedIcon sx={cartIconStyle} />
+    </StyledBadge>
   );
 }
 
 const StyledBadge = styled(Badge)<BadgeProps>(({theme}) => ({
   "& .MuiBadge-badge": {
-    vertical: "top",
-    horizontal: "right",
-    background: `#c8e1c0`,
-    border: `2px solid #333`,
+    background: theme.palette.secondary.main,
+    border: `2px solid theme.palette.primary.main`,
     fontSize: `10px`,
     padding: "2px",
     height: 14,
     minWidth: 14,
+    color: theme.palette.primary.main,
   },
 }));
+
+const cartIconStyle = {
+  color: theme.palette.primary.main,
+};
