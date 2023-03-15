@@ -1,16 +1,25 @@
-import { Container } from "@mui/material";
+import { Container, ImageList, ImageListItem } from "@mui/material";
 import StartCard from "../components/StartCard";
-import { products } from "../data";
-
+import { Product, products } from "../data";
 
 export default function Start() {
   console.log(products);
-  
+
   return (
     <Container>
-      {products.map((product) => (
-        <StartCard key={product.id} title={product.title} image={product.image} images={product.images} price={product.price} />
-      ))}
+      <ImageList cols={3} gap={16}>
+        {products.map((product: Product) => (
+          <ImageListItem key={product.id}>
+            <StartCard
+              id={product.id}
+              image={product.image}
+              images={product.images}
+              title={product.title}
+              price={product.price}
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
     </Container>
   );
 }

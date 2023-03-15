@@ -2,12 +2,13 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Box, Card, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
 import { useState } from "react";
 import { theme } from "../theme";
+
 interface Props {
   id?: string;
-  image?: string;
+  image: string;
   images?: string[];
   title: string;
-  price?: number;
+  price: number;
 }
 
 export default function StartCard({ title, image, images, price }: Props) {
