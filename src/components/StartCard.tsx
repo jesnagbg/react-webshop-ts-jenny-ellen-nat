@@ -14,18 +14,18 @@ export default function StartCard({ title, image, price }: Props) {
           <CardMedia sx={{ height: 270 }} image={image} title={title} />
         </Box>
         <CardContent>
-          <Typography gutterBottom variant='h5' component='div' align='left'>
+          <Typography gutterBottom variant="h5" component="div" align="left">
             {title}
           </Typography>
-          <Grid container justifyContent='space-between' alignItems='center'>
-            <Typography variant='h6' component='div'>
+          <Grid container justifyContent="space-between" alignItems="center">
+            <Typography variant="h6" component="div">
               {price} SEK
             </Typography>
             <IconButton
               sx={{
-                backgroundColor: 'darkgrey',
-                color: 'white',
-                borderRadius: '50%',
+                backgroundColor: "darkgrey",
+                color: "white",
+                borderRadius: "50%",
               }}
             >
               🛒
@@ -39,7 +39,7 @@ export default function StartCard({ title, image, price }: Props) {
 }
 
 const imageBorder = {
-  backgroundColor: '#ededed',
-  padding: '0.5rem 1rem',
-  height: '270px',
-}
+  backgroundColor: "#ededed",
+  padding: "0.5rem 1rem",
+  height: "270px",
+};
