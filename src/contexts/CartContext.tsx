@@ -24,11 +24,7 @@ export default function CartProvider({children}: Props) {
       const newCartItem: CartItem = {...product, quantity: quantity};
       setCartItems([...cartItems, newCartItem]);
     } else {
-      const updatedCartItems = cartItems.map((item) => {
-        if (item.id !== product.id) return item;
-        return {...item, quantity: item.quantity + quantity};
-      });
-      setCartItems(updatedCartItems);
+      changeQuantity(product.id, quantity);
     }
     // Toast
   };
@@ -39,10 +35,11 @@ export default function CartProvider({children}: Props) {
   };
 
   const changeQuantity = (id: string, quantity: number) => {
+    // Must add functionality here that removes the product if quantity reaches 0.
     setCartItems(
       cartItems.map((item) => {
         if (item.id !== id) return item;
-        return {...item, quantity: quantity};
+        return {...item, quantity: item.quantity + quantity};
       })
     );
   };
