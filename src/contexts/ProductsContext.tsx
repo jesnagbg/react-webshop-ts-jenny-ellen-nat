@@ -6,7 +6,7 @@ interface ContextValue {
 }
 
 const ProductsContext = createContext<ContextValue>(null as any);
-export const useProducts = useContext(ProductsContext);
+export const useProducts = () => useContext(ProductsContext);
 
 interface Props {
   children: ReactNode;

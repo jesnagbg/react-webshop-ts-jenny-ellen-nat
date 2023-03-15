@@ -6,7 +6,7 @@ interface ContextValue {
 }
 
 const OrderContext = createContext<ContextValue>(null as any);
-export const useOrder = useContext(OrderContext);
+export const useOrder = () => useContext(OrderContext);
 
 interface Props {
   children: ReactNode;
