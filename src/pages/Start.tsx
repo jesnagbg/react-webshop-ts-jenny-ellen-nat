@@ -1,5 +1,16 @@
 import { Container } from "@mui/material";
+import StartCard from "../components/StartCard";
+import { products } from "../data";
+
 
 export default function Start() {
-  return <Container></Container>;
+  console.log(products);
+  
+  return (
+    <Container>
+      {products.map((product) => (
+        <StartCard key={product.id} title={product.title} image={product.image} price={product.price} />
+      ))}
+    </Container>
+  );
 }
