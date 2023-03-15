@@ -1,19 +1,36 @@
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Box, Card, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
+import { useState } from "react";
 import { theme } from "../theme";
 interface Props {
   id?: string;
   image?: string;
+  images?: string[];
   title: string;
   price?: number;
 }
 
-export default function StartCard({ title, image, price }: Props) {
+export default function StartCard({ title, image, images, price }: Props) {
+  const [hoverImage, setHoverImage] = useState(false);
+  const [currentImage, setCurrentImage] = useState(image);
+
+  const handleMouseEnter = () => {
+    if (images && images.length > 0) {
+      setCurrentImage(images[0]);
+    }
+    setHoverImage(true);
+  };
+
+  const handleMouseLeave = () => {
+    setCurrentImage(image);
+    setHoverImage(false);
+  };
+
   return (
     <Box>
       <Card sx={cardStyling}>
-        <Box sx={imageBorder}>
-          <CardMedia sx={cardImage} image={image} title={title} />
+        <Box sx={imageBorder} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          <CardMedia sx={cardImage} image={currentImage} title={title} />
         </Box>
         <CardContent sx={cardContentStyling}>
           <Grid container justifyContent="space-between" alignItems="center">

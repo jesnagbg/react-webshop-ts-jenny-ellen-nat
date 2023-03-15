@@ -9,7 +9,7 @@ export default function Start() {
   return (
     <Container>
       {products.map((product) => (
-        <StartCard key={product.id} title={product.title} image={product.image} price={product.price} />
+        <StartCard key={product.id} title={product.title} image={product.image} images={product.images} price={product.price} />
       ))}
     </Container>
   );
