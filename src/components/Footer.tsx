@@ -18,15 +18,15 @@ export default function Footer() {
         </Grid>
         <Grid item xs={12} sm={12} md={4} lg={4} xl={4} sx={styledGridBox}>
           <Typography variant="h6">Made by</Typography>
-          <Link href="https://society6.com/" sx={styledLink}>
+          <Link href="https://github.com/ellensofia" sx={styledLink}>
             Ellen Dahlgren
             <KeyboardArrowRightIcon />
           </Link>
-          <Link href="https://society6.com/" sx={styledLink}>
+          <Link href="https://github.com/jesnagbg" sx={styledLink}>
             Jenny Pettersson
             <KeyboardArrowRightIcon />
           </Link>
-          <Link href="https://society6.com/" sx={styledLink}>
+          <Link href="https://github.com/NathanaelBlackbourn" sx={styledLink}>
             Nathanael Blackbourn
             <KeyboardArrowRightIcon />
           </Link>
