@@ -1,5 +1,5 @@
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { Box, Card, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Card, CardContent, Grid, IconButton, Typography } from "@mui/material";
 import { useState } from "react";
 import { useCart } from "../contexts/CartContext";
 import { Product } from "../data";
@@ -34,12 +34,8 @@ export default function StartCard({ product }: Props) {
   return (
     <Box>
       <Card sx={cardStyling}>
-        <Box
-          sx={{ ...imageBorder, height: { xs: 320, sm: 430 }, width: { xs: 250, sm: 335 } }}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <CardMedia sx={cardImage} image={currentImage} title={title} />
+        <Box sx={imageBorder} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          <Box sx={{ ...cardImage, backgroundImage: `url(${currentImage})` }} title={title} />
         </Box>
         <CardContent sx={cardContentStyling}>
           <Grid container justifyContent="space-between" alignItems="center">
@@ -69,6 +65,8 @@ const cardStyling = {
 const imageBorder = {
   backgroundColor: theme.palette.lightGrey.main,
   padding: 2,
+  height: { xs: 320, sm: 430 },
+  width: { xs: 250, sm: 335 },
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -77,7 +75,9 @@ const imageBorder = {
 const cardImage = {
   height: "100%",
   width: "100%",
-  objectFit: "contain",
+  backgroundSize: "contain",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
 };
 
 const shoppingButton = {
