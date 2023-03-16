@@ -1,19 +1,19 @@
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Box, Card, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
 import { useState } from "react";
+import { useCart } from "../contexts/CartContext";
+import { Product } from "../data";
 import { theme } from "../theme";
 
 interface Props {
-  id?: string;
-  image: string;
-  images?: string[];
-  title: string;
-  price: number;
+  product: Product;
 }
 
-export default function StartCard({ title, image, images, price }: Props) {
+export default function StartCard({ product }: Props) {
+  const { id, title, image, images, price } = product;
   const [hoverImage, setHoverImage] = useState(false);
   const [currentImage, setCurrentImage] = useState(image);
+  const { addToCart } = useCart();
 
   const handleMouseEnter = () => {
     if (images && images.length > 0) {
@@ -25,6 +25,10 @@ export default function StartCard({ title, image, images, price }: Props) {
   const handleMouseLeave = () => {
     setCurrentImage(image);
     setHoverImage(false);
+  };
+
+  const addToCartClick = () => {
+    addToCart(product, 1);
   };
 
   return (
@@ -47,7 +51,7 @@ export default function StartCard({ title, image, images, price }: Props) {
                 {price} SEK
               </Typography>
             </Box>
-            <IconButton sx={shoppingButton}>
+            <IconButton sx={shoppingButton} onClick={addToCartClick}>
               <ShoppingCartOutlinedIcon />
             </IconButton>
           </Grid>
@@ -73,10 +77,6 @@ const imageBorder = {
 const cardImage = {
   height: "100%",
   width: "100%",
-  // maxHeight: 400,
-  //maxWidth: 315,
-  //objectFit: "scale-down",
-  //maxWidth: 380,
   objectFit: "contain",
 };
 
@@ -84,6 +84,9 @@ const shoppingButton = {
   backgroundColor: "black",
   color: "white",
   borderRadius: "50%",
+  "&:hover": {
+    backgroundColor: theme.palette.secondary.main,
+  },
 };
 
 const titleStyling = {

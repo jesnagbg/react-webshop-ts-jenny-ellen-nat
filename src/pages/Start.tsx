@@ -24,13 +24,7 @@ export default function Start() {
         <ImageList cols={cols} gap={16} sx={imageListStyling}>
           {products.map((product: Product) => (
             <ImageListItem key={product.id} sx={imageListItemStyling}>
-              <StartCard
-                id={product.id}
-                image={product.image}
-                images={product.images}
-                title={product.title}
-                price={product.price}
-              />
+              <StartCard product={product} />
             </ImageListItem>
           ))}
         </ImageList>
