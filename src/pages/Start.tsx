@@ -1,11 +1,25 @@
-import { Box, Container, ImageList, ImageListItem, Theme, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Container,
+  ImageList,
+  ImageListItem,
+  Theme,
+  useMediaQuery,
+} from "@mui/material";
+import Hero from "../components/Hero";
 import StartCard from "../components/StartCard";
-import { Product, products } from "../data";
+import {Product, products} from "../data";
 
 export default function Start() {
-  const smallScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
-  const mediumScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
-  const largeScreen = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
+  const smallScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("md")
+  );
+  const mediumScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("lg")
+  );
+  const largeScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.up("lg")
+  );
 
   let cols: number;
   if (smallScreen) {
@@ -20,10 +34,18 @@ export default function Start() {
 
   return (
     <Container sx={imageBoxStyling}>
+      <Hero />
       <Box sx={imageBoxStyling}>
-        <ImageList cols={cols} gap={16} sx={imageListStyling}>
+        <ImageList
+          cols={cols}
+          gap={16}
+          sx={imageListStyling}
+        >
           {products.map((product: Product) => (
-            <ImageListItem key={product.id} sx={imageListItemStyling}>
+            <ImageListItem
+              key={product.id}
+              sx={imageListItemStyling}
+            >
               <StartCard product={product} />
             </ImageListItem>
           ))}
@@ -36,14 +58,16 @@ export default function Start() {
 const imageListStyling = {
   flexGrow: 1,
   justifyContent: "space-between",
-}
+};
 
 const imageListItemStyling = {
   alignItems: "center",
-}
+};
 
 const imageBoxStyling = {
-  display: "flex", 
+  display: "flex",
+  flexDirection: "column",
   justifyContent: "center",
+  marginTop: "3rem",
   flexGrow: 1,
-}
+};
