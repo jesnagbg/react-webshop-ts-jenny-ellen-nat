@@ -1,35 +1,54 @@
-import { Box, Card, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { Box, Card, CardContent, Grid, IconButton, Typography } from "@mui/material";
+import { useState } from "react";
+import { useCart } from "../contexts/CartContext";
+import { Product } from "../data";
+import { theme } from "../theme";
+
 interface Props {
-  id?: string;
-  image?: string;
-  title: string;
-  price?: number;
+  product: Product;
 }
 
-export default function StartCard({ title, image, price }: Props) {
+export default function StartCard({ product }: Props) {
+  const { id, title, image, images, price } = product;
+  const [hoverImage, setHoverImage] = useState(false);
+  const [currentImage, setCurrentImage] = useState(image);
+  const { addToCart } = useCart();
+
+  const handleMouseEnter = () => {
+    if (images && images.length > 0) {
+      setCurrentImage(images[0]);
+    }
+    setHoverImage(true);
+  };
+
+  const handleMouseLeave = () => {
+    setCurrentImage(image);
+    setHoverImage(false);
+  };
+
+  const addToCartClick = () => {
+    addToCart(product, 1);
+  };
+
   return (
     <Box>
-      <Card sx={{ maxWidth: 275 }}>
-        <Box sx={imageBorder}>
-          <CardMedia sx={{ height: 270 }} image={image} title={title} />
+      <Card sx={cardStyling}>
+        <Box sx={imageBorder} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          <Box sx={{ ...cardImage, backgroundImage: `url(${currentImage})` }} title={title} />
         </Box>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div" align="left">
-            {title}
-          </Typography>
-          <Grid container justifyContent="space-between" alignItems="center">
-            <Typography variant="h6" component="div">
-              {price} SEK
-            </Typography>
-            <IconButton
-              sx={{
-                backgroundColor: "darkgrey",
-                color: "white",
-                borderRadius: "50%",
-              }}
-            >
-              🛒
-              {/* <ShoppingCartIcon /> */}
+        <CardContent sx={cardContentStyling}>
+          <Grid container sx={belowImageGrid}>
+            <Box>
+              <Typography variant="h5" sx={titleStyling}>
+                {title}
+              </Typography>
+              <Typography sx={priceStyling}>
+                {price} SEK
+              </Typography>
+            </Box>
+            <IconButton sx={shoppingButton} onClick={addToCartClick}>
+              <ShoppingCartOutlinedIcon />
             </IconButton>
           </Grid>
         </CardContent>
@@ -38,8 +57,59 @@ export default function StartCard({ title, image, price }: Props) {
   );
 }
 
-const imageBorder = {
-  backgroundColor: "#ededed",
-  padding: "0.5rem 1rem",
-  height: "270px",
+const cardStyling = {
+  maxWidth: 430,
+  boxShadow: "none",
 };
+
+const imageBorder = {
+  backgroundColor: theme.palette.lightGrey.main,
+  padding: 2,
+  height: { xs: 320, sm: 430 },
+  width: { xs: 250, sm: 335 },
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+const cardImage = {
+  height: "100%",
+  width: "100%",
+  backgroundSize: "contain",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+};
+
+const shoppingButton = {
+  backgroundColor: "black",
+  color: "white",
+  borderRadius: "50%",
+  "&:hover": {
+    backgroundColor: theme.palette.secondary.main,
+  },
+};
+
+const titleStyling = {
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: 500,
+  fontSize: theme.typography.body1.fontSize,
+};
+
+const priceStyling = {
+  fontFamily: theme.typography.fontFamily,
+  fontWeight: 400,
+  fontSize: 14,
+  color: theme.typography.h1.color,
+};
+
+const cardContentStyling = {
+  paddingTop: 1,
+  paddingLeft: 0.2,
+  paddingRight: 0.2,
+  "&:last-child": { paddingBottom: 2 },
+};
+
+const belowImageGrid = {
+  justifyContent: "space-between",
+  alignItems: "center"
+}

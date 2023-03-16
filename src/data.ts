@@ -26,7 +26,7 @@ export const products: Product[] = [
   {
     id: "000002",
     image: "./assets/daisies.JPG",
-    images: ["./assets/daisies.JPG", "./assets/third.jpg"],
+    images: ["./assets/daisies2.JPG", "./assets/third.jpg"],
     title: "Daisies",
     description:
       "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
