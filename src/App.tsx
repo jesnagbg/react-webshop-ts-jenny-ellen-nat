@@ -9,7 +9,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <div>
         <Header />
-        <h1>Hello Students, begin here!</h1>
         <Outlet />
         <Footer />
       </div>

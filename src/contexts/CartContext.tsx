@@ -20,7 +20,7 @@ export default function CartProvider({children}: Props) {
   const [cartItems, setCartItems] = useLocalCart();
 
   const addToCart = (product: Product, quantity: number) => {
-    if (!cartItems.find((item) => (item.id = product.id))) {
+    if (!cartItems.find((item) => item.id === product.id)) {
       const newCartItem: CartItem = {...product, quantity: quantity};
       setCartItems([...cartItems, newCartItem]);
     } else {
