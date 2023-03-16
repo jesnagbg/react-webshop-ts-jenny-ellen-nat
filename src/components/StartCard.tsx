@@ -70,8 +70,11 @@ const imageBorder = {
 const cardImage = {
   height: "100%",
   width: "100%",
-  maxWidth: 380,
-  objectFit: "contain",
+  maxHeight: 400,
+  maxWidth: 315,
+  objectFit: "scale-down",
+  //maxWidth: 380,
+  //objectFit: "contain",
 };
 
 const shoppingButton = {
