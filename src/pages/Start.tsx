@@ -1,5 +1,10 @@
-import { Container } from "@mui/material";
+import {Container} from "@mui/material";
+import Hero from "../components/Hero";
 
 export default function Start() {
-  return <Container></Container>;
+  return (
+    <Container>
+      <Hero />
+    </Container>
+  );
 }
