@@ -32,7 +32,7 @@ export default function CheckoutCard({item}: Props) {
       <Box sx={styledBox}>
         <CardContent sx={styledCardContent}>
           <Typography variant="h5">{item.title}</Typography>
-          <Typography variant="body1">Number pieces?</Typography>
+          <Typography variant="body1">{item.pieces} pieces</Typography>
           <Typography variant="body1">Change quantity buttons here.</Typography>
           <Typography variant="body1">{item.price}kr</Typography>
           <Typography variant="body1">x{item.quantity}</Typography>
