@@ -38,12 +38,12 @@ export default function StartCard({ product }: Props) {
           <Box sx={{ ...cardImage, backgroundImage: `url(${currentImage})` }} title={title} />
         </Box>
         <CardContent sx={cardContentStyling}>
-          <Grid container justifyContent="space-between" alignItems="center">
+          <Grid container sx={belowImageGrid}>
             <Box>
               <Typography variant="h5" sx={titleStyling}>
                 {title}
               </Typography>
-              <Typography variant="h6" sx={priceStyling}>
+              <Typography sx={priceStyling}>
                 {price} SEK
               </Typography>
             </Box>
@@ -108,3 +108,8 @@ const cardContentStyling = {
   paddingRight: 0.2,
   "&:last-child": { paddingBottom: 2 },
 };
+
+const belowImageGrid = {
+  justifyContent: "space-between",
+  alignItems: "center"
+}
