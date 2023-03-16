@@ -1,6 +1,15 @@
 import {createTheme, Theme} from "@mui/material";
 
 export const theme: Theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1400,
+      xl: 1536,
+    },
+  },
   typography: {
     fontFamily: [
       "DM Sans",
@@ -35,6 +44,22 @@ export const theme: Theme = createTheme({
   },
   shape: {
     borderRadius: 0,
+  },
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+        },
+      },
+    },
+    MuiFab: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+        },
+      },
+    },
   },
 });
 

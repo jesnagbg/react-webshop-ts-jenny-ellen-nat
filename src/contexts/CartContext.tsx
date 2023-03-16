@@ -1,11 +1,6 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { CartItem, Product } from "../data";
+import {createContext, ReactNode, useContext} from "react";
+import {CartItem, Product} from "../data";
+import {useLocalCart} from "../hooks/useLocalCart";
 
 interface ContextValue {
   cartItems: CartItem[];
@@ -21,25 +16,16 @@ interface Props {
   children: ReactNode;
 }
 
-export default function CartProvider({ children }: Props) {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-
-  useEffect(() => {
-    const localCartJSON = localStorage.getItem("pieceByPieceCart");
-    if (localCartJSON) {
-      setCartItems(JSON.parse(localCartJSON));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("pieveByPiecesCart", JSON.stringify(cartItems));
-  }, [cartItems]);
+export default function CartProvider({children}: Props) {
+  const [cartItems, setCartItems] = useLocalCart();
 
   const addToCart = (product: Product, quantity: number) => {
-    const newCartItem: CartItem = { ...product, quantity: quantity };
-    const updatedCartItems = [...cartItems, newCartItem];
-    setCartItems(updatedCartItems);
-    console.log(updatedCartItems);
+    if (!cartItems.find((item) => (item.id = product.id))) {
+      const newCartItem: CartItem = {...product, quantity: quantity};
+      setCartItems([...cartItems, newCartItem]);
+    } else {
+      changeQuantity(product.id, quantity);
+    }
     // Toast
   };
 
@@ -49,17 +35,22 @@ export default function CartProvider({ children }: Props) {
   };
 
   const changeQuantity = (id: string, quantity: number) => {
-    setCartItems(
-      cartItems.map((item) => {
-        if (item.id !== id) return item;
-        return { ...item, quantity: quantity };
-      })
-    );
+    const foundItem = cartItems.find((item) => item.id === id);
+    if (!foundItem) return;
+    if (foundItem.quantity + quantity <= 0) {
+      removeFromCart(id);
+    } else {
+      setCartItems(
+        cartItems.map((item) => {
+          if (item.id !== id) return item;
+          return {...item, quantity: item.quantity + quantity};
+        })
+      );
+    }
   };
-
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, changeQuantity }}
+      value={{cartItems, addToCart, removeFromCart, changeQuantity}}
     >
       {children}
     </CartContext.Provider>
