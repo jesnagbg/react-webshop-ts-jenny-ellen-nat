@@ -20,8 +20,9 @@ export default function Basket() {
       <Typography
         variant="subtitle1"
         sx={styledTypography}
+        data-cy="total-price"
       >
-        total:{" "}
+        Total:{" "}
         {cartItems.reduce(
           (total, item) => total + item.price * item.quantity,
           0

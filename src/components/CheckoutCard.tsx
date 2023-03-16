@@ -22,7 +22,10 @@ export default function CheckoutCard({item}: Props) {
   };
 
   return (
-    <Card sx={styledCard}>
+    <Card
+      sx={styledCard}
+      data-cy="cart-item"
+    >
       <CardMedia
         sx={styledCardMedia}
         component="img"
@@ -35,7 +38,12 @@ export default function CheckoutCard({item}: Props) {
           <Typography variant="body1">{item.pieces} pieces</Typography>
           <Typography variant="body1">Change quantity buttons here.</Typography>
           <Typography variant="body1">{item.price}kr</Typography>
-          <Typography variant="body1">x{item.quantity}</Typography>
+          <Typography
+            variant="body1"
+            data-cy="product-quantity"
+          >
+            Quantity: {item.quantity}
+          </Typography>
         </CardContent>
       </Box>
       <Fab
