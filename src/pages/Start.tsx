@@ -7,7 +7,7 @@ export default function Start() {
   const mediumScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
   const largeScreen = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
 
-  let cols;
+  let cols: number;
   if (smallScreen) {
     cols = 1;
   } else if (mediumScreen) {
@@ -23,7 +23,7 @@ export default function Start() {
       <Box display="flex" justifyContent="center">
         <ImageList cols={cols} gap={16}>
           {products.map((product: Product) => (
-            <ImageListItem key={product.id} sx={{ flexGrow: 1 }}>
+            <ImageListItem key={product.id}>
               <StartCard
                 id={product.id}
                 image={product.image}
