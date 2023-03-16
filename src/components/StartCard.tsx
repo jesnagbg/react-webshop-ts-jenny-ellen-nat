@@ -64,7 +64,7 @@ const cardStyling = {
 
 const imageBorder = {
   backgroundColor: theme.palette.lightGrey.main,
-  padding: 1,
+  padding: 2,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -74,10 +74,10 @@ const cardImage = {
   height: "100%",
   width: "100%",
   // maxHeight: 400,
-  // maxWidth: 315,
-  // objectFit: "scale-down",
+  maxWidth: 315,
+  //objectFit: "scale-down",
   //maxWidth: 380,
-  //objectFit: "contain",
+  objectFit: "contain",
 };
 
 const shoppingButton = {

@@ -19,11 +19,11 @@ export default function Start() {
   }
 
   return (
-    <Container>
-      <Box display="flex" justifyContent="center">
-        <ImageList cols={cols} gap={16}>
+    <Container sx={imageBoxStyling}>
+      <Box sx={imageBoxStyling}>
+        <ImageList cols={cols} gap={16} sx={imageListStyling}>
           {products.map((product: Product) => (
-            <ImageListItem key={product.id}>
+            <ImageListItem key={product.id} sx={imageListItemStyling}>
               <StartCard
                 id={product.id}
                 image={product.image}
@@ -37,4 +37,19 @@ export default function Start() {
       </Box>
     </Container>
   );
+}
+
+const imageListStyling = {
+  flexGrow: 1,
+  justifyContent: "space-between",
+}
+
+const imageListItemStyling = {
+  alignItems: "center",
+}
+
+const imageBoxStyling = {
+  display: "flex", 
+  justifyContent: "center",
+  flexGrow: 1,
 }
