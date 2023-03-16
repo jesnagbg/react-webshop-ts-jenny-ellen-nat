@@ -30,7 +30,11 @@ export default function StartCard({ title, image, images, price }: Props) {
   return (
     <Box>
       <Card sx={cardStyling}>
-        <Box sx={imageBorder} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <Box
+          sx={{ ...imageBorder, height: { xs: 320, sm: 430 }, width: { xs: 250, sm: 335 } }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <CardMedia sx={cardImage} image={currentImage} title={title} />
         </Box>
         <CardContent sx={cardContentStyling}>
@@ -56,12 +60,11 @@ export default function StartCard({ title, image, images, price }: Props) {
 const cardStyling = {
   maxWidth: 430,
   boxShadow: "none",
-}
+};
 
 const imageBorder = {
   backgroundColor: theme.palette.lightGrey.main,
   padding: 1,
-  height: 430,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -70,9 +73,9 @@ const imageBorder = {
 const cardImage = {
   height: "100%",
   width: "100%",
-  maxHeight: 400,
-  maxWidth: 315,
-  objectFit: "scale-down",
+  // maxHeight: 400,
+  // maxWidth: 315,
+  // objectFit: "scale-down",
   //maxWidth: 380,
   //objectFit: "contain",
 };
@@ -100,5 +103,5 @@ const cardContentStyling = {
   paddingTop: 1,
   paddingLeft: 0.2,
   paddingRight: 0.2,
-  "&:last-child": { paddingBottom: 2 }
-}
+  "&:last-child": { paddingBottom: 2 },
+};

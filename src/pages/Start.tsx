@@ -1,25 +1,40 @@
-import { Container, ImageList, ImageListItem } from "@mui/material";
+import { Box, Container, ImageList, ImageListItem, Theme, useMediaQuery } from "@mui/material";
 import StartCard from "../components/StartCard";
 import { Product, products } from "../data";
 
 export default function Start() {
-  console.log(products);
+  const smallScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
+  const mediumScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
+  const largeScreen = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
+
+  let cols;
+  if (smallScreen) {
+    cols = 1;
+  } else if (mediumScreen) {
+    cols = 2;
+  } else if (largeScreen) {
+    cols = 3;
+  } else {
+    cols = 3;
+  }
 
   return (
     <Container>
-      <ImageList cols={3} gap={16}>
-        {products.map((product: Product) => (
-          <ImageListItem key={product.id}>
-            <StartCard
-              id={product.id}
-              image={product.image}
-              images={product.images}
-              title={product.title}
-              price={product.price}
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
+      <Box display="flex" justifyContent="center">
+        <ImageList cols={cols} gap={16}>
+          {products.map((product: Product) => (
+            <ImageListItem key={product.id} sx={{ flexGrow: 1 }}>
+              <StartCard
+                id={product.id}
+                image={product.image}
+                images={product.images}
+                title={product.title}
+                price={product.price}
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      </Box>
     </Container>
   );
 }
