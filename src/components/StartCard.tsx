@@ -74,7 +74,7 @@ const cardImage = {
   height: "100%",
   width: "100%",
   // maxHeight: 400,
-  maxWidth: 315,
+  //maxWidth: 315,
   //objectFit: "scale-down",
   //maxWidth: 380,
   objectFit: "contain",
