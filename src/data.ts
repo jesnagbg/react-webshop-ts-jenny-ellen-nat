@@ -4,6 +4,7 @@ export interface Product {
   images?: string[];
   title: string;
   description: string;
+  pieces: number;
   price: number;
 }
 
@@ -19,6 +20,7 @@ export const products: Product[] = [
     title: "Calm woman",
     description:
       "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
+    pieces: 450,
     price: 399,
   },
   {
@@ -28,6 +30,7 @@ export const products: Product[] = [
     title: "Daisies",
     description:
       "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
+    pieces: 500,
     price: 349,
   },
   {
@@ -37,6 +40,7 @@ export const products: Product[] = [
     title: "Moby",
     description:
       "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
+    pieces: 900,
     price: 399,
   },
   {
@@ -46,6 +50,7 @@ export const products: Product[] = [
     title: "Sunrise ferns",
     description:
       "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
+    pieces: 650,
     price: 399,
   },
   {
@@ -55,6 +60,7 @@ export const products: Product[] = [
     title: "Making friends",
     description:
       "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
+    pieces: 1000,
     price: 399,
   },
   {
@@ -64,6 +70,7 @@ export const products: Product[] = [
     title: "Checkerboard",
     description:
       "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
+    pieces: 900,
     price: 499,
   },
   {
@@ -73,6 +80,7 @@ export const products: Product[] = [
     title: "Disco at home",
     description:
       "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
+    pieces: 550,
     price: 399,
   },
   {
@@ -82,6 +90,7 @@ export const products: Product[] = [
     title: "Village farmers market",
     description:
       "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
+    pieces: 1000,
     price: 399,
   },
   {
@@ -91,6 +100,7 @@ export const products: Product[] = [
     title: "California living",
     description:
       "Our jigsaw puzzles transform your favorite artists' designs into hours of tabletop fun. Exercise your mind with our precision cut puzzles featuring a thick, class-leading paperboard, with a satin finish for added durability. Available in either 200, 500 or 1,000 piece sets.",
+    pieces: 600,
     price: 349,
   },
 ];

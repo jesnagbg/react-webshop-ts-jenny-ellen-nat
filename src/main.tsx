@@ -24,7 +24,7 @@ const router = createBrowserRouter(
       element={<App />}
     >
       <Route
-        path=""
+        path="/start"
         element={<Start />}
       />
       <Route
@@ -36,7 +36,7 @@ const router = createBrowserRouter(
         element={<Admin />}
       />
       <Route
-        path="/checkout"
+        path=""
         element={<Checkout />}
       />
       <Route
