@@ -2,8 +2,7 @@ import {keyframes} from "@emotion/react";
 import {Box, Container, Typography} from "@mui/material";
 import {products} from "../data";
 
-const angles = ["-17.52deg", "-28.55deg"];
-const angles2 = ["28.55deg", "14.24deg"];
+const angles = ["", "", "", ""];
 
 export default function Hero() {
   return (
@@ -13,18 +12,13 @@ export default function Hero() {
           <Box
             key={index}
             component="img"
-            sx={{...styledImg, transform: `rotate(${angle})`}}
+            sx={{
+              ...styledImg,
+              animation: `${animations[index]} .6s .4s ease-out`,
+              animationFillMode: "forwards",
+            }}
             alt={`Image of a puzzle ${index}`}
             src={products[index + 1].image}
-          />
-        ))}
-        {angles2.map((angle, index) => (
-          <Box
-            key={index}
-            component="img"
-            sx={{...styledImg2, transform: `rotate(${angle})`}}
-            alt={`Image of a puzzle ${index}`}
-            src={products[index + 3].image}
           />
         ))}
       </Box>
@@ -35,32 +29,43 @@ export default function Hero() {
   );
 }
 
-const slideInFromLeft = keyframes`
+const createKeyframe = (angle: number, translate: number) => keyframes`
   0% {
-    transform: rotate(0deg);
-    transform: translate(50%, 0%);
+    transform: translate(${translate}%, 0%);
   }
 
   100% {
-    transform: translate(0, 0) rotate(${angles});
+    transform: rotate(${angle}deg);
   }
 `;
 
-const slideInFromRight = keyframes`
-  0% {
-    transform: rotate(0deg);
-    transform: translate(-50%, 0%);
-  }
-
-  100% {
-    transform: rotate(${angles});
-  }
-`;
+const animations = [
+  createKeyframe(-17.52, 150),
+  createKeyframe(-28.55, 50),
+  createKeyframe(28.55, -50),
+  createKeyframe(14.24, -150),
+];
 
 const styledImgList = {
   display: "flex",
   justifyContent: "center",
   margin: "100px 0 0 0",
+
+  "> :nth-of-type(1)": {
+    transform: "translate(150%, 0%)",
+  },
+
+  "> :nth-of-type(2)": {
+    transform: "translate(50%, 0%)",
+  },
+
+  "> :nth-of-type(3)": {
+    transform: "translate(-50%, 0%)",
+  },
+
+  "> :nth-of-type(4)": {
+    transform: "translate(-150%, 0%)",
+  },
 };
 
 const styledTitle = {
@@ -84,12 +89,4 @@ const styledImg = {
   width: 246,
   minWidth: 60,
   height: "auto",
-  animation: `${slideInFromLeft} 1s .8s ease-in-out`,
-};
-
-const styledImg2 = {
-  width: 246,
-  minWidth: 60,
-  height: "auto",
-  animation: `${slideInFromRight} 1s .8s ease-in-out`,
 };
