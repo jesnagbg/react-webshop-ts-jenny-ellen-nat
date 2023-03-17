@@ -1,22 +1,20 @@
 import {Box, Typography} from "@mui/material";
-import {useParams} from "react-router-dom";
-import {products} from "../data";
+import {Product} from "../data";
 
-export default function ProductDescription() {
-  const {id} = useParams();
+interface Props {
+  product: Product;
+}
 
-  const product = products.find((p) => p.id === id);
-
+export default function ProductDescription(props: Props) {
   return (
-    <Box sx={styledDescription}>
+    <Box>
       <Box sx={styledHeadings}>
-        <Typography variant="h4">{products[1].title}</Typography>
-        <Typography variant="body1">{products[1].pieces} Pieces</Typography>
+        <Typography variant="h4">{props.product.title}</Typography>
+        <Typography variant="body1">{props.product.pieces} Pieces</Typography>
       </Box>
       <Typography sx={styledParagraph} variant="body1">
-        {products[1].description}
+        {props.product.description}
       </Typography>
-      <Typography variant="body1">{products[1].price} SEK</Typography>
     </Box>
   );
 }
@@ -27,12 +25,7 @@ const styledHeadings = {
   marginBottom: "1.2rem",
 };
 
-const styledDescription = {
-  width: "80%",
-};
-
 const styledParagraph = {
-  maxWidth: "600px",
   fontSize: "20px",
   marginBottom: "1.2rem",
 };

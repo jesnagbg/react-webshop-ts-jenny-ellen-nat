@@ -1,34 +1,38 @@
 import {Box, Stack} from "@mui/material";
-import {products} from "../data";
+import {Product} from "../data";
 import {theme} from "../theme";
 
-export default function ProductGallery() {
+interface Props {
+  product: Product;
+}
+
+export default function ProductGallery(props: Props) {
   return (
     <Stack spacing={2}>
       <Box sx={styledBackground}>
         <Box
           sx={styledBigImg}
           component="img"
-          alt={`Image of a puzzle called ${products[1].title}.`}
-          src={products[1].image}
+          alt={`Image of a puzzle called ${props.product.title}.`}
+          src={`.${props.product.image}`}
         ></Box>
       </Box>
 
       <Box sx={styledSmallImgs}>
-        {products[1].images && (
+        {props.product.images?.[0] && (
           <Box
             sx={styledImg}
             component="img"
-            alt={`Image of a puzzle called ${products[1].title}.`}
-            src={products[1].images[0]}
+            alt={`Image of a puzzle called ${props.product.title}.`}
+            src={`.${props.product.images[0]}`}
           ></Box>
         )}
-        {products[1].images && (
+        {props.product.images?.[1] && (
           <Box
             sx={styledImg}
             component="img"
-            alt={`Close up image of puzzle ${products[1].title}.`}
-            src={products[1].images[1]}
+            alt={`Close up image of puzzle ${props.product.title}.`}
+            src={`.${props.product.images[1]}`}
           ></Box>
         )}
       </Box>
