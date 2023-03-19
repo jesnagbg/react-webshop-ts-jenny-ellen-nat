@@ -1,40 +1,5 @@
-// import { Box, Card, CardContent, CardMedia, IconButton, Link, Typography } from "@mui/material";
-// import { Product } from "../data";
-
-// interface Props {
-//   product: Product;
-// }
-
-// export default function AdminCard({ product }: Props) {
-//   const { id, title, image, images, price } = product;
-
-//   return (
-//     <Box>
-//       <Card>
-//         <CardMedia />
-//         <Box>
-//           <CardContent>
-//             <Box>
-//             <Typography>{title}</Typography>
-//             <Typography>Article number: {id}</Typography>
-//             <Typography>Details: </Typography>
-//             <Typography>{price} SEK</Typography>
-//             </Box>
-//             <Box>
-//             <IconButton>
-//               🍥
-//             </IconButton>
-//             <Link>Edit</Link>
-//             </Box>
-//           </CardContent>
-//         </Box>
-//       </Card>
-//     </Box>
-//   );
-// }
-
 import { Clear } from "@mui/icons-material";
-import { Box, Card, CardContent, CardMedia, IconButton, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, IconButton, Link, Typography } from "@mui/material";
 import { Product } from "../data";
 import { theme } from "../theme";
 
@@ -46,21 +11,27 @@ export default function CheckoutCard({ product }: Props) {
   const { id, title, image, images, price } = product;
 
   return (
-    <Card sx={styledCard}>
+    <Card sx={styledCard} data-cy="product">
       <CardMedia sx={styledCardMedia} component="img" image={image} alt="Image thumbnail" />
       <Box sx={styledBox}>
         <CardContent sx={styledCardContent}>
-          <Typography variant="h5">{title}</Typography>
+          <Typography variant="h5" data-cy="product-title">
+            {title}
+          </Typography>
           <Typography variant="body1">Article number: {id}</Typography>
           <Typography variant="body1">Details:</Typography>
-          <Typography variant="body1">{price} SEK</Typography>
+          <Typography variant="body1" data-cy="product-price">
+            {price} SEK
+          </Typography>
         </CardContent>
       </Box>
       <Box sx={rightContainer}>
-        <IconButton sx={removeButton} aria-label="remove">
+        <IconButton sx={removeButton} aria-label="remove" data-cy="admin-remove-product">
           <Clear />
         </IconButton>
-        <Box sx={editLink}>Edit</Box>
+        <Link sx={editLink} data-cy="admin-edit-product">
+          Edit
+        </Link>
       </Box>
     </Card>
   );
@@ -97,13 +68,11 @@ const removeButton = {
   },
 };
 
-const editLink = {
-
-}
+const editLink = {};
 
 const rightContainer = {
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-end",
-  justifyContent: "space-between"
-}
+  justifyContent: "space-between",
+};

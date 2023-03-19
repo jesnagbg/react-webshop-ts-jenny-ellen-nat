@@ -11,14 +11,12 @@ export default function Checkout() {
           <Typography variant="h1">All products</Typography>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Box>
-            {products.map((product: Product) => (
-              <Box key={product.id}>
-                <Divider />
-                <AdminCard product={product} />
-              </Box>
-            ))}
-          </Box>
+          {products.map((product: Product) => (
+            <Box key={product.id}>
+              <Divider />
+              <AdminCard product={product} />
+            </Box>
+          ))}
         </Grid>
         <Grid item xs={12} md={6}>
           <CheckoutForm></CheckoutForm>
@@ -29,5 +27,5 @@ export default function Checkout() {
 }
 
 const topSpace = {
-  marginTop: 10,
-}
+  marginTop: "100px",
+};

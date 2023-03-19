@@ -32,28 +32,26 @@ export default function StartCard({ product }: Props) {
   };
 
   return (
-    <Box>
-      <Card sx={cardStyling}>
-        <Box sx={imageBorder} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          <Box sx={{ ...cardImage, backgroundImage: `url(${currentImage})` }} title={title} />
-        </Box>
-        <CardContent sx={cardContentStyling}>
-          <Grid container sx={belowImageGrid}>
-            <Box>
-              <Typography variant="h5" sx={titleStyling}>
-                {title}
-              </Typography>
-              <Typography sx={priceStyling}>
-                {price} SEK
-              </Typography>
-            </Box>
-            <IconButton sx={shoppingButton} onClick={addToCartClick}>
-              <ShoppingCartOutlinedIcon />
-            </IconButton>
-          </Grid>
-        </CardContent>
-      </Card>
-    </Box>
+    <Card sx={cardStyling} data-cy="product">
+      <Box sx={imageBorder} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <Box sx={{ ...cardImage, backgroundImage: `url(${currentImage})` }} title={title} />
+      </Box>
+      <CardContent sx={cardContentStyling}>
+        <Grid container sx={belowImageGrid}>
+          <Box>
+            <Typography variant="h5" sx={titleStyling} data-cy="product-title">
+              {title}
+            </Typography>
+            <Typography sx={priceStyling} data-cy="product-price">
+              {price} SEK
+            </Typography>
+          </Box>
+          <IconButton sx={shoppingButton} onClick={addToCartClick} data-cy="product-buy-button">
+            <ShoppingCartOutlinedIcon />
+          </IconButton>
+        </Grid>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -111,5 +109,5 @@ const cardContentStyling = {
 
 const belowImageGrid = {
   justifyContent: "space-between",
-  alignItems: "center"
-}
+  alignItems: "center",
+};
