@@ -6,7 +6,6 @@ import {
   Theme,
   useMediaQuery,
 } from "@mui/material";
-import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Hero from "../components/Hero";
 import StartCard from "../components/StartCard";
@@ -35,10 +34,8 @@ export default function Start() {
   }
 
   const navigate = useNavigate();
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const handleProductClick = (product: Product) => {
-    setSelectedProduct(product);
     navigate(`/product/${product.id}`);
   };
 

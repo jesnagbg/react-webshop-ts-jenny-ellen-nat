@@ -1,16 +1,14 @@
 import {Box, Button, Typography} from "@mui/material";
-import {Product} from "../data";
+import {useProducts} from "../contexts/ProductsContext";
 import AddToCartButton from "./AddToCartButton";
 
-interface Props {
-  product: Product;
-}
+export default function ProductAdd() {
+  const {product} = useProducts();
 
-export default function ProductAdd(props: Props) {
   return (
     <Box sx={styledAdd}>
       <Typography sx={styledPrice} variant="body1">
-        {props.product.price} SEK
+        {product?.price} SEK
       </Typography>
       <Button variant="outlined"> + - </Button>
       <AddToCartButton />

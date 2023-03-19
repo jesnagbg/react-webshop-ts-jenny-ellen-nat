@@ -1,19 +1,17 @@
 import {Box, Typography} from "@mui/material";
-import {Product} from "../data";
+import {useProducts} from "../contexts/ProductsContext";
 
-interface Props {
-  product: Product;
-}
+export default function ProductDescription() {
+  const {product} = useProducts();
 
-export default function ProductDescription(props: Props) {
   return (
     <Box>
       <Box sx={styledHeadings}>
-        <Typography variant="h4">{props.product.title}</Typography>
-        <Typography variant="body1">{props.product.pieces} Pieces</Typography>
+        <Typography variant="h4">{product?.title}</Typography>
+        <Typography variant="body1">{product?.pieces} Pieces</Typography>
       </Box>
       <Typography sx={styledParagraph} variant="body1">
-        {props.product.description}
+        {product?.description}
       </Typography>
     </Box>
   );

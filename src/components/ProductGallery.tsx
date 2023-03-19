@@ -1,38 +1,36 @@
 import {Box, Stack} from "@mui/material";
-import {Product} from "../data";
+import {useProducts} from "../contexts/ProductsContext";
 import {theme} from "../theme";
 
-interface Props {
-  product: Product;
-}
+export default function ProductGallery() {
+  const {product} = useProducts();
 
-export default function ProductGallery(props: Props) {
   return (
     <Stack spacing={2}>
       <Box sx={styledBackground}>
         <Box
           sx={styledBigImg}
           component="img"
-          alt={`Image of a puzzle called ${props.product.title}.`}
-          src={`.${props.product.image}`}
+          alt={`Image of a puzzle called ${product?.title}.`}
+          src={`.${product?.image}`}
         ></Box>
       </Box>
 
       <Box sx={styledSmallImgs}>
-        {props.product.images?.[0] && (
+        {product?.images?.[0] && (
           <Box
             sx={styledImg}
             component="img"
-            alt={`Image of a puzzle called ${props.product.title}.`}
-            src={`.${props.product.images[0]}`}
+            alt={`Image of a puzzle called ${product?.title}.`}
+            src={`.${product?.images[0]}`}
           ></Box>
         )}
-        {props.product.images?.[1] && (
+        {product?.images?.[1] && (
           <Box
             sx={styledImg}
             component="img"
-            alt={`Close up image of puzzle ${props.product.title}.`}
-            src={`.${props.product.images[1]}`}
+            alt={`Close up image of puzzle ${product?.title}.`}
+            src={`.${product?.images[1]}`}
           ></Box>
         )}
       </Box>
