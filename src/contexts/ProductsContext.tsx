@@ -1,5 +1,5 @@
-import {createContext, ReactNode, useContext, useState} from "react";
-import {Product} from "../data";
+import { createContext, ReactNode, useContext, useState } from "react";
+import { Product, products as initialProducts } from "../data";
 
 interface ContextValue {
   products: Product[];
@@ -13,7 +13,8 @@ interface Props {
 }
 
 export default function ProductsProvider({children}: Props) {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>(initialProducts);
+  //Ville bara testa så att det fungerade, kan ändra tillbaka om ni vill!
 
   return (
     <ProductsContext.Provider value={{products}}>

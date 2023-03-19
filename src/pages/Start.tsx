@@ -4,13 +4,15 @@ import {
   ImageList,
   ImageListItem,
   Theme,
-  useMediaQuery,
+  useMediaQuery
 } from "@mui/material";
 import Hero from "../components/Hero";
 import StartCard from "../components/StartCard";
-import {Product, products} from "../data";
+import { useProducts } from "../contexts/ProductsContext";
+import { Product } from "../data";
 
 export default function Start() {
+  const { products } = useProducts();
   const smallScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
   );
