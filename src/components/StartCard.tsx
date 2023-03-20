@@ -1,9 +1,17 @@
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { Box, Card, CardContent, Grid, IconButton, Typography } from "@mui/material";
-import { useState } from "react";
-import { useCart } from "../contexts/CartContext";
-import { Product } from "../data";
-import { theme } from "../theme";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import {
+  Box,
+  Card,
+  CardContent,
+  Grid,
+  IconButton,
+  Typography
+} from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useCart } from '../contexts/CartContext';
+import { Product } from '../data';
+import { theme } from '../theme';
 
 interface Props {
   product: Product;
@@ -31,35 +39,67 @@ export default function StartCard({ product }: Props) {
     addToCart(product, 1);
   };
 
+  const navigate = useNavigate();
+
+  const handleProductClick = (product: Product) => {
+    navigate(`/product/${product.id}`);
+  };
+
   return (
-    <Box>
-      <Card sx={cardStyling}>
-        <Box sx={imageBorder} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          <Box sx={{ ...cardImage, backgroundImage: `url(${currentImage})` }} title={title} />
-        </Box>
-        <CardContent sx={cardContentStyling}>
-          <Grid container sx={belowImageGrid}>
-            <Box>
-              <Typography variant="h5" sx={titleStyling}>
-                {title}
-              </Typography>
-              <Typography sx={priceStyling}>
-                {price} SEK
-              </Typography>
-            </Box>
-            <IconButton sx={shoppingButton} onClick={addToCartClick}>
-              <ShoppingCartOutlinedIcon />
-            </IconButton>
-          </Grid>
-        </CardContent>
-      </Card>
-    </Box>
+    <Card
+      sx={cardStyling}
+      data-cy="product"
+    >
+      <Box
+        sx={imageBorder}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        >
+        <Box
+          sx={{ ...cardImage, backgroundImage: `url(${currentImage})` }}
+          title={title}
+          onClick={() => handleProductClick(product)}
+        />
+      </Box>
+      <CardContent sx={cardContentStyling}>
+        <Grid
+          container
+          sx={belowImageGrid}
+        >
+          <Box
+          onClick={() => handleProductClick(product)}
+          sx={linkedBoxStyling}          
+          >
+            <Typography
+              variant="h5"
+              sx={titleStyling}
+              data-cy="product-title"
+            >
+              {title}
+            </Typography>
+            <Typography
+              sx={priceStyling}
+              data-cy="product-price"
+            >
+              {price} SEK
+            </Typography>
+          </Box>
+          <IconButton
+            sx={shoppingButton}
+            onClick={addToCartClick}
+            data-cy="product-buy-button"
+          >
+            <ShoppingCartOutlinedIcon />
+          </IconButton>
+        </Grid>
+      </CardContent>
+    </Card>
   );
 }
 
 const cardStyling = {
   maxWidth: 430,
-  boxShadow: "none",
+  boxShadow: 'none',
 };
 
 const imageBorder = {
@@ -67,25 +107,27 @@ const imageBorder = {
   padding: 2,
   height: { xs: 320, sm: 430 },
   width: { xs: 250, sm: 335 },
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 };
 
 const cardImage = {
-  height: "100%",
-  width: "100%",
-  backgroundSize: "contain",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
+  height: '100%',
+  width: '100%',
+  backgroundSize: 'contain',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  cursor: 'pointer',
 };
 
 const shoppingButton = {
-  backgroundColor: "black",
-  color: "white",
-  borderRadius: "50%",
-  "&:hover": {
+  backgroundColor: 'black',
+  color: 'white',
+  borderRadius: '50%',
+  '&:hover': {
     backgroundColor: theme.palette.secondary.main,
+    color: 'black',
   },
 };
 
@@ -106,10 +148,14 @@ const cardContentStyling = {
   paddingTop: 1,
   paddingLeft: 0.2,
   paddingRight: 0.2,
-  "&:last-child": { paddingBottom: 2 },
+  '&:last-child': { paddingBottom: 2 },
 };
 
 const belowImageGrid = {
-  justifyContent: "space-between",
-  alignItems: "center"
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
+const linkedBoxStyling = {
+  cursor: 'pointer',
 }

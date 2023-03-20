@@ -6,12 +6,12 @@ import {
   IconButton,
   Link,
   Slide,
-  Typography,
+  Typography
 } from "@mui/material";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-import {FC, ReactElement} from "react";
-import {Link as RouterLink} from "react-router-dom";
-import {theme} from "../theme";
+import { FC, ReactElement } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { theme } from "../theme";
 import CartIcon from "./CartIcon";
 
 interface Props {
@@ -48,9 +48,11 @@ export default function Header() {
             <IconButton aria-label="cart">
               <CartIcon />
             </IconButton>
-            <IconButton aria-label="admin">
-              <PersonOutlineOutlinedIcon sx={styledPersonOutlined} />
-            </IconButton>
+            <Link component={RouterLink} to="/admin">
+              <IconButton aria-label="admin">
+                <PersonOutlineOutlinedIcon sx={styledPersonOutlined} />
+              </IconButton>
+            </Link>
           </Box>
         </Container>
       </AppBar>
