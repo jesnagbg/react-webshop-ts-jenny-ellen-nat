@@ -6,6 +6,7 @@ import {
   Theme,
   useMediaQuery,
 } from "@mui/material";
+import {useNavigate} from "react-router-dom";
 import Hero from "../components/Hero";
 import StartCard from "../components/StartCard";
 import {Product, products} from "../data";
@@ -32,19 +33,22 @@ export default function Start() {
     cols = 3;
   }
 
+  const navigate = useNavigate();
+
+  const handleProductClick = (product: Product) => {
+    navigate(`/product/${product.id}`);
+  };
+
   return (
     <Container sx={imageBoxStyling}>
       <Hero />
       <Box sx={imageBoxStyling}>
-        <ImageList
-          cols={cols}
-          gap={16}
-          sx={imageListStyling}
-        >
+        <ImageList cols={cols} gap={16} sx={imageListStyling}>
           {products.map((product: Product) => (
             <ImageListItem
               key={product.id}
               sx={imageListItemStyling}
+              onClick={() => handleProductClick(product)}
             >
               <StartCard product={product} />
             </ImageListItem>
