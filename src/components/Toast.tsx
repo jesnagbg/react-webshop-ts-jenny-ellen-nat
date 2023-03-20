@@ -1,21 +1,22 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton, Snackbar } from '@mui/material';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 
 interface Props {
   name: string;
   quantity: number;
   remove: boolean;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Toast(props: Props) {
-  const [open, setOpen] = useState(false);
-  const [toastProps, setToastProps] = useState(props);
-
-  useEffect(() => {
-    setOpen(true);
-  }, [toastProps]);
-
+export default function Toast({
+  name,
+  quantity,
+  remove,
+  open,
+  setOpen,
+}: Props) {
   const handleClose = () => {
     setOpen(false);
   };
@@ -32,9 +33,11 @@ export default function Toast(props: Props) {
       open={open}
       autoHideDuration={5000}
       onClose={handleClose}
-      message={`${toastProps.quantity}x ${toastProps.name} ${
-        toastProps.remove ? 'removed from' : 'added to'
-      } cart`}
+      message={
+        remove
+          ? `${name} has been removed from the cart.`
+          : `${quantity}x ${name} has been added to the cart.`
+      }
       action={action}
     />
   );

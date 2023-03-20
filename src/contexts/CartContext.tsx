@@ -17,8 +17,15 @@ interface Props {
   children: ReactNode;
 }
 
+interface ToastProps {
+  name: string;
+  quantity: number;
+  remove: boolean;
+}
+
 export default function CartProvider({ children }: Props) {
   const [cartItems, setCartItems] = useLocalCart();
+  const [toastOpen, setToastOpen] = useState(false);
   const [toastProps, setToastProps] = useState({
     name: '',
     quantity: 0,
@@ -33,6 +40,7 @@ export default function CartProvider({ children }: Props) {
       changeQuantity(product.id, quantity);
     }
     setToastProps({ name: product.title, quantity: quantity, remove: false });
+    setToastOpen(true);
   };
 
   const removeFromCart = (removedItem: CartItem) => {
@@ -43,6 +51,7 @@ export default function CartProvider({ children }: Props) {
       quantity: removedItem.quantity,
       remove: true,
     });
+    setToastOpen(true);
   };
 
   const changeQuantity = (id: string, quantity: number) => {
@@ -64,7 +73,13 @@ export default function CartProvider({ children }: Props) {
       value={{ cartItems, addToCart, removeFromCart, changeQuantity }}
     >
       {children}
-      <Toast {...toastProps} />
+      <Toast
+        name={toastProps?.name}
+        quantity={toastProps?.quantity}
+        remove={toastProps?.remove}
+        open={toastOpen}
+        setOpen={setToastOpen}
+      />
     </CartContext.Provider>
   );
 }
