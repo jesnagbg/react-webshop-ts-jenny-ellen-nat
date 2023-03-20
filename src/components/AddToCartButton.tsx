@@ -3,7 +3,7 @@ import {Button} from "@mui/material";
 export default function AddToCartButton() {
   return (
     <Button variant="contained" sx={styledButton}>
-      Add to chart
+      Add to cart
     </Button>
   );
 }
