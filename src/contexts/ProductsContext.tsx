@@ -1,8 +1,10 @@
-import {createContext, ReactNode, useContext, useState} from "react";
-import {Product} from "../data";
+import {createContext, ReactNode, useContext, useEffect, useState} from "react";
+import {Product, products} from "../data";
 
 interface ContextValue {
   products: Product[];
+  product: Product | null;
+  setProduct: React.Dispatch<React.SetStateAction<Product | null>>;
 }
 
 const ProductsContext = createContext<ContextValue>(null as any);
@@ -13,10 +15,21 @@ interface Props {
 }
 
 export default function ProductsProvider({children}: Props) {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [allProducts, setProducts] = useState<Product[]>([]);
+  const [product, setProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    setProducts(products);
+  }, []);
+
+  const contextValue = {
+    products: allProducts,
+    product,
+    setProduct,
+  };
 
   return (
-    <ProductsContext.Provider value={{products}}>
+    <ProductsContext.Provider value={contextValue}>
       {children}
     </ProductsContext.Provider>
   );

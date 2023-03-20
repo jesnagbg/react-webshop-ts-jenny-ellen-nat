@@ -19,34 +19,13 @@ import Start from "./pages/Start";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route
-      path="/"
-      element={<App />}
-    >
-      <Route
-        path=""
-        element={<Start />}
-      />
-      <Route
-        path="/product"
-        element={<Product />}
-      />
-      <Route
-        path="/admin"
-        element={<Admin />}
-      />
-      <Route
-        path="/checkout"
-        element={<Checkout />}
-      />
-      <Route
-        path="/confirmation"
-        element={<Confirmation />}
-      />
-      <Route
-        path="*"
-        element={<h2>404 not found</h2>}
-      />
+    <Route path="/" element={<App />}>
+      <Route path="" element={<Start />} />
+      <Route path="/product/:id" element={<Product />} />
+      <Route path="/admin" element={<Admin />} />
+      <Route path="/checkout" element={<Checkout />} />
+      <Route path="/confirmation" element={<Confirmation />} />
+      <Route path="*" element={<h2>404 not found</h2>} />
     </Route>
   )
 );

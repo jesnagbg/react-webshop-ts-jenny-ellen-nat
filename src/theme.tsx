@@ -1,4 +1,4 @@
-import { createTheme, Theme } from "@mui/material";
+import {createTheme, Shadows, Theme} from "@mui/material";
 
 export const theme: Theme = createTheme({
   breakpoints: {
@@ -61,6 +61,7 @@ export const theme: Theme = createTheme({
       },
     },
   },
+  shadows: Array(25).fill("none") as Shadows,
 });
 
 declare module "@mui/material/styles" {
