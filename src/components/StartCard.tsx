@@ -67,7 +67,8 @@ export default function StartCard({ product }: Props) {
           sx={belowImageGrid}
         >
           <Box
-          onClick={() => handleProductClick(product)}          
+          onClick={() => handleProductClick(product)}
+          sx={linkedBoxStyling}          
           >
             <Typography
               variant="h5"
@@ -117,6 +118,7 @@ const cardImage = {
   backgroundSize: 'contain',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
+  cursor: 'pointer',
 };
 
 const shoppingButton = {
@@ -153,3 +155,7 @@ const belowImageGrid = {
   justifyContent: 'space-between',
   alignItems: 'center',
 };
+
+const linkedBoxStyling = {
+  cursor: 'pointer',
+}
