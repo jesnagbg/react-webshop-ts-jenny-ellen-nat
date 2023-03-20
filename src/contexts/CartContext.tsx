@@ -40,17 +40,20 @@ export default function CartProvider({ children }: Props) {
     } else {
       changeQuantity(newCartItem, quantity + foundItem.quantity);
     }
-    setToastProps({ name: product.title, quantity: quantity, remove: false });
-    setToastOpen(true);
+    displayToast(newCartItem, false);
   };
 
   const removeFromCart = (targetItem: CartItem) => {
     setCartItems(cartItems.filter((item) => item.id !== targetItem.id));
+    displayToast(targetItem, true);
+  };
 
+  const displayToast = (targetItem: CartItem, remove: boolean) => {
+    setToastOpen(false);
     setToastProps({
       name: targetItem.title,
       quantity: targetItem.quantity,
-      remove: true,
+      remove: remove,
     });
     setToastOpen(true);
   };
