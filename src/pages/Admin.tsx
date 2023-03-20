@@ -30,7 +30,7 @@ export default function Checkout() {
 }
 
 const topSpace = {
-  marginTop: "100px",
+  marginTop: "80px",
 };
 
 const titleStyling = {
