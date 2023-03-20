@@ -43,5 +43,15 @@
   "bugs": {
     "url": "https://github.com/plugga-tech/react-webshop-ts/issues"
   },
-  "homepage": "https://github.com/plugga-tech/react-webshop-ts#readme"
+  "homepage": "https://github.com/plugga-tech/react-webshop-ts#readme",
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "singleAttributePerLine": true,
+    "arrowParens": "always",
+    "embeddedLanguageFormatting": "auto",
+    "bracketSpacing": true
+  }
 }

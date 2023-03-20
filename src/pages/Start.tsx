@@ -38,11 +38,7 @@ export default function Start() {
     <Container sx={imageBoxStyling}>
       <Hero />
       <Box sx={imageBoxStyling}>
-        <ImageList
-          cols={cols}
-          gap={16}
-          sx={imageListStyling}
-        >
+        <ImageList cols={cols} gap={16} sx={imageListStyling}>
           {products.map((product: Product) => (
             <ImageListItem
               key={product.id}
