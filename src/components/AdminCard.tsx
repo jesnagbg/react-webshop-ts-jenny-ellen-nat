@@ -59,12 +59,11 @@ const styledBox = {
 const removeButton = {
   height: "2rem",
   width: "2rem",
-  backgroundColor: theme.palette.primary.main,
-  color: "white",
+  backgroundColor: theme.palette.lightGrey.main,
+  color: "black",
   borderRadius: "50%",
   "&:hover": {
     backgroundColor: theme.palette.secondary.main,
-    color: "black",
   },
 };
 

@@ -1,27 +1,30 @@
 import { Box, Container, Divider, Grid, Typography } from "@mui/material";
+import AdminButton from "../components/AdminButton";
 import AdminCard from "../components/AdminCard";
-import CheckoutForm from "../components/CheckoutForm";
 import { Product, products } from "../data";
 
 export default function Checkout() {
   return (
     <Container maxWidth={"lg"} sx={topSpace}>
-      <Grid container spacing={2}>
+      <AdminButton>
+        Add new item
+      </AdminButton>
+      <Grid sx={bottomSpace} container spacing={0} columnSpacing={12}>
         <Grid item xs={12}>
-          <Typography variant="h1">All products</Typography>
+          <Typography sx={titleStyling} variant="h1">All products</Typography>
         </Grid>
-        <Grid item xs={12} md={6}>
-          {products.map((product: Product) => (
-            <Box key={product.id}>
+        {products.map((product: Product) => (
+          <Grid key={product.id} item xs={12} md={6} lg={6}>
+            <Box>
               <Divider />
               <AdminCard product={product} />
             </Box>
-          ))}
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <CheckoutForm></CheckoutForm>
-        </Grid>
+          </Grid>
+        ))}
       </Grid>
+      <AdminButton to="/">
+        Back to main
+      </AdminButton>
     </Container>
   );
 }
@@ -29,3 +32,11 @@ export default function Checkout() {
 const topSpace = {
   marginTop: "100px",
 };
+
+const titleStyling = {
+  marginBottom: "1rem",
+}
+
+const bottomSpace = {
+  marginBottom: 2,  
+}
