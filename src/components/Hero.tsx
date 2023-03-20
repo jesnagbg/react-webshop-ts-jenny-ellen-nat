@@ -2,19 +2,17 @@ import {keyframes} from "@emotion/react";
 import {Box, Container, Typography} from "@mui/material";
 import {products} from "../data";
 
-const angles = ["", "", "", ""];
-
 export default function Hero() {
   return (
     <Container>
       <Box sx={styledImgList}>
-        {angles.map((angle, index) => (
+        {animations.map((animation, index) => (
           <Box
             key={index}
             component="img"
             sx={{
               ...styledImg,
-              animation: `${animations[index]} .6s .4s ease-out`,
+              animation: `${animation} .6s .4s ease-out`,
               animationFillMode: "forwards",
             }}
             alt={`Image of a puzzle ${index}`}
@@ -22,7 +20,10 @@ export default function Hero() {
           />
         ))}
       </Box>
-      <Typography variant="h1" sx={styledTitle}>
+      <Typography
+        variant="h1"
+        sx={styledTitle}
+      >
         Unleash Your Mind's Potential with Our Puzzles
       </Typography>
     </Container>
