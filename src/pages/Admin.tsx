@@ -3,7 +3,7 @@ import AdminButton from "../components/AdminButton";
 import AdminCard from "../components/AdminCard";
 import { Product, products } from "../data";
 
-export default function Checkout() {
+export default function Admin() {
   return (
     <Container maxWidth={"lg"} sx={topSpace}>
       <AdminButton>
