@@ -11,29 +11,36 @@ export default function CheckoutForm() {
   const validationSchema = yup.object({
     firstName: yup
       .string()
-      .min(2, 'Please enter a valid first name')
-      .required('First name is required'),
+      .min(2, 'Name must be at least two characters')
+      .required('First name required'),
     lastName: yup
       .string()
-      .min(2, 'Please enter a valid last name')
-      .required('Last name is required'),
+      .min(2, 'Name must be at least two characters')
+      .required('Last name required'),
     address: yup
       .string()
       .min(2, 'Please enter a valid address')
-      .required('Last name is required'),
-    address2: yup.string().min(2, 'Please enter a valid address'),
+      .required('Address required'),
     postalCode: yup
-      .string()
+      .number()
+      .typeError('Postal code must be a number')
       .min(4, 'Please enter a valid postal code')
-      .required('Postal code is required'),
-    phone: yup
+      .required('Postal code required'),
+    city: yup
       .string()
-      .min(4, 'Please enter a valid phone number')
-      .required('Phone number is required'),
+      .min(2, 'Please enter a valid city')
+      .required('City required'),
+    phone: yup
+      .number()
+      .typeError('The value must be a number')
+      .integer('The value must be a number')
+      .min(6, 'Please enter a valid phone number')
+      .required('Phone number required'),
     email: yup
       .string()
+      .email()
       .min(4, 'Please enter a valid email')
-      .required('Email is required'),
+      .required('Email required'),
   });
 
   const formik = useFormik({
@@ -41,7 +48,6 @@ export default function CheckoutForm() {
       firstName: '',
       lastName: '',
       address: '',
-      address2: '',
       city: '',
       postalCode: '',
       phone: '',
@@ -68,8 +74,7 @@ export default function CheckoutForm() {
           variant="standard"
           id="firstName"
           name="firstName"
-          label="first name"
-          // autoComplete=""
+          label="First name"
           data-cy="customer-name"
           value={formik.values.firstName}
           onChange={formik.handleChange}
@@ -88,7 +93,7 @@ export default function CheckoutForm() {
           variant="standard"
           id="lastName"
           name="lastName"
-          label="last name"
+          label="Last name"
           type="last name"
           value={formik.values.lastName}
           onChange={formik.handleChange}
@@ -103,7 +108,7 @@ export default function CheckoutForm() {
           variant="standard"
           id="address"
           name="address"
-          label="address"
+          label="Address"
           type="address"
           data-cy="customer-address"
           value={formik.values.address}
@@ -121,22 +126,9 @@ export default function CheckoutForm() {
           fullWidth
           margin="normal"
           variant="standard"
-          id="address2"
-          name="address2"
-          label="address line 2"
-          type="address2"
-          value={formik.values.address2}
-          onChange={formik.handleChange}
-          error={formik.touched.address2 && Boolean(formik.errors.address2)}
-          helperText={formik.touched.address2 && formik.errors.address2}
-        />
-        <TextField
-          fullWidth
-          margin="normal"
-          variant="standard"
           id="city"
           name="city"
-          label="city"
+          label="City"
           type="city"
           data-cy="customer-city"
           value={formik.values.city}
@@ -152,7 +144,7 @@ export default function CheckoutForm() {
           variant="standard"
           id="postalCode"
           name="postalCode"
-          label="postal code"
+          label="Postal code"
           type="postalCode"
           data-cy="customer-zipcode"
           value={formik.values.postalCode}
@@ -168,7 +160,7 @@ export default function CheckoutForm() {
           variant="standard"
           id="phone"
           name="phone"
-          label="phone"
+          label="Phone"
           type="phone"
           data-cy="customer-phone"
           value={formik.values.phone}
@@ -188,7 +180,7 @@ export default function CheckoutForm() {
           variant="standard"
           id="email"
           name="email"
-          label="email"
+          label="Email"
           type="email"
           data-cy="customer-email"
           value={formik.values.email}
