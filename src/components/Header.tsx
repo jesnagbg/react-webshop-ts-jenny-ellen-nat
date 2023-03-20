@@ -68,9 +68,14 @@ export default function Header() {
             >
               <CartIcon />
             </IconButton>
-            <IconButton aria-label="admin">
-              <PersonOutlineOutlinedIcon sx={styledPersonOutlined} />
-            </IconButton>
+            <Link
+              component={RouterLink}
+              to="/admin"
+            >
+              <IconButton aria-label="admin">
+                <PersonOutlineOutlinedIcon sx={styledPersonOutlined} />
+              </IconButton>
+            </Link>
           </Box>
         </Container>
       </AppBar>
