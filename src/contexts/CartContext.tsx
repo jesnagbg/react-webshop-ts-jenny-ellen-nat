@@ -5,8 +5,8 @@ import {useLocalCart} from "../hooks/useLocalCart";
 interface ContextValue {
   cartItems: CartItem[];
   addToCart: (product: Product, quantity: number) => void;
-  removeFromCart: (id: string) => void;
-  changeQuantity: (id: string, quantity: number) => void;
+  removeFromCart: (targetItem: CartItem) => void;
+  changeQuantity: (targetItem: CartItem, quantity: number) => void;
 }
 
 const CartContext = createContext<ContextValue>(null as any);
@@ -20,30 +20,31 @@ export default function CartProvider({children}: Props) {
   const [cartItems, setCartItems] = useLocalCart();
 
   const addToCart = (product: Product, quantity: number) => {
-    if (!cartItems.find((item) => item.id === product.id)) {
-      const newCartItem: CartItem = {...product, quantity: quantity};
+    const newCartItem: CartItem = {...product, quantity: quantity};
+    const foundItem = cartItems.find((item) => item.id === product.id);
+    if (!foundItem) {
       setCartItems([...cartItems, newCartItem]);
     } else {
-      changeQuantity(product.id, quantity);
+      changeQuantity(newCartItem, quantity + foundItem.quantity);
     }
     // Toast
   };
 
-  const removeFromCart = (id: string) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
+  const removeFromCart = (targetItem: CartItem) => {
+    setCartItems(cartItems.filter((item) => item.id !== targetItem.id));
     // Toast
   };
 
-  const changeQuantity = (id: string, quantity: number) => {
-    const foundItem = cartItems.find((item) => item.id === id);
+  const changeQuantity = (targetItem: CartItem, newQuantity: number) => {
+    const foundItem = cartItems.find((item) => item.id === targetItem.id);
     if (!foundItem) return;
-    if (foundItem.quantity + quantity <= 0) {
-      removeFromCart(id);
+    if (newQuantity === 0) {
+      removeFromCart(targetItem);
     } else {
       setCartItems(
         cartItems.map((item) => {
-          if (item.id !== id) return item;
-          return {...item, quantity: item.quantity + quantity};
+          if (item.id !== targetItem.id) return item;
+          return {...item, quantity: newQuantity};
         })
       );
     }

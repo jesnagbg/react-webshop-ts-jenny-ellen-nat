@@ -1,5 +1,5 @@
-import {createContext, ReactNode, useContext, useEffect, useState} from "react";
-import {Product, products} from "../data";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { Product, products } from "../data";
 
 interface ContextValue {
   products: Product[];

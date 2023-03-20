@@ -1,10 +1,10 @@
-import {Box, Button, Container, Grid} from "@mui/material";
-import {useEffect} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import { Box, Button, Container, Grid } from "@mui/material";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import ProductAdd from "../components/ProductAdd";
 import ProductDescription from "../components/ProductDescription";
 import ProductGallery from "../components/ProductGallery";
-import {useProducts} from "../contexts/ProductsContext";
+import { useProducts } from "../contexts/ProductsContext";
 
 export default function Product() {
   const {id} = useParams<{id: string}>();
