@@ -1,16 +1,12 @@
-import {Button, ButtonGroup, TextField} from "@mui/material";
-import {ChangeEvent, useEffect, useRef, useState} from "react";
-import useClickOut from "../hooks/useClickOut";
+import { Box, Button, ButtonGroup } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   initialValue: number;
   valueHandler: (value: number) => void;
 }
 
-export default function Quantity({initialValue, valueHandler}: Props) {
-  const [inputProps, setInputProps] = useState({
-    value: initialValue.toString(),
-  });
+export default function Quantity({ initialValue, valueHandler }: Props) {
   const [quantity, setQuantity] = useState(initialValue);
 
   const ref = useRef();
@@ -19,40 +15,52 @@ export default function Quantity({initialValue, valueHandler}: Props) {
     valueHandler(quantity);
   }, [quantity]);
 
-  useClickOut(ref, () => {
-    if (Number.isNaN(parseInt(inputProps.value))) {
-      setInputProps({value: "0"});
-      setQuantity(0);
-    }
-  });
-
   const oneLess = () => {
-    setInputProps({value: (quantity - 1).toString()});
     setQuantity(quantity - 1);
   };
 
   const oneMore = () => {
-    setInputProps({value: (quantity + 1).toString()});
     setQuantity(quantity + 1);
   };
 
-  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const newValue = e.target.value;
-    if (!Number.isNaN(parseInt(newValue))) {
-      setQuantity(parseInt(newValue));
-    }
-    setInputProps({value: newValue});
-  };
-
   return (
-    <ButtonGroup disableElevation>
-      <Button onClick={oneLess}>-</Button>
-      <TextField
-        onChange={onChange}
-        inputProps={inputProps}
-        size="small"
-      />
-      <Button onClick={oneMore}>+</Button>
+    <ButtonGroup
+      sx={styledButtonGroup}
+      disableElevation
+    >
+      <Button
+        sx={styledButton}
+        onClick={oneLess}
+      >
+        -
+      </Button>
+      <Box sx={styledBox}>{quantity}</Box>
+      <Button
+        sx={styledButton}
+        onClick={oneMore}
+      >
+        +
+      </Button>
     </ButtonGroup>
   );
 }
+
+const styledButtonGroup = {
+  border: '1px solid black',
+  borderRadius: '5px',
+  fontFamily: '"DM Sans", sans-serif',
+};
+
+const styledButton = {
+  border: 'none',
+  '&:hover': {
+    border: 'none',
+  },
+};
+
+const styledBox = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: '0.5rem',
+};

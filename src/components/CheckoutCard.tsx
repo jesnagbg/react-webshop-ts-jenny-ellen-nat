@@ -1,22 +1,22 @@
-import {Clear} from "@mui/icons-material";
+import { Clear } from '@mui/icons-material';
 import {
   Box,
   Card,
   CardContent,
   CardMedia,
-  Fab,
+  IconButton,
   Typography,
-} from "@mui/material";
-import {useCart} from "../contexts/CartContext";
-import {CartItem} from "../data";
-import Quantity from "./Quantity";
+} from '@mui/material';
+import { useCart } from '../contexts/CartContext';
+import { CartItem } from '../data';
+import Quantity from './Quantity';
 
 interface Props {
   item: CartItem;
 }
 
-export default function CheckoutCard({item}: Props) {
-  const {removeFromCart, changeQuantity} = useCart();
+export default function CheckoutCard({ item }: Props) {
+  const { removeFromCart, changeQuantity } = useCart();
 
   const removeItem = () => {
     removeFromCart(item);
@@ -49,21 +49,23 @@ export default function CheckoutCard({item}: Props) {
           <Typography variant="body1">{item.price}kr</Typography>
         </CardContent>
       </Box>
-      <Fab
-        color="primary"
-        aria-label="remove"
-        size="small"
-        onClick={removeItem}
-      >
-        <Clear />
-      </Fab>
+      <Box>
+        <IconButton
+          color="primary"
+          aria-label="remove"
+          size="small"
+          onClick={removeItem}
+        >
+          <Clear />
+        </IconButton>
+      </Box>
     </Card>
   );
 }
 
 const styledCard = {
-  margin: "1rem 0",
-  display: "flex",
+  margin: '1rem 0',
+  display: 'flex',
 };
 
 const styledCardMedia = {
@@ -71,11 +73,11 @@ const styledCardMedia = {
 };
 
 const styledCardContent = {
-  padding: "0 1rem",
+  padding: '0 1rem',
 };
 
 const styledBox = {
-  display: "flex",
-  flexDirection: "column",
-  flex: "1",
+  display: 'flex',
+  flexDirection: 'column',
+  flex: '1',
 };
