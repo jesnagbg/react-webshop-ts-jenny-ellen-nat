@@ -6,8 +6,8 @@ import { useLocalCart } from '../hooks/useLocalCart';
 interface ContextValue {
   cartItems: CartItem[];
   addToCart: (product: Product, quantity: number) => void;
-  removeFromCart: (removedItem: CartItem) => void;
-  changeQuantity: (id: string, quantity: number) => void;
+  removeFromCart: (targetItem: CartItem) => void;
+  changeQuantity: (targetItem: CartItem, quantity: number) => void;
 }
 
 const CartContext = createContext<ContextValue>(null as any);
@@ -33,37 +33,38 @@ export default function CartProvider({ children }: Props) {
   });
 
   const addToCart = (product: Product, quantity: number) => {
-    if (!cartItems.find((item) => item.id === product.id)) {
-      const newCartItem: CartItem = { ...product, quantity: quantity };
+    const newCartItem: CartItem = { ...product, quantity: quantity };
+    const foundItem = cartItems.find((item) => item.id === product.id);
+    if (!foundItem) {
       setCartItems([...cartItems, newCartItem]);
     } else {
-      changeQuantity(product.id, quantity);
+      changeQuantity(newCartItem, quantity + foundItem.quantity);
     }
     setToastProps({ name: product.title, quantity: quantity, remove: false });
     setToastOpen(true);
   };
 
-  const removeFromCart = (removedItem: CartItem) => {
-    setCartItems(cartItems.filter((item) => item.id !== removedItem.id));
+  const removeFromCart = (targetItem: CartItem) => {
+    setCartItems(cartItems.filter((item) => item.id !== targetItem.id));
 
     setToastProps({
-      name: removedItem.title,
-      quantity: removedItem.quantity,
+      name: targetItem.title,
+      quantity: targetItem.quantity,
       remove: true,
     });
     setToastOpen(true);
   };
 
-  const changeQuantity = (id: string, quantity: number) => {
-    const foundItem = cartItems.find((item) => item.id === id);
+  const changeQuantity = (targetItem: CartItem, newQuantity: number) => {
+    const foundItem = cartItems.find((item) => item.id === targetItem.id);
     if (!foundItem) return;
-    if (foundItem.quantity + quantity <= 0) {
-      removeFromCart(foundItem);
+    if (newQuantity === 0) {
+      removeFromCart(targetItem);
     } else {
       setCartItems(
         cartItems.map((item) => {
-          if (item.id !== id) return item;
-          return { ...item, quantity: item.quantity + quantity };
+          if (item.id !== targetItem.id) return item;
+          return { ...item, quantity: newQuantity };
         })
       );
     }
