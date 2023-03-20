@@ -33,11 +33,9 @@ export default function Toast({
       open={open}
       autoHideDuration={5000}
       onClose={handleClose}
-      message={
-        remove
-          ? `${name} has been removed from the cart.`
-          : `${quantity}x ${name} has been added to the cart.`
-      }
+      message={`${quantity}x ${name} ${quantity > 1 ? 'have' : 'has'} been ${
+        remove ? 'removed from' : 'added to'
+      } the cart.`}
       action={action}
     />
   );
