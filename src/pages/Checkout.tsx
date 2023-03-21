@@ -1,24 +1,10 @@
 import { Container, Grid, Typography } from '@mui/material';
 import Basket from '../components/Basket';
 import CheckoutForm from '../components/CheckoutForm';
-import { useCart } from '../contexts/CartContext';
-import { products } from '../data';
 
 export default function Checkout() {
-  // Test the basket!! (REMOVE ME LATER)
-  const { addToCart } = useCart();
-
-  // Basket testing. (REMOVE ME LATER)
-  const addItemToCart = () => {
-    addToCart(products[0], 1);
-  };
-
   return (
     <Container maxWidth={'lg'}>
-      {/* Basket testing button. REMOVE ME LATER */}
-      <button onClick={addItemToCart}>Add me</button>
-      {/**-------------------------------------- */}
-
       <Grid
         container
         spacing={4}
