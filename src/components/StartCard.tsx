@@ -3,9 +3,10 @@ import {
   Box,
   Card,
   CardContent,
+  CardMedia,
   Grid,
   IconButton,
-  Typography,
+  Typography
 } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -55,9 +56,11 @@ export default function StartCard({ product }: Props) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <Box
-          sx={{ ...cardImage, backgroundImage: `url(${currentImage})` }}
-          title={title}
+        <CardMedia
+          component="img"
+          image={currentImage}
+          alt={title}
+          sx={cardImage}
           onClick={() => handleProductClick(product)}
         />
       </Box>
@@ -115,9 +118,7 @@ const imageBorder = {
 const cardImage = {
   height: '100%',
   width: '100%',
-  backgroundSize: 'contain',
-  backgroundPosition: 'center',
-  backgroundRepeat: 'no-repeat',
+  objectFit: 'contain',
   cursor: 'pointer',
 };
 
