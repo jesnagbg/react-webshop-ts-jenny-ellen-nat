@@ -19,11 +19,10 @@ export default function CheckoutForm() {
       .required('Last name required'),
     address: yup
       .string()
-      .min(2, 'Please enter a valid address')
+      .min(4, 'Please enter a valid address')
       .required('Address required'),
     postalCode: yup
       .string()
-      .typeError('Postal code must be a number')
       .min(4, 'Postal code must be at least two characters')
       .required('Postal code required'),
     city: yup
@@ -31,15 +30,12 @@ export default function CheckoutForm() {
       .min(2, 'Please enter a valid city')
       .required('City required'),
     phone: yup
-      .number()
-      .typeError('The value must be a number')
-      .integer('The value must be a number')
-      .min(6, 'Please enter a valid phone number')
+      .string()
+      .min(6, 'Phone number must be at least six characters')
       .required('Phone number required'),
     email: yup
       .string()
-      .email()
-      .min(4, 'Please enter a valid email')
+      .email('Please enter a valid email')
       .required('Email required'),
   });
 
