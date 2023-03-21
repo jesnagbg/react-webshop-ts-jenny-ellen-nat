@@ -32,7 +32,7 @@ const styledButton = {
   border: '1px solid black',
   textTransform: 'none',
   '&:hover': {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.lightGrey.main,
   },
 };
 

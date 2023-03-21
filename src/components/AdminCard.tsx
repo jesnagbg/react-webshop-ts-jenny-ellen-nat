@@ -6,17 +6,20 @@ import {
   CardMedia,
   IconButton,
   Link,
-  Typography,
+  Typography
 } from '@mui/material';
 import { Product } from '../../data';
+import { useDialog } from '../hooks/useDialog';
 import { theme } from '../theme';
+import AdminEditForm from './AdminEditForm';
 
 interface Props {
   product: Product;
 }
 
-export default function CheckoutCard({ product }: Props) {
+export default function AdminCard({ product }: Props) {
   const { id, title, image, images, price } = product;
+  const { open, handleOpen, handleClose } = useDialog();
 
   return (
     <Card
@@ -57,10 +60,12 @@ export default function CheckoutCard({ product }: Props) {
         </IconButton>
         <Link
           sx={editLink}
+          onClick={handleOpen}
           data-cy="admin-edit-product"
         >
           Edit
         </Link>
+        <AdminEditForm open={open} handleClose={handleClose} />
       </Box>
     </Card>
   );
@@ -88,11 +93,11 @@ const styledBox = {
 const removeButton = {
   height: '2rem',
   width: '2rem',
-  backgroundColor: theme.palette.lightGrey.main,
+  backgroundColor: "white",
   color: 'black',
   borderRadius: '50%',
   '&:hover': {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.lightGrey.main,
   },
 };
 
