@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, FormHelperText, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
@@ -9,14 +9,10 @@ export default function CheckoutForm() {
   const navigate = useNavigate();
 
   const validationSchema = yup.object({
-    firstName: yup
+    name: yup
       .string()
       .min(2, 'Name must be at least two characters')
-      .required('First name required'),
-    lastName: yup
-      .string()
-      .min(2, 'Name must be at least two characters')
-      .required('Last name required'),
+      .required('Name required'),
     address: yup
       .string()
       .min(4, 'Please enter a valid address')
@@ -41,8 +37,7 @@ export default function CheckoutForm() {
 
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
+      name: '',
       address: '',
       city: '',
       postalCode: '',
@@ -52,7 +47,7 @@ export default function CheckoutForm() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       JSON.stringify(values, null, 2);
-      navigate(`/confirm`);
+      navigate(`/confirmation`);
     },
   });
 
@@ -67,36 +62,26 @@ export default function CheckoutForm() {
           fullWidth
           margin="normal"
           variant="standard"
-          id="firstName"
-          name="firstName"
-          label="First name"
-          data-cy="customer-name"
-          value={formik.values.firstName}
+          id="name"
+          name="name"
+          label="Name"
+          value={formik.values.name}
           onChange={formik.handleChange}
-          error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-          helperText={
-            <span data-cy="customer-name-error">
-              {formik.touched.firstName && formik.errors.firstName}
-            </span>
-          }
+          error={formik.touched.name && Boolean(formik.errors.name)}
+          helperText={formik.touched.name && formik.errors.name}
+          inputProps={{
+            'data-cy': 'customer-name',
+            'aria-describedby': 'customer-name-helper-text',
+            autoComplete: 'name',
+          }}
           required={true}
-          onBlur={formik.handleBlur}
+          onFocus={() => formik.setFieldTouched('name', true, false)}
         />
-        <TextField
-          fullWidth
-          margin="normal"
-          variant="standard"
-          id="lastName"
-          name="lastName"
-          label="Last name"
-          type="last name"
-          value={formik.values.lastName}
-          onChange={formik.handleChange}
-          error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-          helperText={formik.touched.lastName && formik.errors.lastName}
-          required={true}
-          onBlur={formik.handleBlur}
-        />
+        <FormHelperText
+          id="customer-name-helper-text"
+          data-cy="customer-name-error"
+        ></FormHelperText>
+
         <TextField
           fullWidth
           margin="normal"
@@ -105,18 +90,22 @@ export default function CheckoutForm() {
           name="address"
           label="Address"
           type="address"
-          data-cy="customer-address"
           value={formik.values.address}
           onChange={formik.handleChange}
           error={formik.touched.address && Boolean(formik.errors.address)}
-          helperText={
-            <span data-cy="customer-address-error">
-              {formik.touched.address && formik.errors.address}
-            </span>
-          }
+          helperText={formik.touched.address && formik.errors.address}
+          inputProps={{
+            'data-cy': 'customer-address',
+            'aria-describedby': 'customer-address-helper-text',
+            autoComplete: 'street-address',
+          }}
           required={true}
           onBlur={formik.handleBlur}
         />
+        <FormHelperText
+          id="customer-address-helper-text"
+          data-cy="customer-address-error"
+        ></FormHelperText>
         <TextField
           fullWidth
           margin="normal"
@@ -125,13 +114,13 @@ export default function CheckoutForm() {
           name="city"
           label="City"
           type="city"
-          data-cy="customer-city"
           value={formik.values.city}
           onChange={formik.handleChange}
           error={formik.touched.city && Boolean(formik.errors.city)}
           helperText={formik.touched.city && formik.errors.city}
           required={true}
           onBlur={formik.handleBlur}
+          inputProps={{ 'data-cy': 'customer-city', autoComplete: 'city' }}
         />
         <TextField
           fullWidth
@@ -141,13 +130,16 @@ export default function CheckoutForm() {
           name="postalCode"
           label="Postal code"
           type="postalCode"
-          data-cy="customer-zipcode"
           value={formik.values.postalCode}
           onChange={formik.handleChange}
           error={formik.touched.postalCode && Boolean(formik.errors.postalCode)}
           helperText={formik.touched.postalCode && formik.errors.postalCode}
           required={true}
           onBlur={formik.handleBlur}
+          inputProps={{
+            'data-cy': 'customer-zipcode',
+            autoComplete: 'postal-code',
+          }}
         />
         <TextField
           fullWidth
@@ -157,17 +149,14 @@ export default function CheckoutForm() {
           name="phone"
           label="Phone"
           type="phone"
-          data-cy="customer-phone"
           value={formik.values.phone}
           onChange={formik.handleChange}
           error={formik.touched.phone && Boolean(formik.errors.phone)}
-          helperText={
-            <span data-cy="customer-phone-error">
-              {formik.touched.phone && formik.errors.phone}
-            </span>
-          }
+          helperText={formik.touched.phone && formik.errors.phone}
+          FormHelperTextProps={{ 'data-cy': 'customer-phone-error' } as any}
           required={true}
           onBlur={formik.handleBlur}
+          inputProps={{ 'data-cy': 'customer-phone', autoComplete: 'tel' }}
         />
         <TextField
           fullWidth
@@ -177,24 +166,20 @@ export default function CheckoutForm() {
           name="email"
           label="Email"
           type="email"
-          data-cy="customer-email"
           value={formik.values.email}
           onChange={formik.handleChange}
           error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={
-            <span data-cy="customer-email-error">
-              {formik.touched.email && formik.errors.email}
-            </span>
-          }
+          helperText={formik.touched.email && formik.errors.email}
+          FormHelperTextProps={{ 'data-cy': 'customer-email-error' } as any}
           required={true}
           onBlur={formik.handleBlur}
+          inputProps={{ 'data-cy': 'customer-email', autoComplete: 'email' }}
         />
         <Button
           sx={styledButton}
           color="primary"
           variant="contained"
           type="submit"
-          data-cy="product-buy-button"
         >
           Confirm
         </Button>
