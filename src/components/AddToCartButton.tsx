@@ -10,6 +10,7 @@ export default function AddToCartButton({ onAdd }: Props) {
       variant="contained"
       sx={styledButton}
       onClick={onAdd}
+      data-cy="product-buy-button"
     >
       Add to cart
     </Button>
