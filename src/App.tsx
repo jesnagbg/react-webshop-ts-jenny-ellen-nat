@@ -1,8 +1,9 @@
-import {ThemeProvider} from "@mui/material/styles";
-import {Outlet} from "react-router-dom";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import {theme} from "./theme";
+import { Snackbar } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { Outlet } from 'react-router-dom';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import { theme } from './theme';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Outlet />
         <Footer />
       </div>
+      <Snackbar />
     </ThemeProvider>
   );
 }

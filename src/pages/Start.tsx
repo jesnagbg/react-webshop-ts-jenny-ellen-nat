@@ -6,10 +6,10 @@ import {
   Theme,
   useMediaQuery,
 } from '@mui/material';
+import { Product } from '../../data';
 import Hero from '../components/Hero';
 import StartCard from '../components/StartCard';
 import { useProducts } from '../contexts/ProductsContext';
-import { Product } from '../data';
 
 export default function Start() {
   const { products } = useProducts();

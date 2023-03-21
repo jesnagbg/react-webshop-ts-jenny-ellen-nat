@@ -1,12 +1,12 @@
-import {Container, Grid, Typography} from "@mui/material";
-import Basket from "../components/Basket";
-import CheckoutForm from "../components/CheckoutForm";
-import {useCart} from "../contexts/CartContext";
-import {products} from "../data";
+import { Container, Grid, Typography } from '@mui/material';
+import { products } from '../../data';
+import Basket from '../components/Basket';
+import CheckoutForm from '../components/CheckoutForm';
+import { useCart } from '../contexts/CartContext';
 
 export default function Checkout() {
   // Test the basket!! (REMOVE ME LATER)
-  const {addToCart} = useCart();
+  const { addToCart } = useCart();
 
   // Basket testing. (REMOVE ME LATER)
   const onClick = () => {
@@ -14,7 +14,7 @@ export default function Checkout() {
   };
 
   return (
-    <Container maxWidth={"lg"}>
+    <Container maxWidth={'lg'}>
       {/* Basket testing button. REMOVE ME LATER */}
       <button onClick={onClick}>Add me</button>
       <Grid
