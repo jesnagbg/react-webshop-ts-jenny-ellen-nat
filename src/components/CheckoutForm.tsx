@@ -22,9 +22,9 @@ export default function CheckoutForm() {
       .min(2, 'Please enter a valid address')
       .required('Address required'),
     postalCode: yup
-      .number()
+      .string()
       .typeError('Postal code must be a number')
-      .min(4, 'Please enter a valid postal code')
+      .min(4, 'Postal code must be at least two characters')
       .required('Postal code required'),
     city: yup
       .string()
@@ -63,7 +63,7 @@ export default function CheckoutForm() {
 
   return (
     <div>
-      <Typography variant="h6">Shipping address</Typography>
+      <Typography variant="h5">Shipping address</Typography>
       <StyledForm
         onSubmit={formik.handleSubmit}
         data-cy="customer-form"
