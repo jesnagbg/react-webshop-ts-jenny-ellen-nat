@@ -17,20 +17,27 @@ interface Props {
   children: ReactNode;
 }
 
-interface ToastProps {
-  name: string;
+// interface ToastProps {
+//   name: string;
+//   quantity: number;
+//   remove: boolean;
+// }
+
+interface SnackbarMessage {
+  title: string;
   quantity: number;
   remove: boolean;
 }
 
 export default function CartProvider({ children }: Props) {
   const [cartItems, setCartItems] = useLocalCart();
-  const [toastOpen, setToastOpen] = useState(false);
-  const [toastProps, setToastProps] = useState({
-    name: '',
-    quantity: 0,
-    remove: false,
-  });
+  // const [toastOpen, setToastOpen] = useState(false);
+  // const [toastProps, setToastProps] = useState({
+  //   name: '',
+  //   quantity: 0,
+  //   remove: false,
+  // });
+  const [snackpack, setParentSnackpack] = useState<SnackbarMessage[]>([]);
 
   const addToCart = (product: Product, quantity: number) => {
     const newCartItem: CartItem = { ...product, quantity: quantity };
@@ -49,13 +56,19 @@ export default function CartProvider({ children }: Props) {
   };
 
   const displayToast = (targetItem: CartItem, remove: boolean) => {
-    setToastOpen(false);
-    setToastProps({
-      name: targetItem.title,
+    // setToastOpen(false);
+    // setToastProps({
+    //   name: targetItem.title,
+    //   quantity: targetItem.quantity,
+    //   remove: remove,
+    // });
+    // setToastOpen(true);
+    const newSnackbarMessage: SnackbarMessage = {
+      title: targetItem.title,
       quantity: targetItem.quantity,
       remove: remove,
-    });
-    setToastOpen(true);
+    };
+    setParentSnackpack((prev) => [...prev, newSnackbarMessage]);
   };
 
   const changeQuantity = (targetItem: CartItem, newQuantity: number) => {
@@ -78,11 +91,8 @@ export default function CartProvider({ children }: Props) {
     >
       {children}
       <Toast
-        name={toastProps?.name}
-        quantity={toastProps?.quantity}
-        remove={toastProps?.remove}
-        open={toastOpen}
-        setOpen={setToastOpen}
+        snackpack={snackpack}
+        setSnackpack={setParentSnackpack}
       />
     </CartContext.Provider>
   );
