@@ -1,4 +1,4 @@
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import {
   AppBar,
   Box,
@@ -6,20 +6,20 @@ import {
   IconButton,
   Link,
   Slide,
-  Typography
-} from "@mui/material";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
-import { FC, ReactElement } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { theme } from "../theme";
-import CartIcon from "./CartIcon";
+  Typography,
+} from '@mui/material';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import { FC, ReactElement } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { theme } from '../theme';
+import CartIcon from './CartIcon';
 
 interface Props {
   children: ReactElement;
 }
 
 // Define the HideOnScroll component as a function component
-const HideOnScroll: FC<Props> = ({children}) => {
+const HideOnScroll: FC<Props> = ({ children }) => {
   // useScrollTrigger returns a boolean value indicating whether the user has scrolled down the page
   const trigger = useScrollTrigger();
 
@@ -28,7 +28,11 @@ const HideOnScroll: FC<Props> = ({children}) => {
   // The 'direction' prop determines the direction of the slide animation
   // The 'in' prop determines whether the component should be visible or not
   return (
-    <Slide appear={false} direction="down" in={!trigger}>
+    <Slide
+      appear={false}
+      direction="down"
+      in={!trigger}
+    >
       {children}
     </Slide>
   );
@@ -39,16 +43,29 @@ export default function Header() {
     <HideOnScroll>
       <AppBar sx={styledAppBar}>
         <Container sx={styledContainer}>
-          <Link component={RouterLink} to="/" sx={styledLink}>
-            <Typography variant="h6" sx={styledLogo}>
+          <Link
+            component={RouterLink}
+            to="/"
+            sx={styledLink}
+          >
+            <Typography
+              variant="h6"
+              sx={styledLogo}
+            >
               Piece by Piece
             </Typography>
           </Link>
           <Box>
-            <IconButton aria-label="cart">
+            <IconButton
+              aria-label="cart"
+              data-cy="cart-link"
+            >
               <CartIcon />
             </IconButton>
-            <Link component={RouterLink} to="/admin">
+            <Link
+              component={RouterLink}
+              to="/admin"
+            >
               <IconButton aria-label="admin">
                 <PersonOutlineOutlinedIcon sx={styledPersonOutlined} />
               </IconButton>
@@ -62,28 +79,28 @@ export default function Header() {
 
 const styledAppBar = {
   height: 80,
-  bgcolor: "#fff",
-  marginBottom: "100px",
-  boxShadow: "none",
+  bgcolor: '#fff',
+  marginBottom: '100px',
+  boxShadow: 'none',
 };
 
 const styledContainer = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
   color: theme.palette.primary.main,
-  height: "100%",
+  height: '100%',
 };
 
 const styledLink = {
-  textDecoration: "none",
+  textDecoration: 'none',
 };
 
 const styledLogo = {
-  fontFamily: "Adamina",
+  fontFamily: 'Adamina',
 };
 
 const styledPersonOutlined = {
   color: theme.palette.primary.main,
-  fontSize: "1.7rem",
+  fontSize: '1.7rem',
 };

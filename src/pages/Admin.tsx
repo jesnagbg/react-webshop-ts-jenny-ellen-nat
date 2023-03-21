@@ -1,20 +1,15 @@
 import { Box, Container, Divider, Grid, Typography } from '@mui/material';
-import AdminAddForm from '../components/AdminAddForm';
+import { Product, products } from '../../data';
 import AdminButton from '../components/AdminButton';
 import AdminCard from '../components/AdminCard';
-import { Product, products } from '../data';
-import { useDialog } from '../hooks/useDialog';
 
 export default function Admin() {
-  const { open, handleOpen, handleClose } = useDialog();
-
   return (
     <Container
       maxWidth={'lg'}
       sx={topSpace}
     >
-      <AdminButton onClick={handleOpen}>Add new item</AdminButton>
-      <AdminAddForm open={open} handleClose={handleClose} />
+      <AdminButton>Add new item</AdminButton>
       <Grid
         sx={bottomSpace}
         container
