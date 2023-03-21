@@ -16,6 +16,7 @@ export default function Admin() {
         {/* Är nog så här man ska göra egentligen men fick inte riktigt till det med routing, återkommer! */}
        {/* <AdminButton onClick={handleOpen}>Add new item</AdminButton> */}
        <AdminButton to="/admin/new">Add new item</AdminButton>
+       <AdminButton to="/admin/edit">Edit item</AdminButton>
        <Outlet />
         <Grid
           sx={bottomSpace}

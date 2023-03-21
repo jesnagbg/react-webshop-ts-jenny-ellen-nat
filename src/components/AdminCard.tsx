@@ -5,13 +5,11 @@ import {
   CardContent,
   CardMedia,
   IconButton,
-  Link,
   Typography
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { Product } from '../../data';
-import { useDialog } from '../hooks/useDialog';
 import { theme } from '../theme';
-import AdminEditForm from './AdminEditForm';
 
 interface Props {
   product: Product;
@@ -19,7 +17,6 @@ interface Props {
 
 export default function AdminCard({ product }: Props) {
   const { id, title, image, images, price } = product;
-  const { open, handleOpen, handleClose } = useDialog();
 
   return (
     <Card
@@ -58,14 +55,9 @@ export default function AdminCard({ product }: Props) {
         >
           <Clear />
         </IconButton>
-        <Link
-          sx={editLink}
-          onClick={handleOpen}
-          data-cy="admin-edit-product"
-        >
+        <Link to="/admin/edit" style={editLink} data-cy="admin-edit-product">
           Edit
         </Link>
-        <AdminEditForm open={open} handleClose={handleClose} />
       </Box>
     </Card>
   );
