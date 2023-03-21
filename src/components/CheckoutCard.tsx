@@ -39,14 +39,24 @@ export default function CheckoutCard({ item }: Props) {
       />
       <Box sx={styledBox}>
         <CardContent sx={styledCardContent}>
-          <Typography variant="h5">{item.title}</Typography>
+          <Typography
+            data-cy="product-title"
+            variant="h5"
+          >
+            {item.title}
+          </Typography>
           <Typography variant="body1">{item.pieces} pieces</Typography>
           <Typography variant="body1"> Quantity:</Typography>
           <Quantity
             initialValue={item.quantity}
             valueHandler={valueHandler}
           />
-          <Typography variant="body1">{item.price}kr</Typography>
+          <Typography
+            data-cy="product-price"
+            variant="body1"
+          >
+            {item.price * item.quantity}kr
+          </Typography>
         </CardContent>
       </Box>
       <Box>

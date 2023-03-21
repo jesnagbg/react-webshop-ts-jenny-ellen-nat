@@ -46,41 +46,41 @@ export default function Header() {
   };
 
   return (
-    <HideOnScroll>
-      <AppBar sx={styledAppBar}>
-        <Container sx={styledContainer}>
+    // <HideOnScroll>
+    <AppBar sx={styledAppBar}>
+      <Container sx={styledContainer}>
+        <Link
+          component={RouterLink}
+          to="/"
+          sx={styledLink}
+        >
+          <Typography
+            variant="h6"
+            sx={styledLogo}
+          >
+            Piece by Piece
+          </Typography>
+        </Link>
+        <Box>
+          <IconButton
+            data-cy="cart-link"
+            onClick={navigateCheckout}
+            aria-label="cart"
+          >
+            <CartIcon />
+          </IconButton>
           <Link
             component={RouterLink}
-            to="/"
-            sx={styledLink}
+            to="/admin"
           >
-            <Typography
-              variant="h6"
-              sx={styledLogo}
-            >
-              Piece by Piece
-            </Typography>
-          </Link>
-          <Box>
-            <IconButton
-              data-cy="cart-link"
-              onClick={navigateCheckout}
-              aria-label="cart"
-            >
-              <CartIcon />
+            <IconButton aria-label="admin">
+              <PersonOutlineOutlinedIcon sx={styledPersonOutlined} />
             </IconButton>
-            <Link
-              component={RouterLink}
-              to="/admin"
-            >
-              <IconButton aria-label="admin">
-                <PersonOutlineOutlinedIcon sx={styledPersonOutlined} />
-              </IconButton>
-            </Link>
-          </Box>
-        </Container>
-      </AppBar>
-    </HideOnScroll>
+          </Link>
+        </Box>
+      </Container>
+    </AppBar>
+    // </HideOnScroll>
   );
 }
 
