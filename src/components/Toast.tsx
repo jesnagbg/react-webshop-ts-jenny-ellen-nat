@@ -7,36 +7,33 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { CartItem } from '../data';
 
 interface Props {
-  snackpack: SnackbarMessage[];
-  setSnackpack: React.Dispatch<SetStateAction<SnackbarMessage[]>>;
+  snackpack: SnackbarData[];
+  setSnackpack: React.Dispatch<SetStateAction<SnackbarData[]>>;
 }
 
-interface SnackbarMessage {
-  title: string;
-  quantity: number;
+interface SnackbarData {
+  cartItem: CartItem;
   remove: boolean;
 }
 
 export default function Toast({ snackpack, setSnackpack }: Props) {
   const [open, setOpen] = useState(false);
-  const [messageInfo, setMessageInfo] = useState<SnackbarMessage | undefined>(
+  const [messageData, setMessageData] = useState<SnackbarData | undefined>(
     undefined
   );
 
   useEffect(() => {
-    console.log('Toast useEffect ran.');
-    if (snackpack.length && !messageInfo) {
-      console.log('If statement block 1 ran.');
-      setMessageInfo({ ...snackpack[0] });
+    if (snackpack.length && !messageData) {
+      setMessageData({ ...snackpack[0] });
       setSnackpack((prev) => prev.slice(1));
       setOpen(true);
-    } else if (snackpack.length && messageInfo && open) {
-      console.log('If statement block 2 ran.');
+    } else if (snackpack.length && messageData && open) {
       setOpen(false);
     }
-  }, [snackpack, messageInfo, open]);
+  }, [snackpack, messageData, open]);
 
   const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') return;
@@ -44,7 +41,7 @@ export default function Toast({ snackpack, setSnackpack }: Props) {
   };
 
   const handleExited = () => {
-    setMessageInfo(undefined);
+    setMessageData(undefined);
   };
 
   const action = (
@@ -55,14 +52,18 @@ export default function Toast({ snackpack, setSnackpack }: Props) {
     </Fragment>
   );
 
-  return messageInfo ? (
+  return messageData ? (
     <Snackbar
+      data-cy="added-to-cart-toast"
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       open={open}
       autoHideDuration={5000}
       onClose={handleClose}
-      message={`${messageInfo.quantity}x ${messageInfo.title} ${
-        messageInfo.quantity > 1 ? 'have' : 'has'
-      } been ${messageInfo.remove ? 'removed from' : 'added to'} the cart.`}
+      message={`${messageData.cartItem.quantity}x ${
+        messageData.cartItem.title
+      } ${messageData.cartItem.quantity > 1 ? 'have' : 'has'} been ${
+        messageData.remove ? 'removed from' : 'added to'
+      } the cart.`}
       action={action}
       TransitionProps={{ onExited: handleExited }}
     />

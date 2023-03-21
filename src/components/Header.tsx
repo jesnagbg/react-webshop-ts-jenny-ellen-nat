@@ -63,6 +63,7 @@ export default function Header() {
           </Link>
           <Box>
             <IconButton
+              data-cy="cart-link"
               onClick={navigateCheckout}
               aria-label="cart"
             >

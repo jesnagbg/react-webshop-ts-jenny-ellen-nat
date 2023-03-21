@@ -8,6 +8,7 @@ export default function CartIcon() {
 
   return (
     <StyledBadge
+      data-cy="cart-items-count-badge"
       badgeContent={cartItems.reduce((a, item) => a + item.quantity, 0)}
     >
       <ShoppingCartOutlinedIcon sx={cartIconStyle} />

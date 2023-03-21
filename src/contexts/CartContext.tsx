@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 import Toast from '../components/Toast';
 import { CartItem, Product } from '../data';
-import { useLocalCart } from '../hooks/useLocalCart';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface ContextValue {
   cartItems: CartItem[];
@@ -17,27 +17,14 @@ interface Props {
   children: ReactNode;
 }
 
-// interface ToastProps {
-//   name: string;
-//   quantity: number;
-//   remove: boolean;
-// }
-
-interface SnackbarMessage {
-  title: string;
-  quantity: number;
+interface SnackbarData {
+  cartItem: CartItem;
   remove: boolean;
 }
 
 export default function CartProvider({ children }: Props) {
-  const [cartItems, setCartItems] = useLocalCart();
-  // const [toastOpen, setToastOpen] = useState(false);
-  // const [toastProps, setToastProps] = useState({
-  //   name: '',
-  //   quantity: 0,
-  //   remove: false,
-  // });
-  const [snackpack, setParentSnackpack] = useState<SnackbarMessage[]>([]);
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('cc-cart');
+  const [snackpack, setSnackpack] = useState<SnackbarData[]>([]);
 
   const addToCart = (product: Product, quantity: number) => {
     const newCartItem: CartItem = { ...product, quantity: quantity };
@@ -56,19 +43,12 @@ export default function CartProvider({ children }: Props) {
   };
 
   const displayToast = (targetItem: CartItem, remove: boolean) => {
-    // setToastOpen(false);
-    // setToastProps({
-    //   name: targetItem.title,
-    //   quantity: targetItem.quantity,
-    //   remove: remove,
-    // });
-    // setToastOpen(true);
-    const newSnackbarMessage: SnackbarMessage = {
-      title: targetItem.title,
-      quantity: targetItem.quantity,
+    const newSnackbarMessage: SnackbarData = {
+      // Create the object here or in the other functions?
+      cartItem: targetItem,
       remove: remove,
     };
-    setParentSnackpack((prev) => [...prev, newSnackbarMessage]);
+    setSnackpack((prev) => [...prev, newSnackbarMessage]);
   };
 
   const changeQuantity = (targetItem: CartItem, newQuantity: number) => {
@@ -92,7 +72,7 @@ export default function CartProvider({ children }: Props) {
       {children}
       <Toast
         snackpack={snackpack}
-        setSnackpack={setParentSnackpack}
+        setSnackpack={setSnackpack}
       />
     </CartContext.Provider>
   );

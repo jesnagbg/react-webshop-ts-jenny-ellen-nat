@@ -29,13 +29,20 @@ export default function Quantity({ initialValue, valueHandler }: Props) {
       disableElevation
     >
       <Button
+        data-cy="decrease-quantity-button"
         sx={styledButton}
         onClick={oneLess}
       >
         -
       </Button>
-      <Box sx={styledBox}>{quantity}</Box>
+      <Box
+        data-cy="product-quantity"
+        sx={styledBox}
+      >
+        {quantity}
+      </Box>
       <Button
+        data-cy="increase-quantity-button"
         sx={styledButton}
         onClick={oneMore}
       >
