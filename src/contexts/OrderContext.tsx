@@ -1,5 +1,5 @@
-import {createContext, ReactNode, useContext, useState} from "react";
-import {CartItem} from "../data";
+import { createContext, ReactNode, useContext, useState } from 'react';
+import { CartItem } from '../../data';
 
 interface ContextValue {
   order: CartItem[];
@@ -12,10 +12,10 @@ interface Props {
   children: ReactNode;
 }
 
-export default function OrderProvider({children}: Props) {
+export default function OrderProvider({ children }: Props) {
   const [order, setOrder] = useState<CartItem[]>([]);
 
   return (
-    <OrderContext.Provider value={{order}}>{children}</OrderContext.Provider>
+    <OrderContext.Provider value={{ order }}>{children}</OrderContext.Provider>
   );
 }
