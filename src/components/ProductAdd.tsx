@@ -41,6 +41,7 @@ const styledAdd = {
   alignItems: 'flex-end',
   gap: '1rem',
   background: '#fff',
+  flexWrap: 'wrap',
   '@media (max-width: 899px)': {
     flexDirection: 'row',
     justifyContent: 'flex-end',
