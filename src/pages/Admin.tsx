@@ -1,12 +1,11 @@
 import { Box, Container, Divider, Grid, Typography } from '@mui/material';
+import { Outlet } from 'react-router-dom';
 import { Product, products } from '../../data';
-import AdminAddForm from '../components/AdminAddForm';
 import AdminButton from '../components/AdminButton';
 import AdminCard from '../components/AdminCard';
-import { useDialog } from '../hooks/useDialog';
 
 export default function Admin() {
-  const { open, handleOpen, handleClose } = useDialog();
+  //const { open, handleOpen, handleClose } = useDialog();
 
   return (
     <Container
@@ -14,8 +13,10 @@ export default function Admin() {
       sx={topSpace}
     >
       <main>
-       <AdminButton onClick={handleOpen}>Add new item</AdminButton>
-       <AdminAddForm open={open} handleClose={handleClose} />
+        {/* Är nog så här man ska göra egentligen men fick inte riktigt till det med routing, återkommer! */}
+       {/* <AdminButton onClick={handleOpen}>Add new item</AdminButton> */}
+       <AdminButton to="/admin/new">Add new item</AdminButton>
+       <Outlet />
         <Grid
           sx={bottomSpace}
           container

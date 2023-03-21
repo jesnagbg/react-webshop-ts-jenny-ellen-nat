@@ -8,7 +8,7 @@ import AdminButton from './AdminButton';
 
 interface AdminAddFormProps {
   open: boolean;
-  handleClose: () => void;
+  handleClose?: () => void;
 }
 
 export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
@@ -24,7 +24,7 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
         <p>HELLO</p>
       </DialogContent>
       <DialogActions>
-        <AdminButton onClick={handleClose}>Cancel</AdminButton>
+        <AdminButton to="/admin">Cancel</AdminButton>
         <AdminButton onClick={handleClose}>Add item</AdminButton>
       </DialogActions>
     </Dialog>
