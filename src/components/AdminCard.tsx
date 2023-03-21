@@ -40,7 +40,7 @@ export default function AdminCard({ product }: Props) {
           >
             {title}
           </Typography>
-          <Typography variant="body1">Article number: {id}</Typography>
+          <Typography variant="body1">Article number: <span data-cy="product-id">{id}</span></Typography>
           <Typography variant="body1">Details:</Typography>
           <Typography
             variant="body1"

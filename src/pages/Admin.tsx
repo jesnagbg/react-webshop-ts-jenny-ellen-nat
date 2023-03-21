@@ -13,41 +13,45 @@ export default function Admin() {
       maxWidth={'lg'}
       sx={topSpace}
     >
-      <AdminButton onClick={handleOpen}>Add new item</AdminButton>
-      <AdminAddForm open={open} handleClose={handleClose} />
-      <Grid
-        sx={bottomSpace}
-        container
-        spacing={0}
-        columnSpacing={12}
-      >
+      <main>
+       <AdminButton onClick={handleOpen}>Add new item</AdminButton>
+       <AdminAddForm open={open} handleClose={handleClose} />
         <Grid
-          item
-          xs={12}
+          sx={bottomSpace}
+          container
+          spacing={0}
+          columnSpacing={12}
         >
-          <Typography
-            sx={titleStyling}
-            variant="h1"
-          >
-            All products
-          </Typography>
-        </Grid>
-        {products.map((product: Product) => (
           <Grid
-            key={product.id}
             item
             xs={12}
-            md={6}
-            lg={6}
           >
-            <Box>
-              <Divider />
-              <AdminCard product={product} />
-            </Box>
+            <Typography
+              sx={titleStyling}
+              variant="h1"
+            >
+              All products
+            </Typography>
           </Grid>
-        ))}
-      </Grid>
-      <AdminButton to="/">Back to main</AdminButton>
+          {products.map((product: Product) => (
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={6}
+            >
+              <Box>
+                <Divider />
+                <AdminCard
+                  product={product}
+                  key={product.id}
+                />
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+        <AdminButton to="/">Back to main</AdminButton>
+      </main>
     </Container>
   );
 }
