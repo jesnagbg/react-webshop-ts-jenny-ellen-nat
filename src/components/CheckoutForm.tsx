@@ -52,7 +52,6 @@ export default function CheckoutForm() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       JSON.stringify(values, null, 2);
-      console.log('confirm');
       navigate(`/confirm`);
     },
   });
