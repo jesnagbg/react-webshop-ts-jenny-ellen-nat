@@ -7,8 +7,8 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
+import { CartItem } from '../../data';
 import { useCart } from '../contexts/CartContext';
-import { CartItem } from '../data';
 import Quantity from './Quantity';
 
 interface Props {

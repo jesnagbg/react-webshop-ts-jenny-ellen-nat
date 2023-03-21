@@ -5,12 +5,12 @@ import {
   CardContent,
   Grid,
   IconButton,
-  Typography
+  Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { Product } from '../../data';
 import { useCart } from '../contexts/CartContext';
-import { Product } from '../data';
 import { theme } from '../theme';
 
 interface Props {
@@ -54,7 +54,7 @@ export default function StartCard({ product }: Props) {
         sx={imageBorder}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        >
+      >
         <Box
           sx={{ ...cardImage, backgroundImage: `url(${currentImage})` }}
           title={title}
@@ -67,8 +67,8 @@ export default function StartCard({ product }: Props) {
           sx={belowImageGrid}
         >
           <Box
-          onClick={() => handleProductClick(product)}
-          sx={linkedBoxStyling}          
+            onClick={() => handleProductClick(product)}
+            sx={linkedBoxStyling}
           >
             <Typography
               variant="h5"
@@ -158,4 +158,4 @@ const belowImageGrid = {
 
 const linkedBoxStyling = {
   cursor: 'pointer',
-}
+};

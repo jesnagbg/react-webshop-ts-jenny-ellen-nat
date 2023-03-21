@@ -1,5 +1,11 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { Product, products } from "../data";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { Product, products } from '../../data';
 
 interface ContextValue {
   products: Product[];
@@ -14,7 +20,7 @@ interface Props {
   children: ReactNode;
 }
 
-export default function ProductsProvider({children}: Props) {
+export default function ProductsProvider({ children }: Props) {
   const [allProducts, setProducts] = useState<Product[]>([]);
   const [product, setProduct] = useState<Product | null>(null);
 

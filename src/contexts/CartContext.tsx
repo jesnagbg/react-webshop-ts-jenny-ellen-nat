@@ -1,6 +1,6 @@
-import {createContext, ReactNode, useContext} from "react";
-import {CartItem, Product} from "../data";
-import {useLocalCart} from "../hooks/useLocalCart";
+import { createContext, ReactNode, useContext } from 'react';
+import { CartItem, Product } from '../../data';
+import { useLocalCart } from '../hooks/useLocalCart';
 
 interface ContextValue {
   cartItems: CartItem[];
@@ -16,11 +16,11 @@ interface Props {
   children: ReactNode;
 }
 
-export default function CartProvider({children}: Props) {
+export default function CartProvider({ children }: Props) {
   const [cartItems, setCartItems] = useLocalCart();
 
   const addToCart = (product: Product, quantity: number) => {
-    const newCartItem: CartItem = {...product, quantity: quantity};
+    const newCartItem: CartItem = { ...product, quantity: quantity };
     const foundItem = cartItems.find((item) => item.id === product.id);
     if (!foundItem) {
       setCartItems([...cartItems, newCartItem]);
@@ -44,14 +44,14 @@ export default function CartProvider({children}: Props) {
       setCartItems(
         cartItems.map((item) => {
           if (item.id !== targetItem.id) return item;
-          return {...item, quantity: newQuantity};
+          return { ...item, quantity: newQuantity };
         })
       );
     }
   };
   return (
     <CartContext.Provider
-      value={{cartItems, addToCart, removeFromCart, changeQuantity}}
+      value={{ cartItems, addToCart, removeFromCart, changeQuantity }}
     >
       {children}
     </CartContext.Provider>

@@ -4,23 +4,23 @@ import {
   ImageList,
   ImageListItem,
   Theme,
-  useMediaQuery
-} from "@mui/material";
-import Hero from "../components/Hero";
-import StartCard from "../components/StartCard";
-import { useProducts } from "../contexts/ProductsContext";
-import { Product } from "../data";
+  useMediaQuery,
+} from '@mui/material';
+import { Product } from '../../data';
+import Hero from '../components/Hero';
+import StartCard from '../components/StartCard';
+import { useProducts } from '../contexts/ProductsContext';
 
 export default function Start() {
   const { products } = useProducts();
   const smallScreen = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("md")
+    theme.breakpoints.down('md')
   );
   const mediumScreen = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("lg")
+    theme.breakpoints.down('lg')
   );
   const largeScreen = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.up("lg")
+    theme.breakpoints.up('lg')
   );
 
   let cols: number;
@@ -37,35 +37,41 @@ export default function Start() {
   return (
     <Container sx={imageBoxStyling}>
       <Hero />
-      <Box sx={imageBoxStyling}>
-        <ImageList cols={cols} gap={16} sx={imageListStyling}>
-          {products.map((product: Product) => (
-            <ImageListItem
-              key={product.id}
-              sx={imageListItemStyling}
-            >
-              <StartCard product={product} />
-            </ImageListItem>
-          ))}
-        </ImageList>
-      </Box>
+      <main>
+        <Box sx={imageBoxStyling}>
+          <ImageList
+            cols={cols}
+            gap={16}
+            sx={imageListStyling}
+          >
+            {products.map((product: Product) => (
+              <ImageListItem
+                key={product.id}
+                sx={imageListItemStyling}
+              >
+                <StartCard product={product} />
+              </ImageListItem>
+            ))}
+          </ImageList>
+        </Box>
+      </main>
     </Container>
   );
 }
 
 const imageListStyling = {
   flexGrow: 1,
-  justifyContent: "space-between",
+  justifyContent: 'space-between',
 };
 
 const imageListItemStyling = {
-  alignItems: "center",
+  alignItems: 'center',
 };
 
 const imageBoxStyling = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  marginTop: "3rem",
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  marginTop: '3rem',
   flexGrow: 1,
 };
