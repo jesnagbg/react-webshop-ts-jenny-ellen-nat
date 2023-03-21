@@ -9,40 +9,44 @@ export default function Admin() {
       maxWidth={'lg'}
       sx={topSpace}
     >
-      <AdminButton>Add new item</AdminButton>
-      <Grid
-        sx={bottomSpace}
-        container
-        spacing={0}
-        columnSpacing={12}
-      >
+      <main>
+        <AdminButton data-cy="admin-add-product">Add new item</AdminButton>
         <Grid
-          item
-          xs={12}
+          sx={bottomSpace}
+          container
+          spacing={0}
+          columnSpacing={12}
         >
-          <Typography
-            sx={titleStyling}
-            variant="h1"
-          >
-            All products
-          </Typography>
-        </Grid>
-        {products.map((product: Product) => (
           <Grid
-            key={product.id}
             item
             xs={12}
-            md={6}
-            lg={6}
           >
-            <Box>
-              <Divider />
-              <AdminCard product={product} />
-            </Box>
+            <Typography
+              sx={titleStyling}
+              variant="h1"
+            >
+              All products
+            </Typography>
           </Grid>
-        ))}
-      </Grid>
-      <AdminButton to="/">Back to main</AdminButton>
+          {products.map((product: Product) => (
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={6}
+            >
+              <Box>
+                <Divider />
+                <AdminCard
+                  product={product}
+                  key={product.id}
+                />
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+        <AdminButton to="/">Back to main</AdminButton>
+      </main>
     </Container>
   );
 }
