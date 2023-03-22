@@ -3,10 +3,12 @@ import { styled } from '@mui/system';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
+import { useOrder } from '../contexts/OrderContext';
 import { theme } from '../theme';
 
 export default function CheckoutForm() {
   const navigate = useNavigate();
+  const { order, updateOrder, cartItems } = useOrder(); // get cartItems from OrderContext
 
   const validationSchema = yup.object({
     name: yup
@@ -46,7 +48,21 @@ export default function CheckoutForm() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      JSON.stringify(values, null, 2);
+      const updatedOrder = {
+        // create new order with updated name
+        ...order,
+        cart: order.cart,
+        deliveryAddress: {
+          ...order.deliveryAddress,
+          name: values.name,
+          address: values.address,
+          city: values.city,
+          postalCode: values.postalCode,
+          phone: values.phone,
+          email: values.email,
+        },
+      };
+      updateOrder(updatedOrder);
       navigate(`/confirmation`);
     },
   });
