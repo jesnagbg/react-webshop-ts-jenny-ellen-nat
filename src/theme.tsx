@@ -68,6 +68,25 @@ export const theme: Theme = createTheme({
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#C7D8B7',
+          color: '#222222',
+
+          '&:hover': {
+            backgroundColor: '#c7d8b7c5',
+          },
+        },
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecorationLine: 'none',
+        },
+      },
+    },
   },
   shadows: Array(25).fill('none') as Shadows,
 });
