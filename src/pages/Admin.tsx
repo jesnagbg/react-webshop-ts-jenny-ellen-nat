@@ -8,7 +8,6 @@ export default function Checkout() {
     <Container
       maxWidth={'lg'}
       sx={topSpace}
-      component={'main'}
     >
       <AdminButton>Add new item</AdminButton>
       <Grid

@@ -17,10 +17,7 @@ export default function Product() {
   }, [id, products, setProduct]);
 
   return (
-    <Container
-      component={'main'}
-      sx={styledContainer}
-    >
+    <Container sx={styledContainer}>
       <Button
         sx={styledButton}
         onClick={() => navigate(-1)}

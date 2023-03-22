@@ -35,10 +35,7 @@ export default function Start() {
   }
 
   return (
-    <Container
-      component={'main'}
-      sx={imageBoxStyling}
-    >
+    <Container sx={imageBoxStyling}>
       <Hero />
       <Box sx={imageBoxStyling}>
         <ImageList

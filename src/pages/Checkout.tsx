@@ -14,10 +14,7 @@ export default function Checkout() {
   };
 
   return (
-    <Container
-      maxWidth={'lg'}
-      component={'main'}
-    >
+    <Container maxWidth={'lg'}>
       {/* Basket testing button. REMOVE ME LATER */}
       <button onClick={onClick}>Add me</button>
       <Grid
