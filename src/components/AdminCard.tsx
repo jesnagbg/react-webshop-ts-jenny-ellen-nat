@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function AdminCard({ product }: Props) {
-  const { id, title, image, images, price } = product;
+  const { id, title, image, images, price, pieces } = product;
 
   return (
     <Card
@@ -38,7 +38,7 @@ export default function AdminCard({ product }: Props) {
             {title}
           </Typography>
           <Typography variant="body1">Article number: <span data-cy="product-id">{id}</span></Typography>
-          <Typography variant="body1">Details:</Typography>
+          <Typography variant="body1">Pieces: {pieces}</Typography>
           <Typography
             variant="body1"
             data-cy="product-price"

@@ -94,7 +94,7 @@ export default function AdminEditForm({ open, handleClose }: AdminEditFormProps)
       </DialogContent>
       <DialogActions>
         <AdminButton to="/admin">Cancel</AdminButton>
-        <AdminButton onClick={formik.handleSubmit}>Add item</AdminButton>
+        <AdminButton onClick={formik.handleSubmit}>Save</AdminButton>
       </DialogActions>
     </Dialog>
   );

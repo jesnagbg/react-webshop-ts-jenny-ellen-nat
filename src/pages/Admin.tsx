@@ -1,11 +1,13 @@
 import { Box, Container, Divider, Grid, Typography } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import { Product, products } from '../../data';
+import { Product } from '../../data';
 import AdminButton from '../components/AdminButton';
 import AdminCard from '../components/AdminCard';
+import { useProducts } from '../contexts/ProductsContext';
 
 export default function Admin() {
   //const { open, handleOpen, handleClose } = useDialog();
+  const { products } = useProducts();
 
   return (
     <Container
