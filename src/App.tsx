@@ -9,7 +9,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <div>
         <Header />
-        <Outlet />
+        <main>
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </ThemeProvider>

@@ -23,7 +23,7 @@ interface SnackbarData {
 }
 
 export default function CartProvider({ children }: Props) {
-  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('cc-cart');
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('cart');
   const [snackpack, setSnackpack] = useState<SnackbarData[]>([]);
 
   const addToCart = (product: Product, quantity: number) => {
