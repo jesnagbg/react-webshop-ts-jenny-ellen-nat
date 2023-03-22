@@ -21,61 +21,38 @@ export default function CartProvider({ children }: Props) {
   const [cartItems, setCartItems] = useLocalCart();
   const { order, updateOrder } = useOrder();
 
+  const updateCartAndOrder = (newCartItems: CartItem[]) => {
+    setCartItems(newCartItems);
+    updateOrder({ ...order, cart: newCartItems });
+  };
+
   const addToCart = (product: Product, quantity: number) => {
-    const newCartItem: CartItem = { ...product, quantity: quantity };
+    const newCartItem: CartItem = { ...product, quantity };
     const foundItem = cartItems.find((item) => item.id === product.id);
     if (!foundItem) {
-      setCartItems([...cartItems, newCartItem]);
+      updateCartAndOrder([...cartItems, newCartItem]);
     } else {
-      changeQuantity(newCartItem, quantity + foundItem.quantity);
+      changeQuantity(foundItem, quantity + foundItem.quantity);
     }
-
-    const updatedOrder = {
-      ...order,
-      cart: [...order.cart, newCartItem],
-    };
-    updateOrder(updatedOrder);
   };
 
   const removeFromCart = (targetItem: CartItem) => {
-    const newCartItems = cartItems.filter((item) => item.id !== targetItem.id);
-    setCartItems(newCartItems);
-
-    const updatedOrder = {
-      ...order,
-      cart: newCartItems,
-    };
-    updateOrder(updatedOrder);
+    updateCartAndOrder(cartItems.filter((item) => item.id !== targetItem.id));
   };
 
-  const changeQuantity = (targetItem: CartItem, newQuantity: number) => {
-    const foundItem = cartItems.find((item) => item.id === targetItem.id);
-    if (!foundItem) return;
-    if (newQuantity === 0) {
-      removeFromCart(targetItem);
-    } else {
-      const newCartItems = cartItems.map((item) => {
-        if (item.id !== targetItem.id) return item;
-        return { ...item, quantity: newQuantity };
-      });
-      setCartItems(newCartItems);
-
-      const updatedOrder = {
-        ...order,
-        cart: newCartItems,
-      };
-      updateOrder(updatedOrder);
-    }
+  const changeQuantity = (targetItem: CartItem, quantity: number) => {
+    const newCartItems =
+      quantity === 0
+        ? cartItems.filter((item) => item.id !== targetItem.id)
+        : cartItems.map((item) =>
+            item.id !== targetItem.id ? item : { ...item, quantity }
+          );
+    updateCartAndOrder(newCartItems);
   };
 
   return (
     <CartContext.Provider
-      value={{
-        cartItems,
-        addToCart,
-        removeFromCart,
-        changeQuantity,
-      }}
+      value={{ cartItems, addToCart, removeFromCart, changeQuantity }}
     >
       {children}
     </CartContext.Provider>
