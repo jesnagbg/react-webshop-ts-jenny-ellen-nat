@@ -24,7 +24,7 @@ export default function AdminButton({ to = "", children, onClick }: Props) {
 }
 
 const styledButton = {
-  padding: '.4rem 3rem',
+  padding: '.4rem 2.6rem',
   marginBottom: 2,
   whiteSpace: 'no-wrap',
   backgroundColor: 'white',

@@ -55,8 +55,10 @@ export default function AdminCard({ product }: Props) {
         >
           <Clear />
         </IconButton>
-        <Link to="/admin/edit" style={editLink} data-cy="admin-edit-product">
+        <Link to="/admin/edit" data-cy="admin-edit-product">
+          <Typography sx={styledLink}>
           Edit
+          </Typography>
         </Link>
       </Box>
     </Card>
@@ -100,4 +102,12 @@ const rightContainer = {
   flexDirection: 'column',
   alignItems: 'flex-end',
   justifyContent: 'space-between',
+};
+
+const styledLink = {
+  textDecorationColor: theme.palette.primary.main,
+  color: theme.palette.primary.main,
+  display: 'flex',
+  alignItems: 'center',
+  fontFamily: 'DM Sans',
 };

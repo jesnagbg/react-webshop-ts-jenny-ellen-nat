@@ -1,7 +1,5 @@
 import {
-  Box,
-  Button,
-  Dialog,
+  Box, Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
@@ -19,9 +17,16 @@ interface AdminAddFormProps {
   handleClose?: () => void;
 }
 
+//Vi kan vända den ni gav mig men den ger väldigt långa IDn,
+// så då kanske vi får tänka om lite kring ui:t.
+function generateShortId(length: number = 8) {
+  return Math.random().toString(36).substring(2, length);
+}
+
 export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
   const navigate = useNavigate();
   const { products, setProducts } = useProducts();
+
 
   const validationSchema = yup.object({
     title: yup
@@ -29,44 +34,38 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
       .min(2, 'Title must be at least two characters')
       .required('Title required'),
     image: yup.string().required('Image required'),
-    description: yup.string(),
+    //images: yup.array(yup.string()),
     price: yup
-      .number()
-      .min(0, 'Price must be greater than or equal to 0')
-      .required('Price required'),
-    images: yup.array(yup.string()),
+    .number()
+    .min(0, 'Price must be greater than or equal to 0')
+    .required('Price required'),
     pieces: yup
-      .number()
-      .positive('Pieces must be a positive number')
-      .integer('Pieces must be an integer')
-      .required('Pieces required'),
-    id: yup
-      .number()
-      .positive('ID must be a positive number')
-      .integer('ID must be an integer')
-      .required('ID required'),
+    .number()
+    .positive('Pieces must be a positive number')
+    .integer('Pieces must be an integer')
+    .required('Pieces required'),
+    description: yup.string(),
   });
 
   const formik = useFormik({
     initialValues: {
       title: '',
       image: '',
-      description: '',
+      //images: [],
       price: '',
-      id: '',
       pieces: '',
-      images: [],
+      description: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       const newProduct: Product = {
-        id: values.id,
+        id: generateShortId(),
         image: values.image,
         title: values.title,
         description: values.description,
         price: values.price,
         pieces: values.pieces,
-        images: values.images,
+        //images: values.images,
       };
 
       setProducts([...products, newProduct]);
@@ -118,19 +117,19 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
             error={formik.touched.price && Boolean(formik.errors.price)}
             helperText={formik.touched.price && formik.errors.price}
           />
-          <TextField
-            fullWidth
-            margin="normal"
-            variant="standard"
-            id="id"
-            name="id"
-            label="ID"
-            type="number"
-            value={formik.values.id}
-            onChange={formik.handleChange}
-            error={formik.touched.id && Boolean(formik.errors.id)}
-            helperText={formik.touched.id && formik.errors.id}
-          />
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="standard"
+              id="pieces"
+              name="pieces"
+              label="Pieces"
+              type="number"
+              value={formik.values.pieces}
+              onChange={formik.handleChange}
+              error={formik.touched.pieces && Boolean(formik.errors.pieces)}
+              helperText={formik.touched.pieces && formik.errors.pieces}
+            />
           <TextField
             fullWidth
             margin="normal"
@@ -153,32 +152,24 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
             value={formik.values.description}
             onChange={formik.handleChange}
           />
-          <TextField
-            fullWidth
-            margin="normal"
-            variant="standard"
-            id="pieces"
-            name="pieces"
-            label="Pieces"
-            type="number"
-            value={formik.values.pieces}
-            onChange={formik.handleChange}
-            error={formik.touched.pieces && Boolean(formik.errors.pieces)}
-            helperText={formik.touched.pieces && formik.errors.pieces}
-          />
-          <Button
+          {/* <Button
             onClick={() =>
               formik.setFieldValue('images', [...formik.values.images, ''])
             }
           >
             Add more images
-          </Button>
+          </Button> */}
         </Box>
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={buttonContainer}>
         <AdminButton to="/admin">Cancel</AdminButton>
-        <AdminButton onClick={formik.handleSubmit}>Add item</AdminButton>
+        <AdminButton onClick={formik.handleSubmit}>Add</AdminButton>
       </DialogActions>
     </Dialog>
   );
+}
+
+const buttonContainer = {
+  justifyContent: "space-between",
+  margin: "0 1rem",
 }
