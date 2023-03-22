@@ -1,9 +1,9 @@
-import {Box, Stack} from "@mui/material";
-import {useProducts} from "../contexts/ProductsContext";
-import {theme} from "../theme";
+import { Box, Stack } from '@mui/material';
+import { useProducts } from '../contexts/ProductsContext';
+import { theme } from '../theme';
 
 export default function ProductGallery() {
-  const {product} = useProducts();
+  const { product } = useProducts();
 
   return (
     <Stack spacing={2}>
@@ -12,7 +12,7 @@ export default function ProductGallery() {
           sx={styledBigImg}
           component="img"
           alt={`Image of a puzzle called ${product?.title}.`}
-          src={`.${product?.image}`}
+          src={`${product?.image}`}
         ></Box>
       </Box>
 
@@ -22,7 +22,7 @@ export default function ProductGallery() {
             sx={styledImg}
             component="img"
             alt={`Image of a puzzle called ${product?.title}.`}
-            src={`.${product?.images[0]}`}
+            src={`${product?.images[0]}`}
           ></Box>
         )}
         {product?.images?.[1] && (
@@ -30,7 +30,7 @@ export default function ProductGallery() {
             sx={styledImg}
             component="img"
             alt={`Close up image of puzzle ${product?.title}.`}
-            src={`.${product?.images[1]}`}
+            src={`${product?.images[1]}`}
           ></Box>
         )}
       </Box>
@@ -39,27 +39,27 @@ export default function ProductGallery() {
 }
 
 const styledBackground = {
-  width: "calc(100% -16px)",
-  height: "100%",
+  width: 'calc(100% -16px)',
+  height: '100%',
   background: theme.palette.lightGrey.main,
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "1rem",
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: '1rem',
 };
 
 const styledImg = {
-  maxWidth: "100%",
-  aspectRatio: "1/1",
-  objectFit: "cover",
+  maxWidth: '100%',
+  aspectRatio: '1/1',
+  objectFit: 'cover',
 };
 const styledBigImg = {
-  maxWidth: "70%",
-  objectFit: "contain",
+  maxWidth: '70%',
+  objectFit: 'contain',
 };
 
 const styledSmallImgs = {
-  display: "flex",
-  maxWidth: "25%",
-  gap: "1rem",
+  display: 'flex',
+  maxWidth: '25%',
+  gap: '1rem',
 };

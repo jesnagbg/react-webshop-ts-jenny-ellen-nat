@@ -37,24 +37,22 @@ export default function Start() {
   return (
     <Container sx={imageBoxStyling}>
       <Hero />
-      <main>
-        <Box sx={imageBoxStyling}>
-          <ImageList
-            cols={cols}
-            gap={16}
-            sx={imageListStyling}
-          >
-            {products.map((product: Product) => (
-              <ImageListItem
-                key={product.id}
-                sx={imageListItemStyling}
-              >
-                <StartCard product={product} />
-              </ImageListItem>
-            ))}
-          </ImageList>
-        </Box>
-      </main>
+      <Box sx={imageBoxStyling}>
+        <ImageList
+          cols={cols}
+          gap={16}
+          sx={imageListStyling}
+        >
+          {products.map((product: Product) => (
+            <ImageListItem
+              key={product.id}
+              sx={imageListItemStyling}
+            >
+              <StartCard product={product} />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      </Box>
     </Container>
   );
 }
