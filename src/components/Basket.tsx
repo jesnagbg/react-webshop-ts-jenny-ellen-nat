@@ -1,9 +1,9 @@
-import {Box, Divider, Stack, Typography} from "@mui/material";
-import {useCart} from "../contexts/CartContext";
-import CheckoutCard from "./CheckoutCard";
+import { Box, Divider, Stack, Typography } from '@mui/material';
+import { useCart } from '../contexts/CartContext';
+import CheckoutCard from './CheckoutCard';
 
 export default function Basket() {
-  const {cartItems} = useCart();
+  const { cartItems } = useCart();
 
   return (
     <Box>
@@ -12,7 +12,10 @@ export default function Basket() {
       <Stack>
         {cartItems.map((item) => (
           <Box key={item.id}>
-            <CheckoutCard item={item} />
+            <CheckoutCard
+              item={item}
+              readonly={false}
+            />
             <Divider />
           </Box>
         ))}
@@ -22,7 +25,7 @@ export default function Basket() {
         sx={styledTypography}
         data-cy="total-price"
       >
-        Total:{" "}
+        Total:{' '}
         {cartItems.reduce(
           (total, item) => total + item.price * item.quantity,
           0
@@ -34,5 +37,5 @@ export default function Basket() {
 }
 
 const styledTypography = {
-  textAlign: "right",
+  textAlign: 'right',
 };
