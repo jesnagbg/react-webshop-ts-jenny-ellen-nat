@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
+import { CartItem, Product } from '../../data';
 import Toast from '../components/Toast';
-import { CartItem, Product } from '../data';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface ContextValue {

@@ -1,6 +1,6 @@
-import {keyframes} from "@emotion/react";
-import {Box, Container, Typography} from "@mui/material";
-import {products} from "../data";
+import { keyframes } from '@emotion/react';
+import { Box, Container, Typography } from '@mui/material';
+import { products } from '../../data';
 
 export default function Hero() {
   return (
@@ -13,7 +13,7 @@ export default function Hero() {
             sx={{
               ...styledImg,
               animation: `${animation} .6s .4s ease-out`,
-              animationFillMode: "forwards",
+              animationFillMode: 'forwards',
             }}
             alt={`Image of a puzzle ${index}`}
             src={products[index + 1].image}
@@ -48,46 +48,46 @@ const animations = [
 ];
 
 const styledImgList = {
-  display: "flex",
-  justifyContent: "center",
-  margin: "100px 0 0 0",
+  display: 'flex',
+  justifyContent: 'center',
+  margin: '100px 0 0 0',
 
-  "> :nth-of-type(1)": {
-    transform: "translate(150%, 0%)",
+  '> :nth-of-type(1)': {
+    transform: 'translate(150%, 0%)',
   },
 
-  "> :nth-of-type(2)": {
-    transform: "translate(50%, 0%)",
+  '> :nth-of-type(2)': {
+    transform: 'translate(50%, 0%)',
   },
 
-  "> :nth-of-type(3)": {
-    transform: "translate(-50%, 0%)",
+  '> :nth-of-type(3)': {
+    transform: 'translate(-50%, 0%)',
   },
 
-  "> :nth-of-type(4)": {
-    transform: "translate(-150%, 0%)",
+  '> :nth-of-type(4)': {
+    transform: 'translate(-150%, 0%)',
   },
 };
 
 const styledTitle = {
-  textTransform: "uppercase",
-  margin: "0 auto",
-  textAlign: "center",
-  padding: "4rem 0 0 0",
+  textTransform: 'uppercase',
+  margin: '0 auto',
+  textAlign: 'center',
+  padding: '4rem 0 0 0',
   maxWidth: 670,
 
-  "@media (max-width: 899px)": {
-    fontSize: "1.6rem",
+  '@media (max-width: 899px)': {
+    fontSize: '1.6rem',
   },
 
   // Temp breakpoint
-  "@media (max-width: 499px)": {
-    fontSize: "1.2rem",
+  '@media (max-width: 499px)': {
+    fontSize: '1.2rem',
   },
 };
 
 const styledImg = {
   width: 246,
   minWidth: 60,
-  height: "auto",
+  height: 'auto',
 };

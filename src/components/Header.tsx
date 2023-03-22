@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { FC, ReactElement } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { theme } from '../theme';
 import CartIcon from './CartIcon';
 
@@ -39,12 +39,6 @@ const HideOnScroll: FC<Props> = ({ children }) => {
 };
 
 export default function Header() {
-  const navigate = useNavigate();
-
-  const navigateCheckout = () => {
-    navigate('/checkout');
-  };
-
   return (
     // <HideOnScroll>
     <AppBar sx={styledAppBar}>
@@ -62,13 +56,17 @@ export default function Header() {
           </Typography>
         </Link>
         <Box>
-          <IconButton
-            data-cy="cart-link"
-            onClick={navigateCheckout}
-            aria-label="cart"
+          <Link
+            component={RouterLink}
+            to="/checkout"
           >
-            <CartIcon />
-          </IconButton>
+            <IconButton
+              data-cy="cart-link"
+              aria-label="cart"
+            >
+              <CartIcon />
+            </IconButton>
+          </Link>
           <Link
             component={RouterLink}
             to="/admin"

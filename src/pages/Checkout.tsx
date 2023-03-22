@@ -1,8 +1,8 @@
 import { Container, Grid, Typography } from '@mui/material';
+import { products } from '../../data';
 import Basket from '../components/Basket';
 import CheckoutForm from '../components/CheckoutForm';
 import { useCart } from '../contexts/CartContext';
-import { products } from '../data';
 
 export default function Checkout() {
   // Test the basket!! (REMOVE ME LATER)

@@ -3,14 +3,15 @@ import {
   Box,
   Card,
   CardContent,
+  CardMedia,
   Grid,
   IconButton,
   Typography
 } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { Product } from '../../data';
 import { useCart } from '../contexts/CartContext';
-import { Product } from '../data';
 import { theme } from '../theme';
 
 interface Props {
@@ -54,10 +55,12 @@ export default function StartCard({ product }: Props) {
         sx={imageBorder}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        >
-        <Box
-          sx={{ ...cardImage, backgroundImage: `url(${currentImage})` }}
-          title={title}
+      >
+        <CardMedia
+          component="img"
+          image={currentImage}
+          alt={title}
+          sx={cardImage}
           onClick={() => handleProductClick(product)}
         />
       </Box>
@@ -67,8 +70,8 @@ export default function StartCard({ product }: Props) {
           sx={belowImageGrid}
         >
           <Box
-          onClick={() => handleProductClick(product)}
-          sx={linkedBoxStyling}          
+            onClick={() => handleProductClick(product)}
+            sx={linkedBoxStyling}
           >
             <Typography
               variant="h5"
@@ -115,9 +118,7 @@ const imageBorder = {
 const cardImage = {
   height: '100%',
   width: '100%',
-  backgroundSize: 'contain',
-  backgroundPosition: 'center',
-  backgroundRepeat: 'no-repeat',
+  objectFit: 'contain',
   cursor: 'pointer',
 };
 
@@ -158,4 +159,4 @@ const belowImageGrid = {
 
 const linkedBoxStyling = {
   cursor: 'pointer',
-}
+};

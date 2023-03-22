@@ -6,10 +6,10 @@ import {
   Theme,
   useMediaQuery,
 } from '@mui/material';
+import { Product } from '../../data';
 import Hero from '../components/Hero';
 import StartCard from '../components/StartCard';
 import { useProducts } from '../contexts/ProductsContext';
-import { Product } from '../data';
 
 export default function Start() {
   const { products } = useProducts();
@@ -37,22 +37,24 @@ export default function Start() {
   return (
     <Container sx={imageBoxStyling}>
       <Hero />
-      <Box sx={imageBoxStyling}>
-        <ImageList
-          cols={cols}
-          gap={16}
-          sx={imageListStyling}
-        >
-          {products.map((product: Product) => (
-            <ImageListItem
-              key={product.id}
-              sx={imageListItemStyling}
-            >
-              <StartCard product={product} />
-            </ImageListItem>
-          ))}
-        </ImageList>
-      </Box>
+      <main>
+        <Box sx={imageBoxStyling}>
+          <ImageList
+            cols={cols}
+            gap={16}
+            sx={imageListStyling}
+          >
+            {products.map((product: Product) => (
+              <ImageListItem
+                key={product.id}
+                sx={imageListItemStyling}
+              >
+                <StartCard product={product} />
+              </ImageListItem>
+            ))}
+          </ImageList>
+        </Box>
+      </main>
     </Container>
   );
 }
