@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
+import { v4 } from 'uuid';
 import { CartItem } from '../../data';
 import { useCart } from './CartContext';
 
@@ -13,6 +14,7 @@ export interface ContextValue {
 
 export interface Order {
   cart: CartItem[];
+  id: string;
   deliveryAddress: Address;
 }
 
@@ -27,6 +29,7 @@ export interface Address {
 
 const initialOrderValues: Order = {
   cart: [],
+  id: '',
   deliveryAddress: {
     name: '',
     address: '',
@@ -50,7 +53,7 @@ export default function OrderProvider({ children }: Props) {
   const { cartItems } = useCart();
 
   const updateOrder = (newOrder: Order) => {
-    setOrder({ ...newOrder, cart: cartItems });
+    setOrder({ ...newOrder, id: v4(), cart: cartItems });
   };
 
   return (
