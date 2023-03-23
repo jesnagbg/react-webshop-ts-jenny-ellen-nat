@@ -3,7 +3,7 @@ import {
   ReactNode,
   useContext,
   useEffect,
-  useState,
+  useState
 } from 'react';
 import { Product, products } from '../../data';
 
@@ -11,6 +11,7 @@ interface ContextValue {
   products: Product[];
   product: Product | null;
   setProduct: React.Dispatch<React.SetStateAction<Product | null>>;
+  setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
 }
 
 const ProductsContext = createContext<ContextValue>(null as any);
@@ -32,6 +33,7 @@ export default function ProductsProvider({ children }: Props) {
     products: allProducts,
     product,
     setProduct,
+    setProducts,
   };
 
   return (

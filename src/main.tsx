@@ -1,12 +1,15 @@
+import { ThemeProvider } from '@emotion/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider,
+  RouterProvider
 } from 'react-router-dom';
 import App from './App';
+import AdminAddForm from './components/AdminAddForm';
+import AdminEditForm from './components/AdminEditForm';
 import CartProvider from './contexts/CartContext';
 import OrderProvider from './contexts/OrderContext';
 import ProductsProvider from './contexts/ProductsContext';
@@ -16,6 +19,7 @@ import Checkout from './pages/Checkout';
 import Confirmation from './pages/Confirmation';
 import Product from './pages/Product';
 import Start from './pages/Start';
+import { theme } from './theme';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,10 +35,14 @@ const router = createBrowserRouter(
         path="/product/:id"
         element={<Product />}
       />
-      <Route
+      {/* <Route
         path="/admin"
         element={<Admin />}
-      />
+      /> */}
+      <Route path='/admin' element={<Admin />}>
+        <Route path='product/new' element={<AdminAddForm open/>}/>
+        <Route path='edit' element={<AdminEditForm open/>}/>
+      </Route>
       <Route
         path="/checkout"
         element={<Checkout />}
@@ -53,12 +61,14 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <ProductsProvider>
-      <CartProvider>
-        <OrderProvider>
-          <RouterProvider router={router} />
-        </OrderProvider>
-      </CartProvider>
-    </ProductsProvider>
+    <ThemeProvider theme={theme}>
+      <ProductsProvider>
+        <CartProvider>
+          <OrderProvider>
+            <RouterProvider router={router} />
+          </OrderProvider>
+        </CartProvider>
+      </ProductsProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
