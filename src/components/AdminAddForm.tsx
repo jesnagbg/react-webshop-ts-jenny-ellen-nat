@@ -16,8 +16,9 @@ import AdminButton from './AdminButton';
 
 
 interface AdminAddFormProps {
+  product?: Product;
   open: boolean;
-  handleClose?: () => void;
+  onClose?: () => void;
 }
 
 //Vi kan vända den ni gav mig men den ger väldigt långa IDn,
@@ -26,35 +27,38 @@ function generateShortId(length: number = 8) {
   return Math.random().toString(36).substring(2, length);
 }
 
-export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
+const validationSchema = yup.object({
+  title: yup
+    .string()
+    .min(2, 'Title must be at least two characters')
+    .required('Title required'),
+  image: yup.string().required('Image required'),
+  //images: yup.array(yup.string()),
+  price: yup
+    .number()
+    .min(0, 'Price must be greater than or equal to 0')
+    .required('Price required'),
+  pieces: yup
+    .number()
+    .positive('Pieces must be a positive number')
+    .integer('Pieces must be an integer'),
+  description: yup.string(),
+});
+
+type ProductCreate = Omit<Product, 'id'>;
+
+export default function AdminAddForm({ product, open, onClose }: AdminAddFormProps) {
   const navigate = useNavigate();
   const { products, setProducts } = useProducts();
+  const isEdit = Boolean(product);
 
-  const validationSchema = yup.object({
-    title: yup
-      .string()
-      .min(2, 'Title must be at least two characters')
-      .required('Title required'),
-    image: yup.string().required('Image required'),
-    //images: yup.array(yup.string()),
-    price: yup
-      .number()
-      .min(0, 'Price must be greater than or equal to 0')
-      .required('Price required'),
-    pieces: yup
-      .number()
-      .positive('Pieces must be a positive number')
-      .integer('Pieces must be an integer'),
-    description: yup.string(),
-  });
-
-  const formik = useFormik({
-    initialValues: {
+  const formik = useFormik<ProductCreate>({
+    initialValues: product || {
       title: '',
       image: '',
-      //images: [],
-      price: '',
-      pieces: '',
+      images: [],
+      price: '' as any,
+      pieces: '' as any,
       description: '',
     },
     validationSchema: validationSchema,
@@ -66,13 +70,17 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
         description: values.description,
         price: values.price,
         pieces: values.pieces,
-        //images: values.images,
+        images: values.images,
       };
+      
+      if (isEdit) {
 
-      setProducts([...products, newProduct]);
+      } else {
+        setProducts([...products, newProduct]);
+      }
 
-      if (handleClose) {
-        handleClose();
+      if (onClose) {
+        onClose();
       }
       navigate('/admin');
     },
@@ -81,7 +89,7 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
   return (
     <Dialog
       open={open}
-      onClose={handleClose}
+      onClose={onClose}
       maxWidth="sm"
       fullWidth
     >
@@ -195,7 +203,7 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
       </DialogContent>
       <DialogActions sx={buttonContainer}>
         <AdminButton to="/admin">Cancel</AdminButton>
-        <AdminButton type="submit" onClick={formik.handleSubmit}>Add</AdminButton>
+        <AdminButton type="submit" onClick={formik.handleSubmit}>{isEdit ? "Save" : "Add"}</AdminButton>
       </DialogActions>
     </Dialog>
   );
