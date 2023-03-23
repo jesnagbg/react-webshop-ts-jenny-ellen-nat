@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@emotion/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
@@ -16,6 +17,7 @@ import Checkout from './pages/Checkout';
 import Confirmation from './pages/Confirmation';
 import Product from './pages/Product';
 import Start from './pages/Start';
+import { theme } from './theme';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,12 +55,14 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <ProductsProvider>
-      <CartProvider>
-        <OrderProvider>
-          <RouterProvider router={router} />
-        </OrderProvider>
-      </CartProvider>
-    </ProductsProvider>
+    <ThemeProvider theme={theme}>
+      <ProductsProvider>
+        <CartProvider>
+          <OrderProvider>
+            <RouterProvider router={router} />
+          </OrderProvider>
+        </CartProvider>
+      </ProductsProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );

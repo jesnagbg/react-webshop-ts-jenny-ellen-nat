@@ -3,36 +3,21 @@ import {
   Container,
   ImageList,
   ImageListItem,
-  Theme,
   useMediaQuery,
 } from '@mui/material';
 import { Product } from '../../data';
 import Hero from '../components/Hero';
 import StartCard from '../components/StartCard';
 import { useProducts } from '../contexts/ProductsContext';
+import { theme } from '../theme';
 
 export default function Start() {
   const { products } = useProducts();
-  const smallScreen = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down('md')
-  );
-  const mediumScreen = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down('lg')
-  );
-  const largeScreen = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.up('lg')
-  );
 
-  let cols: number;
-  if (smallScreen) {
-    cols = 1;
-  } else if (mediumScreen) {
-    cols = 2;
-  } else if (largeScreen) {
-    cols = 3;
-  } else {
-    cols = 3;
-  }
+  const smScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const mdScreen = useMediaQuery(theme.breakpoints.down('lg'));
+
+  let cols: number = smScreen ? 1 : mdScreen ? 2 : 3;
 
   return (
     <Container sx={imageBoxStyling}>

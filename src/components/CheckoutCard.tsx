@@ -13,9 +13,10 @@ import Quantity from './Quantity';
 
 interface Props {
   item: CartItem;
+  readonly: boolean;
 }
 
-export default function CheckoutCard({ item }: Props) {
+export default function CheckoutCard({ item, readonly }: Props) {
   const { removeFromCart, changeQuantity } = useCart();
 
   const removeItem = () => {
@@ -47,10 +48,14 @@ export default function CheckoutCard({ item }: Props) {
           </Typography>
           <Typography variant="body1">{item.pieces} pieces</Typography>
           <Typography variant="body1"> Quantity:</Typography>
-          <Quantity
-            initialValue={item.quantity}
-            valueHandler={valueHandler}
-          />
+          {readonly ? (
+            <Typography variant="body1">{item.quantity}</Typography>
+          ) : (
+            <Quantity
+              initialValue={item.quantity}
+              valueHandler={valueHandler}
+            />
+          )}
           <Typography
             data-cy="product-price"
             variant="body1"
@@ -59,16 +64,18 @@ export default function CheckoutCard({ item }: Props) {
           </Typography>
         </CardContent>
       </Box>
-      <Box>
-        <IconButton
-          color="primary"
-          aria-label="remove"
-          size="small"
-          onClick={removeItem}
-        >
-          <Clear />
-        </IconButton>
-      </Box>
+      {readonly ? null : (
+        <Box>
+          <IconButton
+            color="primary"
+            aria-label="remove"
+            size="small"
+            onClick={removeItem}
+          >
+            <Clear />
+          </IconButton>
+        </Box>
+      )}
     </Card>
   );
 }

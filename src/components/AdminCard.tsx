@@ -6,7 +6,7 @@ import {
   CardMedia,
   IconButton,
   Link,
-  Typography
+  Typography,
 } from '@mui/material';
 import { Product } from '../../data';
 import { theme } from '../theme';
@@ -15,7 +15,7 @@ interface Props {
   product: Product;
 }
 
-export default function CheckoutCard({ product }: Props) {
+export default function AdminCard({ product }: Props) {
   const { id, title, image, images, price } = product;
 
   return (
@@ -37,7 +37,9 @@ export default function CheckoutCard({ product }: Props) {
           >
             {title}
           </Typography>
-          <Typography variant="body1">Article number: <span data-cy="product-id">{id}</span></Typography>
+          <Typography variant="body1">
+            Article number: <span data-cy="product-id">{id}</span>
+          </Typography>
           <Typography variant="body1">Details:</Typography>
           <Typography
             variant="body1"
