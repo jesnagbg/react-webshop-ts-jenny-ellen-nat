@@ -44,8 +44,7 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
     pieces: yup
       .number()
       .positive('Pieces must be a positive number')
-      .integer('Pieces must be an integer')
-      .required('Pieces required'),
+      .integer('Pieces must be an integer'),
     description: yup.string(),
   });
 
@@ -101,6 +100,9 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
             variant="standard"
             id="title"
             name="title"
+            inputProps={{
+              'data-cy': 'product-title',
+            }}
             label={
               <>
                 Title<span style={requiredIndicator}>*</span>
@@ -123,6 +125,9 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
             variant="standard"
             id="price"
             name="price"
+            inputProps={{
+              'data-cy': 'product-price',
+            }}
             label={
               <>
                 Price<span style={requiredIndicator}>*</span>
@@ -140,11 +145,7 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
             variant="standard"
             id="pieces"
             name="pieces"
-            label={
-              <>
-                Pieces<span style={requiredIndicator}>*</span>
-              </>
-            }
+            label="Pieces"
             type="number"
             value={formik.values.pieces}
             onChange={formik.handleChange}
@@ -157,6 +158,9 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
             variant="standard"
             id="image"
             name="image"
+            inputProps={{
+              'data-cy': 'product-image',
+            }}
             label={
               <>
                 Image<span style={requiredIndicator}>*</span>
@@ -173,6 +177,9 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
             variant="standard"
             id="description"
             name="description"
+            inputProps={{
+              'data-cy': 'product-description',
+            }}
             label="Description"
             value={formik.values.description}
             onChange={formik.handleChange}
@@ -188,7 +195,7 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
       </DialogContent>
       <DialogActions sx={buttonContainer}>
         <AdminButton to="/admin">Cancel</AdminButton>
-        <AdminButton onClick={formik.handleSubmit}>Add</AdminButton>
+        <AdminButton type="submit" onClick={formik.handleSubmit}>Add</AdminButton>
       </DialogActions>
     </Dialog>
   );

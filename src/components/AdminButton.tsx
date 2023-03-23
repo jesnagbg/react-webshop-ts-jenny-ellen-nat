@@ -7,10 +7,11 @@ interface Props {
   to?: string;
   onClick?: () => void;
   "data-cy"?: string;
+  type?: 'button' | 'reset' | 'submit';
 }
 
 // Inte säker på om vi vill lägga in länkning här eller när den används, kan alltid ändra det senare.
-export default function AdminButton({ to = "", children, onClick, "data-cy": dataCy }: Props) {
+export default function AdminButton({ to = "", children, onClick, "data-cy": dataCy, type = 'button' }: Props) {
   return (
     <Link to={to} style={styledLink}>
       <Button
@@ -18,6 +19,7 @@ export default function AdminButton({ to = "", children, onClick, "data-cy": dat
         sx={styledButton}
         onClick={onClick}
         data-cy={dataCy}
+        type={type}
       >
         {children}
       </Button>
