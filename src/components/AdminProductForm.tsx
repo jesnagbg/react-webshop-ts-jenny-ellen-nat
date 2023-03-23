@@ -14,15 +14,12 @@ import { Product } from '../../data';
 import { useProducts } from '../contexts/ProductsContext';
 import AdminButton from './AdminButton';
 
-
-interface AdminAddFormProps {
+interface AdminProductFormProps {
   product?: Product;
   open: boolean;
   onClose?: () => void;
 }
 
-//Vi kan vända den ni gav mig men den ger väldigt långa IDn,
-// så då kanske vi får tänka om lite kring ui:t.
 function generateShortId(length: number = 8) {
   return Math.random().toString(36).substring(2, length);
 }
@@ -47,7 +44,11 @@ const validationSchema = yup.object({
 
 type ProductCreate = Omit<Product, 'id'>;
 
-export default function AdminAddForm({ product, open, onClose }: AdminAddFormProps) {
+export default function AdminProductForm({
+  product,
+  open,
+  onClose,
+}: AdminProductFormProps) {
   const navigate = useNavigate();
   const { products, setProducts } = useProducts();
   const isEdit = Boolean(product);
@@ -72,9 +73,8 @@ export default function AdminAddForm({ product, open, onClose }: AdminAddFormPro
         pieces: values.pieces,
         images: values.images,
       };
-      
-      if (isEdit) {
 
+      if (isEdit) {
       } else {
         setProducts([...products, newProduct]);
       }
@@ -203,7 +203,12 @@ export default function AdminAddForm({ product, open, onClose }: AdminAddFormPro
       </DialogContent>
       <DialogActions sx={buttonContainer}>
         <AdminButton to="/admin">Cancel</AdminButton>
-        <AdminButton type="submit" onClick={formik.handleSubmit}>{isEdit ? "Save" : "Add"}</AdminButton>
+        <AdminButton
+          type="submit"
+          onClick={formik.handleSubmit}
+        >
+          {isEdit ? 'Save' : 'Add'}
+        </AdminButton>
       </DialogActions>
     </Dialog>
   );
