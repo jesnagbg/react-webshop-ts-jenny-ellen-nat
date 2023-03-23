@@ -49,11 +49,6 @@ export default function CartProvider({ children }: Props) {
     displayToast(targetItem, true);
   };
 
-  // const removeFromCart = (targetItem: CartItem) => {
-  //   setCartItems(cartItems.filter((item) => item.id !== targetItem.id));
-  //   displayToast(targetItem, true);
-  // };
-
   const displayToast = (targetItem: CartItem, remove: boolean) => {
     const newSnackbarMessage: SnackbarData = {
       // Create the object here or in the other functions?

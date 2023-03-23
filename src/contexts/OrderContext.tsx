@@ -2,6 +2,9 @@ import { createContext, ReactNode, useContext, useState } from 'react';
 import { CartItem } from '../../data';
 import { useCart } from './CartContext';
 
+interface Props {
+  children: ReactNode;
+}
 export interface ContextValue {
   order: Order;
   updateOrder: (updatedOrder: Order) => void;
@@ -36,26 +39,18 @@ const initialOrderValues: Order = {
 
 export const OrderContext = createContext<ContextValue>({
   order: initialOrderValues,
-  updateOrder: (updatedOrder: Order) => {},
+  updateOrder: () => {},
   cartItems: [],
 });
 
 export const useOrder = () => useContext(OrderContext);
-
-interface Props {
-  children: ReactNode;
-}
 
 export default function OrderProvider({ children }: Props) {
   const [order, setOrder] = useState<Order>(initialOrderValues);
   const { cartItems } = useCart();
 
   const updateOrder = (newOrder: Order) => {
-    const updatedOrder = {
-      ...newOrder,
-      cart: cartItems,
-    };
-    setOrder(updatedOrder);
+    setOrder({ ...newOrder, cart: cartItems });
   };
 
   return (
