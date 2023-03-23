@@ -78,9 +78,9 @@ export default function Confirmation() {
           >
             Dear {testOrder.deliveryDetails.firstName}, thank you for your
             order! We are pleased to confirm that your order has been
-            successfully placed and is being processed. Your order ID is . We
-            will notify you as soon as your order has been shipped. Best
-            regards, Piece by Piece
+            successfully placed and is being processed. Your order ID is
+            {testOrder.orderID}. We will notify you as soon as your order has
+            been shipped. Best regards, Piece by Piece.
           </Typography>
         </Grid>
         <Grid
@@ -88,6 +88,7 @@ export default function Confirmation() {
           xs={12}
           md={6}
         >
+          <Typography variant="h4">Order #{testOrder.orderID}</Typography>
           <Divider />
           {testOrder.orderItems.map((item) => {
             return (
@@ -146,4 +147,5 @@ const styledContainer = {
 
 const styledButton = {
   marginTop: '2rem',
+  border: '1px solid black',
 };
