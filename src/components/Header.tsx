@@ -58,8 +58,8 @@ export default function Header() {
             to="/checkout"
           >
             <IconButton
-              aria-label="cart"
               data-cy="cart-link"
+              aria-label="cart"
             >
               <CartIcon />
             </IconButton>

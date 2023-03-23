@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup } from '@mui/material';
+import { Button, ButtonGroup, TextField } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 
 interface Props {
@@ -29,13 +29,19 @@ export default function Quantity({ initialValue, valueHandler }: Props) {
       disableElevation
     >
       <Button
+        data-cy="decrease-quantity-button"
         sx={styledButton}
         onClick={oneLess}
       >
         -
       </Button>
-      <Box sx={styledBox}>{quantity}</Box>
+      <TextField
+        data-cy="product-quantity"
+        // sx={styledBox}
+        value={quantity}
+      />
       <Button
+        data-cy="increase-quantity-button"
         sx={styledButton}
         onClick={oneMore}
       >

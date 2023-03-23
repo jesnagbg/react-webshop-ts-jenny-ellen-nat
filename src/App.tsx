@@ -1,4 +1,3 @@
-import { Snackbar } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { Outlet } from 'react-router-dom';
 import Footer from './components/Footer';
@@ -15,7 +14,6 @@ function App() {
         </main>
         <Footer />
       </div>
-      <Snackbar />
     </ThemeProvider>
   );
 }
