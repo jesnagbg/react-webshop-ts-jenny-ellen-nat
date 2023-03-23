@@ -1,8 +1,10 @@
 import {
-  Box, Dialog,
+  Box,
+  Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormHelperText,
   TextField
 } from '@mui/material';
 import { useFormik } from 'formik';
@@ -11,6 +13,7 @@ import * as yup from 'yup';
 import { Product } from '../../data';
 import { useProducts } from '../contexts/ProductsContext';
 import AdminButton from './AdminButton';
+
 
 interface AdminAddFormProps {
   open: boolean;
@@ -27,7 +30,6 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
   const navigate = useNavigate();
   const { products, setProducts } = useProducts();
 
-
   const validationSchema = yup.object({
     title: yup
       .string()
@@ -36,14 +38,14 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
     image: yup.string().required('Image required'),
     //images: yup.array(yup.string()),
     price: yup
-    .number()
-    .min(0, 'Price must be greater than or equal to 0')
-    .required('Price required'),
+      .number()
+      .min(0, 'Price must be greater than or equal to 0')
+      .required('Price required'),
     pieces: yup
-    .number()
-    .positive('Pieces must be a positive number')
-    .integer('Pieces must be an integer')
-    .required('Pieces required'),
+      .number()
+      .positive('Pieces must be a positive number')
+      .integer('Pieces must be an integer')
+      .required('Pieces required'),
     description: yup.string(),
   });
 
@@ -91,6 +93,7 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
           onSubmit={formik.handleSubmit}
           noValidate
           autoComplete="off"
+          data-cy="product-form"
         >
           <TextField
             fullWidth
@@ -98,11 +101,21 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
             variant="standard"
             id="title"
             name="title"
-            label="Title"
+            label={
+              <>
+                Title<span style={requiredIndicator}>*</span>
+              </>
+            }
             value={formik.values.title}
             onChange={formik.handleChange}
             error={formik.touched.title && Boolean(formik.errors.title)}
-            helperText={formik.touched.title && formik.errors.title}
+            helperText={
+              formik.touched.title && formik.errors.title ? (
+                <FormHelperText data-cy="product-title-error">
+                  {formik.errors.title}
+                </FormHelperText>
+              ) : null
+            }
           />
           <TextField
             fullWidth
@@ -110,33 +123,45 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
             variant="standard"
             id="price"
             name="price"
-            label="Price"
+            label={
+              <>
+                Price<span style={requiredIndicator}>*</span>
+              </>
+            }
             type="number"
             value={formik.values.price}
             onChange={formik.handleChange}
             error={formik.touched.price && Boolean(formik.errors.price)}
             helperText={formik.touched.price && formik.errors.price}
           />
-            <TextField
-              fullWidth
-              margin="normal"
-              variant="standard"
-              id="pieces"
-              name="pieces"
-              label="Pieces"
-              type="number"
-              value={formik.values.pieces}
-              onChange={formik.handleChange}
-              error={formik.touched.pieces && Boolean(formik.errors.pieces)}
-              helperText={formik.touched.pieces && formik.errors.pieces}
-            />
+          <TextField
+            fullWidth
+            margin="normal"
+            variant="standard"
+            id="pieces"
+            name="pieces"
+            label={
+              <>
+                Pieces<span style={requiredIndicator}>*</span>
+              </>
+            }
+            type="number"
+            value={formik.values.pieces}
+            onChange={formik.handleChange}
+            error={formik.touched.pieces && Boolean(formik.errors.pieces)}
+            helperText={formik.touched.pieces && formik.errors.pieces}
+          />
           <TextField
             fullWidth
             margin="normal"
             variant="standard"
             id="image"
             name="image"
-            label="Image"
+            label={
+              <>
+                Image<span style={requiredIndicator}>*</span>
+              </>
+            }
             value={formik.values.image}
             onChange={formik.handleChange}
             error={formik.touched.image && Boolean(formik.errors.image)}
@@ -170,6 +195,10 @@ export default function AdminAddForm({ open, handleClose }: AdminAddFormProps) {
 }
 
 const buttonContainer = {
-  justifyContent: "space-between",
-  margin: "0 1rem",
-}
+  justifyContent: 'space-between',
+  margin: '0 1rem',
+};
+
+const requiredIndicator = {
+  color: 'red',
+};
