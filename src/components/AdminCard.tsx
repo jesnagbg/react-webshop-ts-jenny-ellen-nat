@@ -66,7 +66,7 @@ export default function AdminCard({ product }: Props) {
         </IconButton>
         {/* <Link to={`/admin/edit/${product.id}`} data-cy="admin-edit-product"> */}
         <Link
-          to="/admin/edit/product"
+          to={`/admin/product/${product.id}`}
           data-cy="admin-edit-product"
           onClick={handleEditButtonClick} // Add the onClick event handler here
         >
