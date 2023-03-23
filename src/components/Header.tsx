@@ -6,7 +6,7 @@ import {
   IconButton,
   Link,
   Slide,
-  Typography
+  Typography,
 } from '@mui/material';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { FC, ReactElement } from 'react';
@@ -40,43 +40,45 @@ const HideOnScroll: FC<Props> = ({ children }) => {
 
 export default function Header() {
   return (
-    <HideOnScroll>
-      <AppBar sx={styledAppBar}>
-        <Container sx={styledContainer}>
+    // <HideOnScroll>
+    <AppBar sx={styledAppBar}>
+      <Container sx={styledContainer}>
+        <Link
+          component={RouterLink}
+          to="/"
+          sx={styledLink}
+        >
+          <Typography
+            variant="h6"
+            sx={styledLogo}
+          >
+            Piece by Piece
+          </Typography>
+        </Link>
+        <Box>
           <Link
             component={RouterLink}
-            to="/"
-            sx={styledLink}
+            to="/checkout"
           >
-            <Typography
-              variant="h6"
-              sx={styledLogo}
-            >
-              Piece by Piece
-            </Typography>
-          </Link>
-          <Box>
             <IconButton
-              aria-label="cart"
               data-cy="cart-link"
+              aria-label="cart"
             >
               <CartIcon />
             </IconButton>
-            <Link
-              component={RouterLink}
-              to="/admin"
-              data-cy="admin-link"
-            >
-              <IconButton
-                aria-label="admin"
-              >
-                <PersonOutlineOutlinedIcon sx={styledPersonOutlined} />
-              </IconButton>
-            </Link>
-          </Box>
-        </Container>
-      </AppBar>
-    </HideOnScroll>
+          </Link>
+          <Link
+            component={RouterLink}
+            to="/admin"
+          >
+            <IconButton aria-label="admin">
+              <PersonOutlineOutlinedIcon sx={styledPersonOutlined} />
+            </IconButton>
+          </Link>
+        </Box>
+      </Container>
+    </AppBar>
+    // </HideOnScroll>
   );
 }
 
