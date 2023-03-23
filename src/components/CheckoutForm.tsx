@@ -1,4 +1,9 @@
-import { Button, FormHelperText, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  FormHelperTextProps,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { styled } from '@mui/system';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
@@ -8,48 +13,22 @@ import { theme } from '../theme';
 
 export default function CheckoutForm() {
   const navigate = useNavigate();
-  const { order, updateOrder, cartItems } = useOrder(); // get cartItems from OrderContext
-
-  const validationSchema = yup.object({
-    name: yup
-      .string()
-      .min(2, 'Name must be at least two characters')
-      .required('Name required'),
-    address: yup
-      .string()
-      .min(4, 'Please enter a valid address')
-      .required('Address required'),
-    postalCode: yup
-      .string()
-      .min(4, 'Postal code must be at least two characters')
-      .required('Postal code required'),
-    city: yup
-      .string()
-      .min(2, 'Please enter a valid city')
-      .required('City required'),
-    phone: yup
-      .string()
-      .min(6, 'Phone number must be at least six characters')
-      .required('Phone number required'),
-    email: yup
-      .string()
-      .email('Please enter a valid email')
-      .required('Email required'),
-  });
+  const { order, updateOrder } = useOrder();
 
   const formik = useFormik({
     initialValues: {
       name: '',
       address: '',
       city: '',
-      postalCode: '',
+      zipCode: '',
       phone: '',
       email: '',
     },
     validationSchema: validationSchema,
+
+    // create new order with updated name
     onSubmit: (values) => {
       const updatedOrder = {
-        // create new order with updated name
         ...order,
         cart: order.cart,
         deliveryAddress: {
@@ -57,7 +36,7 @@ export default function CheckoutForm() {
           name: values.name,
           address: values.address,
           city: values.city,
-          postalCode: values.postalCode,
+          zipCode: values.zipCode,
           phone: values.phone,
           email: values.email,
         },
@@ -82,21 +61,18 @@ export default function CheckoutForm() {
           name="name"
           label="Name"
           value={formik.values.name}
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           error={formik.touched.name && Boolean(formik.errors.name)}
           helperText={formik.touched.name && formik.errors.name}
+          FormHelperTextProps={
+            { 'data-cy': 'customer-name-error' } as FormHelperTextProps
+          }
           inputProps={{
             'data-cy': 'customer-name',
-            'aria-describedby': 'customer-name-helper-text',
             autoComplete: 'name',
           }}
-          required={true}
-          onFocus={() => formik.setFieldTouched('name', true, false)}
         />
-        <FormHelperText
-          id="customer-name-helper-text"
-          data-cy="customer-name-error"
-        ></FormHelperText>
 
         <TextField
           fullWidth
@@ -110,18 +86,16 @@ export default function CheckoutForm() {
           onChange={formik.handleChange}
           error={formik.touched.address && Boolean(formik.errors.address)}
           helperText={formik.touched.address && formik.errors.address}
+          FormHelperTextProps={
+            { 'data-cy': 'customer-address-error' } as FormHelperTextProps
+          }
           inputProps={{
             'data-cy': 'customer-address',
-            'aria-describedby': 'customer-address-helper-text',
             autoComplete: 'street-address',
           }}
-          required={true}
           onBlur={formik.handleBlur}
         />
-        <FormHelperText
-          id="customer-address-helper-text"
-          data-cy="customer-address-error"
-        ></FormHelperText>
+
         <TextField
           fullWidth
           margin="normal"
@@ -134,7 +108,9 @@ export default function CheckoutForm() {
           onChange={formik.handleChange}
           error={formik.touched.city && Boolean(formik.errors.city)}
           helperText={formik.touched.city && formik.errors.city}
-          required={true}
+          FormHelperTextProps={
+            { 'data-cy': 'customer-city-error' } as FormHelperTextProps
+          }
           onBlur={formik.handleBlur}
           inputProps={{ 'data-cy': 'customer-city', autoComplete: 'city' }}
         />
@@ -142,15 +118,17 @@ export default function CheckoutForm() {
           fullWidth
           margin="normal"
           variant="standard"
-          id="postalCode"
-          name="postalCode"
+          id="zipCode"
+          name="zipCode"
           label="Postal code"
-          type="postalCode"
-          value={formik.values.postalCode}
+          type="zipCode"
+          value={formik.values.zipCode}
           onChange={formik.handleChange}
-          error={formik.touched.postalCode && Boolean(formik.errors.postalCode)}
-          helperText={formik.touched.postalCode && formik.errors.postalCode}
-          required={true}
+          error={formik.touched.zipCode && Boolean(formik.errors.zipCode)}
+          helperText={formik.touched.zipCode && formik.errors.zipCode}
+          FormHelperTextProps={
+            { 'data-cy': 'customer-zipcode-error' } as FormHelperTextProps
+          }
           onBlur={formik.handleBlur}
           inputProps={{
             'data-cy': 'customer-zipcode',
@@ -170,7 +148,6 @@ export default function CheckoutForm() {
           error={formik.touched.phone && Boolean(formik.errors.phone)}
           helperText={formik.touched.phone && formik.errors.phone}
           FormHelperTextProps={{ 'data-cy': 'customer-phone-error' } as any}
-          required={true}
           onBlur={formik.handleBlur}
           inputProps={{ 'data-cy': 'customer-phone', autoComplete: 'tel' }}
         />
@@ -187,7 +164,6 @@ export default function CheckoutForm() {
           error={formik.touched.email && Boolean(formik.errors.email)}
           helperText={formik.touched.email && formik.errors.email}
           FormHelperTextProps={{ 'data-cy': 'customer-email-error' } as any}
-          required={true}
           onBlur={formik.handleBlur}
           inputProps={{ 'data-cy': 'customer-email', autoComplete: 'email' }}
         />
@@ -203,6 +179,35 @@ export default function CheckoutForm() {
     </div>
   );
 }
+
+const validationSchema = yup.object({
+  name: yup
+    .string()
+    .min(2, 'Name must be at least two characters')
+    .required('Name required'),
+  address: yup
+    .string()
+    .min(4, 'Please enter a valid address')
+    .required('Address required'),
+  zipCode: yup
+    .string()
+    .matches(/^[0-9]+$/, 'Postal code must be a number')
+    .min(4, 'Postal code must be at least two characters')
+    .max(7, 'Postal code can not be more than seven characters')
+    .required('Postal code required'),
+  city: yup
+    .string()
+    .min(2, 'Please enter a valid city')
+    .required('City required'),
+  phone: yup
+    .string()
+    .min(6, 'Phone number must be at least six characters')
+    .required('Phone number required'),
+  email: yup
+    .string()
+    .email('Please enter a valid email')
+    .required('Email required'),
+});
 
 const styledButton = {
   margin: '2rem 0',
