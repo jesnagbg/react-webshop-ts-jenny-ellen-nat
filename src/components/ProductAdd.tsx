@@ -19,6 +19,7 @@ export default function ProductAdd() {
       <Typography
         sx={styledPrice}
         variant="body1"
+        data-cy="product-price"
       >
         {product?.price} SEK
       </Typography>
