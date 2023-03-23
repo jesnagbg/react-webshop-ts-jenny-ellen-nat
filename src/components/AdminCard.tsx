@@ -5,9 +5,9 @@ import {
   CardContent,
   CardMedia,
   IconButton,
-  Link,
-  Typography,
+  Typography
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { Product } from '../../data';
 import { theme } from '../theme';
 
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function AdminCard({ product }: Props) {
-  const { id, title, image, images, price } = product;
+  const { id, title, image, images, price, pieces } = product;
 
   return (
     <Card
@@ -37,10 +37,8 @@ export default function AdminCard({ product }: Props) {
           >
             {title}
           </Typography>
-          <Typography variant="body1">
-            Article number: <span data-cy="product-id">{id}</span>
-          </Typography>
-          <Typography variant="body1">Details:</Typography>
+          <Typography variant="body1">Article number: <span data-cy="product-id">{id}</span></Typography>
+          <Typography variant="body1">Pieces: {pieces}</Typography>
           <Typography
             variant="body1"
             data-cy="product-price"
@@ -57,11 +55,10 @@ export default function AdminCard({ product }: Props) {
         >
           <Clear />
         </IconButton>
-        <Link
-          sx={editLink}
-          data-cy="admin-edit-product"
-        >
+        <Link to="/admin/edit" data-cy="admin-edit-product">
+          <Typography sx={styledLink}>
           Edit
+          </Typography>
         </Link>
       </Box>
     </Card>
@@ -90,11 +87,11 @@ const styledBox = {
 const removeButton = {
   height: '2rem',
   width: '2rem',
-  backgroundColor: theme.palette.lightGrey.main,
+  backgroundColor: "white",
   color: 'black',
   borderRadius: '50%',
   '&:hover': {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.lightGrey.main,
   },
 };
 
@@ -105,4 +102,12 @@ const rightContainer = {
   flexDirection: 'column',
   alignItems: 'flex-end',
   justifyContent: 'space-between',
+};
+
+const styledLink = {
+  textDecorationColor: theme.palette.primary.main,
+  color: theme.palette.primary.main,
+  display: 'flex',
+  alignItems: 'center',
+  fontFamily: 'DM Sans',
 };

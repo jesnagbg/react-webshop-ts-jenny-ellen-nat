@@ -6,7 +6,7 @@ import {
   IconButton,
   Link,
   Slide,
-  Typography,
+  Typography
 } from '@mui/material';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { FC, ReactElement } from 'react';
@@ -71,7 +71,7 @@ export default function Header() {
             component={RouterLink}
             to="/admin"
           >
-            <IconButton aria-label="admin">
+            <IconButton aria-label="admin" data-cy="admin-link">
               <PersonOutlineOutlinedIcon sx={styledPersonOutlined} />
             </IconButton>
           </Link>

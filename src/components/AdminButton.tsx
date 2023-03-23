@@ -5,15 +5,21 @@ import { theme } from '../theme';
 interface Props {
   children: React.ReactNode;
   to?: string;
+  onClick?: () => void;
+  "data-cy"?: string;
+  type?: 'button' | 'reset' | 'submit';
 }
 
 // Inte säker på om vi vill lägga in länkning här eller när den används, kan alltid ändra det senare.
-export default function AdminButton({ to = "", children }: Props) {
+export default function AdminButton({ to = "", children, onClick, "data-cy": dataCy, type = 'button' }: Props) {
   return (
     <Link to={to} style={styledLink}>
       <Button
         variant="contained"
         sx={styledButton}
+        onClick={onClick}
+        data-cy={dataCy}
+        type={type}
       >
         {children}
       </Button>
@@ -22,7 +28,7 @@ export default function AdminButton({ to = "", children }: Props) {
 }
 
 const styledButton = {
-  padding: '.4rem 3rem',
+  padding: '.4rem 2.6rem',
   marginBottom: 2,
   whiteSpace: 'no-wrap',
   backgroundColor: 'white',
@@ -30,7 +36,7 @@ const styledButton = {
   border: '1px solid black',
   textTransform: 'none',
   '&:hover': {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.lightGrey.main,
   },
 };
 

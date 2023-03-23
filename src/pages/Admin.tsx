@@ -1,16 +1,25 @@
 import { Box, Container, Divider, Grid, Typography } from '@mui/material';
-import { Product, products } from '../../data';
+import { Outlet } from 'react-router-dom';
+import { Product } from '../../data';
 import AdminButton from '../components/AdminButton';
 import AdminCard from '../components/AdminCard';
+import { useProducts } from '../contexts/ProductsContext';
+import { useDialog } from '../hooks/useDialog';
 
 export default function Admin() {
+  const { open, handleOpen, handleClose } = useDialog();
+  const { products } = useProducts();
+
   return (
     <Container
       maxWidth={'lg'}
       sx={topSpace}
     >
       <main>
-        <AdminButton data-cy="admin-add-product">Add new item</AdminButton>
+        {/* Är nog så här man ska göra egentligen men fick inte riktigt till det med routing, återkommer! */}
+       {/* <AdminButton onClick={handleOpen}>Add new item</AdminButton> */}
+       <AdminButton data-cy="admin-add-product" to="/admin/product/new">Add new item</AdminButton>
+       <Outlet />
         <Grid
           sx={bottomSpace}
           container
