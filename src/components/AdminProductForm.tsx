@@ -93,7 +93,7 @@ export default function AdminProductForm({
 
       if (isEdit) {
         setProducts(
-          products.map((p) => (p.id === newProduct.id ? newProduct : p))
+          products.map((product) => (product.id === newProduct.id ? newProduct : product))
         );
       } else {
         setProducts([...products, newProduct]);

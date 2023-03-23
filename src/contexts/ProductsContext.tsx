@@ -6,13 +6,14 @@ import {
   useState
 } from 'react';
 import { Product, products } from '../../data';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface ContextValue {
   products: Product[];
   product: Product | null;
+  selectedProduct: Product | null;
   setProduct: React.Dispatch<React.SetStateAction<Product | null>>;
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
-  selectedProduct: Product | null;
   setSelectedProduct: React.Dispatch<React.SetStateAction<Product | null>>;
 }
 
@@ -24,8 +25,8 @@ interface Props {
 }
 
 export default function ProductsProvider({ children }: Props) {
-  const [allProducts, setProducts] = useState<Product[]>([]);
-  const [product, setProduct] = useState<Product | null>(null);
+  const [allProducts, setProducts] = useLocalStorage<Product[]>('products');
+  const [product, setProduct] = useLocalStorage<Product | null>('order');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
@@ -35,9 +36,9 @@ export default function ProductsProvider({ children }: Props) {
   const contextValue = {
     products: allProducts,
     product,
+    selectedProduct,
     setProduct,
     setProducts,
-    selectedProduct,
     setSelectedProduct,
   };
 
@@ -47,3 +48,5 @@ export default function ProductsProvider({ children }: Props) {
     </ProductsContext.Provider>
   );
 }
+
+
