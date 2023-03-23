@@ -60,11 +60,10 @@ export const theme: Theme = createTheme({
         },
       },
     },
-    MuiSnackbar: {
+    MuiLink: {
       styleOverrides: {
         root: {
-          backgroundColor: '#C7D8B7',
-          color: '#222222',
+          textDecorationLine: 'none',
         },
       },
     },

@@ -37,7 +37,6 @@ export default function Quantity({ initialValue, valueHandler }: Props) {
       </Button>
       <TextField
         data-cy="product-quantity"
-        // sx={styledBox}
         value={quantity}
       />
       <Button
@@ -62,11 +61,4 @@ const styledButton = {
   '&:hover': {
     border: 'none',
   },
-};
-
-const styledBox = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  padding: '0.5rem',
 };

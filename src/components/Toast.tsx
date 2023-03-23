@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { CartItem } from '../data';
+import { CartItem } from '../../data';
 
 interface Props {
   snackpack: SnackbarData[];
