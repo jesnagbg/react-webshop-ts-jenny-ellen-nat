@@ -14,15 +14,15 @@ import { Product } from '../../data';
 import { useProducts } from '../contexts/ProductsContext';
 import AdminButton from './AdminButton';
 
+//--------------------------Interfaces------------------------------//
+
 interface AdminProductFormProps {
   product?: Product;
   open: boolean;
   onClose?: () => void;
+  mode: 'add' | 'edit';
 }
-
-function generateShortId(length: number = 8) {
-  return Math.random().toString(36).substring(2, length);
-}
+type ProductCreate = Omit<Product, 'id'>;
 
 const validationSchema = yup.object({
   title: yup
@@ -42,30 +42,47 @@ const validationSchema = yup.object({
   description: yup.string(),
 });
 
-type ProductCreate = Omit<Product, 'id'>;
+function generateShortId(length: number = 8) {
+  return Math.random().toString(36).substring(2, length);
+}
+
+//--------------------------Function------------------------------//
 
 export default function AdminProductForm({
   product,
   open,
   onClose,
+  mode,
 }: AdminProductFormProps) {
   const navigate = useNavigate();
-  const { products, setProducts } = useProducts();
-  const isEdit = Boolean(product);
+  const { products, setProducts, selectedProduct } = useProducts();
+  // const isEdit = Boolean(product);
+  const isEdit = mode === 'edit';
+
+  
 
   const formik = useFormik<ProductCreate>({
-    initialValues: product || {
-      title: '',
-      image: '',
-      images: [],
-      price: '' as any,
-      pieces: '' as any,
-      description: '',
-    },
+    initialValues: isEdit && selectedProduct
+      ? {
+          title: selectedProduct.title,
+          image: selectedProduct.image,
+          images: selectedProduct.images,
+          price: selectedProduct.price,
+          pieces: selectedProduct.pieces,
+          description: selectedProduct.description,
+        }
+      : {
+          title: '',
+          image: '',
+          images: [],
+          price: '' as any,
+          pieces: '' as any,
+          description: '',
+        },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       const newProduct: Product = {
-        id: generateShortId(),
+        id: (isEdit && selectedProduct) ? selectedProduct.id : generateShortId(),
         image: values.image,
         title: values.title,
         description: values.description,
@@ -75,6 +92,9 @@ export default function AdminProductForm({
       };
 
       if (isEdit) {
+        setProducts(
+          products.map((p) => (p.id === newProduct.id ? newProduct : p))
+        );
       } else {
         setProducts([...products, newProduct]);
       }
@@ -93,7 +113,7 @@ export default function AdminProductForm({
       maxWidth="sm"
       fullWidth
     >
-      <DialogTitle>Add new item</DialogTitle>
+      <DialogTitle>{isEdit ? 'Edit item' : 'Add new item'}</DialogTitle>
       <DialogContent>
         <Box
           component="form"

@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Product } from '../../data';
+import { useProducts } from '../contexts/ProductsContext';
 import { theme } from '../theme';
 
 interface Props {
@@ -16,7 +17,13 @@ interface Props {
 }
 
 export default function AdminCard({ product }: Props) {
+  const { setSelectedProduct } = useProducts();
   const { id, title, image, images, price, pieces } = product;
+
+  const handleEditButtonClick = () => {
+    setSelectedProduct(product);
+    console.log(product);
+  };
 
   return (
     <Card
@@ -37,7 +44,9 @@ export default function AdminCard({ product }: Props) {
           >
             {title}
           </Typography>
-          <Typography variant="body1">Article number: <span data-cy="product-id">{id}</span></Typography>
+          <Typography variant="body1">
+            Article number: <span data-cy="product-id">{id}</span>
+          </Typography>
           <Typography variant="body1">Pieces: {pieces}</Typography>
           <Typography
             variant="body1"
@@ -55,10 +64,13 @@ export default function AdminCard({ product }: Props) {
         >
           <Clear />
         </IconButton>
-        <Link to="/admin/edit" data-cy="admin-edit-product">
-          <Typography sx={styledLink}>
-          Edit
-          </Typography>
+        {/* <Link to={`/admin/edit/${product.id}`} data-cy="admin-edit-product"> */}
+        <Link
+          to="/admin/edit/product"
+          data-cy="admin-edit-product"
+          onClick={handleEditButtonClick} // Add the onClick event handler here
+        >
+          <Typography sx={styledLink}>Edit</Typography>
         </Link>
       </Box>
     </Card>
@@ -87,7 +99,7 @@ const styledBox = {
 const removeButton = {
   height: '2rem',
   width: '2rem',
-  backgroundColor: "white",
+  backgroundColor: 'white',
   color: 'black',
   borderRadius: '50%',
   '&:hover': {

@@ -35,8 +35,8 @@ const router = createBrowserRouter(
         element={<Product />}
       />
       <Route path='/admin' element={<Admin />}>
-        <Route path='product/new' element={<AdminProductForm open/>}/>
-        <Route path='edit' element={<AdminProductForm open/>}/>
+        <Route path='product/new' element={<AdminProductForm open mode='add'/>}/>
+        <Route path="edit/:id" element={<AdminProductForm open mode='edit'/>}/>
       </Route>
       <Route
         path="/checkout"

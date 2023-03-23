@@ -12,6 +12,8 @@ interface ContextValue {
   product: Product | null;
   setProduct: React.Dispatch<React.SetStateAction<Product | null>>;
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+  selectedProduct: Product | null;
+  setSelectedProduct: React.Dispatch<React.SetStateAction<Product | null>>;
 }
 
 const ProductsContext = createContext<ContextValue>(null as any);
@@ -24,6 +26,7 @@ interface Props {
 export default function ProductsProvider({ children }: Props) {
   const [allProducts, setProducts] = useState<Product[]>([]);
   const [product, setProduct] = useState<Product | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     setProducts(products);
@@ -34,6 +37,8 @@ export default function ProductsProvider({ children }: Props) {
     product,
     setProduct,
     setProducts,
+    selectedProduct,
+    setSelectedProduct,
   };
 
   return (
