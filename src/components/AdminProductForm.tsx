@@ -1,11 +1,7 @@
 import {
-  Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  FormHelperTextProps,
-  TextField,
+  Box, FormHelperTextProps,
+  Paper,
+  TextField
 } from '@mui/material';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
@@ -114,146 +110,142 @@ export default function AdminProductForm({
   //--------------------------Return------------------------------//
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      maxWidth="sm"
-      fullWidth
-    >
-      <DialogTitle>{isEdit ? 'Edit item' : 'Add new item'}</DialogTitle>
-      <DialogContent>
-        <Box
-          component="form"
-          onSubmit={formik.handleSubmit}
-          noValidate
-          autoComplete="off"
-          data-cy="product-form"
-          // id="product-form"
-        >
-          <TextField
-            fullWidth
-            margin="normal"
-            variant="standard"
-            id="title"
-            name="title"
-            inputProps={{
-              'data-cy': 'product-title',
-            }}
-            label={
-              <>
-                Title<span style={requiredIndicator}>*</span>
-              </>
-            }
-            value={formik.values.title}
-            onChange={formik.handleChange}
-            error={formik.touched.title && Boolean(formik.errors.title)}
-            helperText={formik.touched.title && formik.errors.title}
-            onBlur={formik.handleBlur}
-            FormHelperTextProps={
-              { 'data-cy': 'product-title-error' } as FormHelperTextProps
-            }
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            variant="standard"
-            id="price"
-            name="price"
-            inputProps={{
-              'data-cy': 'product-price',
-            }}
-            label={
-              <>
-                Price<span style={requiredIndicator}>*</span>
-              </>
-            }
-            type="number"
-            value={formik.values.price}
-            onChange={formik.handleChange}
-            error={formik.touched.price && Boolean(formik.errors.price)}
-            helperText={formik.touched.price && formik.errors.price}
-            FormHelperTextProps={
-              { 'data-cy': 'product-price-error' } as FormHelperTextProps
-            }
-            onBlur={formik.handleBlur}
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            variant="standard"
-            id="pieces"
-            name="pieces"
-            label="Pieces"
-            type="number"
-            value={formik.values.pieces}
-            onChange={formik.handleChange}
-            error={formik.touched.pieces && Boolean(formik.errors.pieces)}
-            helperText={formik.touched.pieces && formik.errors.pieces}
-            onBlur={formik.handleBlur}
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            variant="standard"
-            id="image"
-            name="image"
-            inputProps={{
-              'data-cy': 'product-image',
-            }}
-            label={
-              <>
-                Image<span style={requiredIndicator}>*</span>
-              </>
-            }
-            value={formik.values.image}
-            onChange={formik.handleChange}
-            error={formik.touched.image && Boolean(formik.errors.image)}
-            helperText={formik.touched.image && formik.errors.image}
-            onBlur={formik.handleBlur}
-            FormHelperTextProps={
-              { 'data-cy': 'product-image-error' } as FormHelperTextProps
-            }
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            variant="standard"
-            id="description"
-            name="description"
-            inputProps={{
-              'data-cy': 'product-description',
-            }}
-            label="Description"
-            value={formik.values.description}
-            error={
-              formik.touched.description && Boolean(formik.errors.description)
-            }
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            helperText={formik.touched.description && formik.errors.description}
-            FormHelperTextProps={
-              { 'data-cy': 'product-description-error' } as FormHelperTextProps
-            }
-          />
-          {/* <Button
+    <Box sx={topMargin}>
+      <Paper>
+        <Box p={2}>
+          <Box
+            component="form"
+            onSubmit={formik.handleSubmit}
+            noValidate
+            autoComplete="off"
+            data-cy="product-form"
+          >
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="standard"
+              id="title"
+              name="title"
+              inputProps={{
+                'data-cy': 'product-title',
+              }}
+              label={
+                <>
+                  Title<span style={requiredIndicator}>*</span>
+                </>
+              }
+              value={formik.values.title}
+              onChange={formik.handleChange}
+              error={formik.touched.title && Boolean(formik.errors.title)}
+              helperText={formik.touched.title && formik.errors.title}
+              onBlur={formik.handleBlur}
+              FormHelperTextProps={
+                { 'data-cy': 'product-title-error' } as FormHelperTextProps
+              }
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="standard"
+              id="price"
+              name="price"
+              inputProps={{
+                'data-cy': 'product-price',
+              }}
+              label={
+                <>
+                  Price<span style={requiredIndicator}>*</span>
+                </>
+              }
+              type="number"
+              value={formik.values.price}
+              onChange={formik.handleChange}
+              error={formik.touched.price && Boolean(formik.errors.price)}
+              helperText={formik.touched.price && formik.errors.price}
+              FormHelperTextProps={
+                { 'data-cy': 'product-price-error' } as FormHelperTextProps
+              }
+              onBlur={formik.handleBlur}
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="standard"
+              id="pieces"
+              name="pieces"
+              label="Pieces"
+              type="number"
+              value={formik.values.pieces}
+              onChange={formik.handleChange}
+              error={formik.touched.pieces && Boolean(formik.errors.pieces)}
+              helperText={formik.touched.pieces && formik.errors.pieces}
+              onBlur={formik.handleBlur}
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="standard"
+              id="image"
+              name="image"
+              inputProps={{
+                'data-cy': 'product-image',
+              }}
+              label={
+                <>
+                  Image<span style={requiredIndicator}>*</span>
+                </>
+              }
+              value={formik.values.image}
+              onChange={formik.handleChange}
+              error={formik.touched.image && Boolean(formik.errors.image)}
+              helperText={formik.touched.image && formik.errors.image}
+              onBlur={formik.handleBlur}
+              FormHelperTextProps={
+                { 'data-cy': 'product-image-error' } as FormHelperTextProps
+              }
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="standard"
+              id="description"
+              name="description"
+              inputProps={{
+                'data-cy': 'product-description',
+              }}
+              label="Description"
+              value={formik.values.description}
+              error={
+                formik.touched.description && Boolean(formik.errors.description)
+              }
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              helperText={
+                formik.touched.description && formik.errors.description
+              }
+              FormHelperTextProps={
+                {
+                  'data-cy': 'product-description-error',
+                } as FormHelperTextProps
+              }
+            />
+            {/* <Button
             onClick={() =>
               formik.setFieldValue('images', [...formik.values.images, ''])
             }
           >
             Add more images
           </Button> */}
+          </Box>
+          <Box sx={buttonContainer}>
+            <AdminButton to="/admin">Cancel</AdminButton>
+            <AdminButton type="submit" onClick={formik.handleSubmit}>
+              {isEdit ? 'Save' : 'Add'}
+            </AdminButton>
+          </Box>
         </Box>
-      </DialogContent>
-      <DialogActions sx={buttonContainer}>
-        <AdminButton to="/admin">Cancel</AdminButton>
-        <AdminButton
-          type="submit"
-          onClick={formik.handleSubmit}
-        >
-          {isEdit ? 'Save' : 'Add'}
-        </AdminButton>
-      </DialogActions>
-    </Dialog>
+      </Paper>
+    </Box>
   );
 }
 
@@ -265,3 +257,7 @@ const buttonContainer = {
 const requiredIndicator = {
   color: 'red',
 };
+
+const topMargin = {
+  marginTop: "80px",
+}
