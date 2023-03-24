@@ -1,7 +1,5 @@
 import {
-  Box, FormHelperTextProps,
-  Paper,
-  TextField
+  Box, Dialog, DialogActions, DialogContent, DialogTitle, FormHelperTextProps, TextField
 } from '@mui/material';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +23,10 @@ const validationSchema = yup.object({
     .string()
     .min(2, 'Title must be at least two characters')
     .required('Title required'),
-  image: yup.string().required('Image required'),
+    image: yup
+    .string()
+    .url('Image must be a valid URL')
+    .required('Image required'),
   //images: yup.array(yup.string()),
   price: yup
     .number()
@@ -110,15 +111,22 @@ export default function AdminProductForm({
   //--------------------------Return------------------------------//
 
   return (
-    <Box sx={topMargin}>
-      <Paper>
-        <Box p={2}>
+    <Box>
+      <Dialog
+        open={open}
+        onClose={onClose}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>{isEdit ? 'Edit item' : 'Add new item'}</DialogTitle>
+        <DialogContent>
           <Box
             component="form"
             onSubmit={formik.handleSubmit}
             noValidate
             autoComplete="off"
             data-cy="product-form"
+            // id="product-form"
           >
             <TextField
               fullWidth
@@ -237,14 +245,17 @@ export default function AdminProductForm({
             Add more images
           </Button> */}
           </Box>
-          <Box sx={buttonContainer}>
-            <AdminButton to="/admin">Cancel</AdminButton>
-            <AdminButton type="submit" onClick={formik.handleSubmit}>
-              {isEdit ? 'Save' : 'Add'}
-            </AdminButton>
-          </Box>
-        </Box>
-      </Paper>
+        </DialogContent>
+        <DialogActions sx={buttonContainer}>
+          <AdminButton to="/admin">Cancel</AdminButton>
+          <AdminButton
+            type="submit"
+            onClick={formik.handleSubmit}
+          >
+            {isEdit ? 'Save' : 'Add'}
+          </AdminButton>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
@@ -257,7 +268,3 @@ const buttonContainer = {
 const requiredIndicator = {
   color: 'red',
 };
-
-const topMargin = {
-  marginTop: "80px",
-}
