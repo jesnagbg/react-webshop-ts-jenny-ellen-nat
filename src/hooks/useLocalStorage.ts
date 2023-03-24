@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 
-function getLocalCart(key: string) {
+function getLocalCart<Type>(key: string, defaultValue: Type) {
   const localCartJSON = localStorage.getItem(key);
   if (localCartJSON) return JSON.parse(localCartJSON);
-  return [];
+  return defaultValue;
 }
 
 export const useLocalStorage = <Type>(
-  key: string
+  key: string,
+  defaultValue: Type
 ): [Type, React.Dispatch<React.SetStateAction<Type>>] => {
   const [cartItems, setCartItems] = useState<Type>(() => {
-    return getLocalCart(key);
+    return getLocalCart(key, defaultValue);
   });
+
+  console.log('Local storage ran.', key);
 
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(cartItems));

@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useState } from 'react';
 import { CartItem, Product } from '../../data';
 import Toast from '../components/Toast';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useOrder } from './OrderContext';
 
 interface ContextValue {
   cartItems: CartItem[];
@@ -23,22 +24,28 @@ interface SnackbarData {
 }
 
 export default function CartProvider({ children }: Props) {
-  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('cart');
+  const { order, updateOrder } = useOrder();
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('cart', []);
   const [snackpack, setSnackpack] = useState<SnackbarData[]>([]);
 
+  const updateCartAndOrder = (newCartItems: CartItem[]) => {
+    setCartItems(newCartItems);
+    updateOrder({ ...order, cart: newCartItems });
+  };
+
   const addToCart = (product: Product, quantity: number) => {
-    const newCartItem: CartItem = { ...product, quantity: quantity };
+    const newCartItem: CartItem = { ...product, quantity };
     const foundItem = cartItems.find((item) => item.id === product.id);
     if (!foundItem) {
-      setCartItems([...cartItems, newCartItem]);
+      updateCartAndOrder([...cartItems, newCartItem]);
     } else {
-      changeQuantity(newCartItem, quantity + foundItem.quantity);
+      changeQuantity(foundItem, quantity + foundItem.quantity);
     }
     displayToast(newCartItem, false);
   };
 
   const removeFromCart = (targetItem: CartItem) => {
-    setCartItems(cartItems.filter((item) => item.id !== targetItem.id));
+    updateCartAndOrder(cartItems.filter((item) => item.id !== targetItem.id));
     displayToast(targetItem, true);
   };
 
@@ -51,20 +58,16 @@ export default function CartProvider({ children }: Props) {
     setSnackpack((prev) => [...prev, newSnackbarMessage]);
   };
 
-  const changeQuantity = (targetItem: CartItem, newQuantity: number) => {
-    const foundItem = cartItems.find((item) => item.id === targetItem.id);
-    if (!foundItem) return;
-    if (newQuantity === 0) {
-      removeFromCart(targetItem);
-    } else {
-      setCartItems(
-        cartItems.map((item) => {
-          if (item.id !== targetItem.id) return item;
-          return { ...item, quantity: newQuantity };
-        })
-      );
-    }
+  const changeQuantity = (targetItem: CartItem, quantity: number) => {
+    const newCartItems =
+      quantity === 0
+        ? cartItems.filter((item) => item.id !== targetItem.id)
+        : cartItems.map((item) =>
+            item.id !== targetItem.id ? item : { ...item, quantity }
+          );
+    updateCartAndOrder(newCartItems);
   };
+
   return (
     <CartContext.Provider
       value={{ cartItems, addToCart, removeFromCart, changeQuantity }}

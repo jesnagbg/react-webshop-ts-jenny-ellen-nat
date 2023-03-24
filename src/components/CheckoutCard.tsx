@@ -90,7 +90,11 @@ const styledCardMedia = {
 };
 
 const styledCardContent = {
-  padding: '0 1rem',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  display: 'flex',
+  gap: '10px',
+  paddingTop: '0',
 };
 
 const styledBox = {

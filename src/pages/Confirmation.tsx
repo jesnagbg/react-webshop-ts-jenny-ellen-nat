@@ -4,56 +4,16 @@ import {
   Divider,
   Grid,
   Link,
+  Stack,
   Typography,
 } from '@mui/material';
-import { Stack } from '@mui/system';
 import { Fragment } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { CartItem, products } from '../../data';
 import CheckoutCard from '../components/CheckoutCard';
-
-// Test data
-
-interface DelieryDetails {
-  firstName: string;
-  lastName: string;
-  addressLine1: string;
-  phoneNumber: string;
-  email: string;
-  postCode: string;
-}
-
-interface OrderItems {
-  items: CartItem[];
-  totalPrice: number;
-}
-
-interface Order {
-  deliveryDetails: DelieryDetails;
-  orderItems: CartItem[];
-  orderID: string;
-  totalPrice: number;
-}
+import { useOrder } from '../contexts/OrderContext';
 
 export default function Confirmation() {
-  const testDelivery: DelieryDetails = {
-    firstName: 'Nathanael',
-    lastName: 'Blackbourn',
-    addressLine1: '123 Madeup Street',
-    phoneNumber: '+46 65578990987655',
-    email: 'email@fejkemail.com',
-    postCode: '8766678',
-  };
-
-  const testOrder: Order = {
-    deliveryDetails: testDelivery,
-    orderItems: [
-      { ...products[0], quantity: 1 },
-      { ...products[1], quantity: 2 },
-    ],
-    orderID: crypto.randomUUID(),
-    totalPrice: 9999,
-  };
+  const { order } = useOrder();
 
   return (
     <Container sx={styledContainer}>
@@ -76,11 +36,11 @@ export default function Confirmation() {
             variant="body2"
             sx={styledType}
           >
-            Dear {testOrder.deliveryDetails.firstName}, thank you for your
-            order! We are pleased to confirm that your order has been
-            successfully placed and is being processed. Your order ID is
-            {testOrder.orderID}. We will notify you as soon as your order has
-            been shipped. Best regards, Piece by Piece.
+            Dear {order.deliveryAddress.name}, thank you for your order! We are
+            pleased to confirm that your order has been successfully placed and
+            is being processed. Your order ID is
+            {order.id}. We will notify you as soon as your order has been
+            shipped. Best regards, Piece by Piece.
           </Typography>
         </Grid>
         <Grid
@@ -88,9 +48,9 @@ export default function Confirmation() {
           xs={12}
           md={6}
         >
-          <Typography variant="h4">Order #{testOrder.orderID}</Typography>
+          <Typography variant="h4">Order #{order.id}</Typography>
           <Divider />
-          {testOrder.orderItems.map((item) => {
+          {order.cart.map((item) => {
             return (
               <Fragment>
                 <CheckoutCard
@@ -101,7 +61,13 @@ export default function Confirmation() {
               </Fragment>
             );
           })}
-          <Typography variant="h5">Total: {testOrder.totalPrice}kr</Typography>
+          <Typography variant="h5">
+            Total:
+            {order.cart
+              .reduce((total, item) => total + item.quantity * item.price, 0)
+              .toFixed(2)}
+            kr
+          </Typography>
           <Typography
             variant="h3"
             sx={styledSubheader}
@@ -109,12 +75,21 @@ export default function Confirmation() {
             Delivery details
           </Typography>
           <Stack>
-            <Typography variant="body1">{testDelivery.firstName}</Typography>
-            <Typography variant="body1">{testDelivery.lastName}</Typography>
-            <Typography variant="body1">{testDelivery.addressLine1}</Typography>
-            <Typography variant="body1">{testDelivery.postCode}</Typography>
-            <Typography variant="body1">{testDelivery.email}</Typography>
-            <Typography variant="body1">{testDelivery.phoneNumber}</Typography>
+            <Typography variant="body1">
+              {order.deliveryAddress.name}
+            </Typography>
+            <Typography variant="body1">
+              {order.deliveryAddress.address}
+            </Typography>
+            <Typography variant="body1">
+              {order.deliveryAddress.postalCode}
+            </Typography>
+            <Typography variant="body1">
+              {order.deliveryAddress.email}
+            </Typography>
+            <Typography variant="body1">
+              {order.deliveryAddress.phone}
+            </Typography>
           </Stack>
           <Link
             component={RouterLink}
