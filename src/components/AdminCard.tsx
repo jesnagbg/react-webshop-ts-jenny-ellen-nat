@@ -7,7 +7,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../data';
 import { theme } from '../theme';
@@ -25,11 +25,20 @@ export default function AdminCard({ product }: Props) {
     setConfirmOpen(true);
   };
 
+  const anchorRef = useRef(null);
+
   return (
     <Card
       sx={styledCard}
+      ref={anchorRef}
       data-cy="product"
     >
+      <ConfirmDelete
+        product={product}
+        setConfirmOpen={setConfirmOpen}
+        confirmOpen={confirmOpen}
+        anchorEl={anchorRef.current}
+      />
       <CardMedia
         sx={styledCardMedia}
         component="img"
@@ -72,11 +81,6 @@ export default function AdminCard({ product }: Props) {
           <Typography sx={styledLink}>Edit</Typography>
         </Link>
       </Box>
-      <ConfirmDelete
-        product={product}
-        setConfirmOpen={setConfirmOpen}
-        confirmOpen={confirmOpen}
-      />
     </Card>
   );
 }
