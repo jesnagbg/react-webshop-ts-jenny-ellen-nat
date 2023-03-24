@@ -42,6 +42,7 @@ export default function CheckoutForm() {
         },
       };
       updateOrder(updatedOrder);
+      localStorage.removeItem('cart');
       navigate(`/confirmation`);
     },
   });
@@ -112,7 +113,10 @@ export default function CheckoutForm() {
             { 'data-cy': 'customer-city-error' } as FormHelperTextProps
           }
           onBlur={formik.handleBlur}
-          inputProps={{ 'data-cy': 'customer-city', autoComplete: 'city' }}
+          inputProps={{
+            'data-cy': 'customer-city',
+            autoComplete: 'address-level2',
+          }}
         />
         <TextField
           fullWidth
