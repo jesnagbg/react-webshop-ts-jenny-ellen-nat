@@ -5,7 +5,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider
+  RouterProvider,
 } from 'react-router-dom';
 import App from './App';
 import AdminProductForm from './components/AdminProductForm';
@@ -34,10 +34,28 @@ const router = createBrowserRouter(
         path="/product/:id"
         element={<Product />}
       />
-      <Route path='/admin' element={<Admin />}>
-        <Route path='product/new' element={<AdminProductForm open mode='add'/>}/>
-        <Route path="product/:id" element={<AdminProductForm open mode='edit'/>}/>
-      </Route>
+      <Route
+        path="/admin"
+        element={<Admin />}
+      />
+      <Route
+        path="/admin/product/new"
+        element={
+          <AdminProductForm
+            open
+            mode="add"
+          />
+        }
+      />
+      <Route
+        path="/admin/product/:id"
+        element={
+          <AdminProductForm
+            open
+            mode="edit"
+          />
+        }
+      />
       <Route
         path="/checkout"
         element={<Checkout />}

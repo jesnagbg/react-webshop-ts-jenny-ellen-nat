@@ -4,8 +4,8 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  FormHelperText,
-  TextField
+  FormHelperTextProps,
+  TextField,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
@@ -33,13 +33,16 @@ const validationSchema = yup.object({
   //images: yup.array(yup.string()),
   price: yup
     .number()
-    .min(0, 'Price must be greater than or equal to 0')
+    .min(1, 'Price must be greater than 0')
     .required('Price required'),
   pieces: yup
     .number()
     .positive('Pieces must be a positive number')
     .integer('Pieces must be an integer'),
-  description: yup.string(),
+  description: yup
+    .string()
+    .min(4, 'Description must be at least four characterns')
+    .required('Description required'),
 });
 
 function generateShortId(length: number = 8) {
@@ -56,33 +59,33 @@ export default function AdminProductForm({
 }: AdminProductFormProps) {
   const navigate = useNavigate();
   const { products, setProducts, selectedProduct } = useProducts();
-  // const isEdit = Boolean(product);
   const isEdit = mode === 'edit';
 
-  
+  //const { productId } = useParams<{ productId: string }>();
 
   const formik = useFormik<ProductCreate>({
-    initialValues: isEdit && selectedProduct
-      ? {
-          title: selectedProduct.title,
-          image: selectedProduct.image,
-          images: selectedProduct.images,
-          price: selectedProduct.price,
-          pieces: selectedProduct.pieces,
-          description: selectedProduct.description,
-        }
-      : {
-          title: '',
-          image: '',
-          images: [],
-          price: '' as any,
-          pieces: '' as any,
-          description: '',
-        },
+    initialValues:
+      isEdit && selectedProduct
+        ? {
+            title: selectedProduct.title,
+            image: selectedProduct.image,
+            images: selectedProduct.images,
+            price: selectedProduct.price,
+            pieces: selectedProduct.pieces,
+            description: selectedProduct.description,
+          }
+        : {
+            title: '',
+            image: '',
+            images: [],
+            price: '' as any,
+            pieces: '' as any,
+            description: '',
+          },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       const newProduct: Product = {
-        id: (isEdit && selectedProduct) ? selectedProduct.id : generateShortId(),
+        id: isEdit && selectedProduct ? selectedProduct.id : generateShortId(),
         image: values.image,
         title: values.title,
         description: values.description,
@@ -93,7 +96,9 @@ export default function AdminProductForm({
 
       if (isEdit) {
         setProducts(
-          products.map((product) => (product.id === newProduct.id ? newProduct : product))
+          products.map((product) =>
+            product.id === newProduct.id ? newProduct : product
+          )
         );
       } else {
         setProducts([...products, newProduct]);
@@ -105,6 +110,8 @@ export default function AdminProductForm({
       navigate('/admin');
     },
   });
+
+  //--------------------------Return------------------------------//
 
   return (
     <Dialog
@@ -121,6 +128,7 @@ export default function AdminProductForm({
           noValidate
           autoComplete="off"
           data-cy="product-form"
+          // id="product-form"
         >
           <TextField
             fullWidth
@@ -139,12 +147,10 @@ export default function AdminProductForm({
             value={formik.values.title}
             onChange={formik.handleChange}
             error={formik.touched.title && Boolean(formik.errors.title)}
-            helperText={
-              formik.touched.title && formik.errors.title ? (
-                <FormHelperText data-cy="product-title-error">
-                  {formik.errors.title}
-                </FormHelperText>
-              ) : null
+            helperText={formik.touched.title && formik.errors.title}
+            onBlur={formik.handleBlur}
+            FormHelperTextProps={
+              { 'data-cy': 'product-title-error' } as FormHelperTextProps
             }
           />
           <TextField
@@ -166,6 +172,10 @@ export default function AdminProductForm({
             onChange={formik.handleChange}
             error={formik.touched.price && Boolean(formik.errors.price)}
             helperText={formik.touched.price && formik.errors.price}
+            FormHelperTextProps={
+              { 'data-cy': 'product-price-error' } as FormHelperTextProps
+            }
+            onBlur={formik.handleBlur}
           />
           <TextField
             fullWidth
@@ -179,6 +189,7 @@ export default function AdminProductForm({
             onChange={formik.handleChange}
             error={formik.touched.pieces && Boolean(formik.errors.pieces)}
             helperText={formik.touched.pieces && formik.errors.pieces}
+            onBlur={formik.handleBlur}
           />
           <TextField
             fullWidth
@@ -198,6 +209,10 @@ export default function AdminProductForm({
             onChange={formik.handleChange}
             error={formik.touched.image && Boolean(formik.errors.image)}
             helperText={formik.touched.image && formik.errors.image}
+            onBlur={formik.handleBlur}
+            FormHelperTextProps={
+              { 'data-cy': 'product-image-error' } as FormHelperTextProps
+            }
           />
           <TextField
             fullWidth
@@ -210,7 +225,15 @@ export default function AdminProductForm({
             }}
             label="Description"
             value={formik.values.description}
+            error={
+              formik.touched.description && Boolean(formik.errors.description)
+            }
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            helperText={formik.touched.description && formik.errors.description}
+            FormHelperTextProps={
+              { 'data-cy': 'product-description-error' } as FormHelperTextProps
+            }
           />
           {/* <Button
             onClick={() =>

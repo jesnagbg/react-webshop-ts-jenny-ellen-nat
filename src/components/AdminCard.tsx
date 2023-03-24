@@ -5,7 +5,7 @@ import {
   CardContent,
   CardMedia,
   IconButton,
-  Typography
+  Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Product } from '../../data';
@@ -68,7 +68,7 @@ export default function AdminCard({ product }: Props) {
         <Link
           to={`/admin/product/${product.id}`}
           data-cy="admin-edit-product"
-          onClick={handleEditButtonClick} // Add the onClick event handler here
+          onClick={handleEditButtonClick}
         >
           <Typography sx={styledLink}>Edit</Typography>
         </Link>
