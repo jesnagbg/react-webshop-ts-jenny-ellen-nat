@@ -5,12 +5,14 @@ import {
   CardContent,
   CardMedia,
   IconButton,
-  Typography,
+  Typography
 } from '@mui/material';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../data';
 import { useProducts } from '../contexts/ProductsContext';
 import { theme } from '../theme';
+import ConfirmDelete from './ConfirmDelete';
 
 interface Props {
   product: Product;
@@ -19,6 +21,13 @@ interface Props {
 export default function AdminCard({ product }: Props) {
   const { setSelectedProduct } = useProducts();
   const { id, title, image, images, price, pieces } = product;
+  const [confirmOpen, setConfirmOpen] = useState(false);
+
+  const openConfirmDelete = () => {
+    setConfirmOpen(true);
+  };
+
+  const anchorRef = useRef(null);
 
   const handleEditButtonClick = () => {
     setSelectedProduct(product);
@@ -28,8 +37,15 @@ export default function AdminCard({ product }: Props) {
   return (
     <Card
       sx={styledCard}
+      ref={anchorRef}
       data-cy="product"
     >
+      <ConfirmDelete
+        product={product}
+        setConfirmOpen={setConfirmOpen}
+        confirmOpen={confirmOpen}
+        anchorEl={anchorRef.current}
+      />
       <CardMedia
         sx={styledCardMedia}
         component="img"
@@ -44,8 +60,8 @@ export default function AdminCard({ product }: Props) {
           >
             {title}
           </Typography>
-          <Typography variant="body1">
-            Article number: <span data-cy="product-id">{id}</span>
+          <Typography variant="body1">            
+            Article number: <span data-cy="product-id">{id}</span>          
           </Typography>
           <Typography variant="body1">Pieces: {pieces}</Typography>
           <Typography
@@ -58,6 +74,7 @@ export default function AdminCard({ product }: Props) {
       </Box>
       <Box sx={rightContainer}>
         <IconButton
+          onClick={openConfirmDelete}
           sx={removeButton}
           aria-label="remove"
           data-cy="admin-remove-product"
