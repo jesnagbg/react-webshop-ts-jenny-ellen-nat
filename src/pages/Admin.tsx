@@ -4,10 +4,8 @@ import { Product } from '../../data';
 import AdminButton from '../components/AdminButton';
 import AdminCard from '../components/AdminCard';
 import { useProducts } from '../contexts/ProductsContext';
-import { useDialog } from '../hooks/useDialog';
 
 export default function Admin() {
-  const { open, handleOpen, handleClose } = useDialog();
   const { products } = useProducts();
 
   return (

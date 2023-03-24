@@ -2,10 +2,10 @@ export interface Product {
   id: string;
   image: string;
   title: string;
-  description?: string;
-  price: any;
+  description: string;
+  price: number;
   images?: string[];
-  pieces: any;
+  pieces: number;
 }
 
 export interface CartItem extends Product {

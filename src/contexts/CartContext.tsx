@@ -25,7 +25,7 @@ interface SnackbarData {
 
 export default function CartProvider({ children }: Props) {
   const { order, updateOrder } = useOrder();
-  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('cart');
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('cart', []);
   const [snackpack, setSnackpack] = useState<SnackbarData[]>([]);
 
   const updateCartAndOrder = (newCartItems: CartItem[]) => {

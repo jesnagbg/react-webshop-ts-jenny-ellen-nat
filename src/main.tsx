@@ -8,8 +8,7 @@ import {
   RouterProvider
 } from 'react-router-dom';
 import App from './App';
-import AdminAddForm from './components/AdminAddForm';
-import AdminEditForm from './components/AdminEditForm';
+import AdminProductForm from './components/AdminProductForm';
 import CartProvider from './contexts/CartContext';
 import OrderProvider from './contexts/OrderContext';
 import ProductsProvider from './contexts/ProductsContext';
@@ -35,13 +34,28 @@ const router = createBrowserRouter(
         path="/product/:id"
         element={<Product />}
       />
-      {/* <Route
+      <Route
         path="/admin"
         element={<Admin />}
-      /> */}
-      <Route path='/admin' element={<Admin />}>
-        <Route path='product/new' element={<AdminAddForm open/>}/>
-        <Route path='edit' element={<AdminEditForm open/>}/>
+      >
+      <Route
+        path="product/new"
+        element={
+          <AdminProductForm
+            open
+            mode="add"
+          />
+        }
+      />
+      <Route
+        path="product/:id"
+        element={
+          <AdminProductForm
+            open
+            mode="edit"
+          />
+        }
+      />
       </Route>
       <Route
         path="/checkout"
