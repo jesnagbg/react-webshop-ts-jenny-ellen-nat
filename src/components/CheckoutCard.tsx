@@ -54,6 +54,7 @@ export default function CheckoutCard({ item, readonly }: Props) {
             <Quantity
               initialValue={item.quantity}
               valueHandler={valueHandler}
+              min={0}
             />
           )}
           <Typography
