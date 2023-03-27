@@ -87,6 +87,10 @@ const styledTextField = {
   '& *': {
     textAlign: 'center',
   },
+  '& input': {
+    height: '43px',
+    padding: '0',
+  },
   width: '4rem',
 };
 
