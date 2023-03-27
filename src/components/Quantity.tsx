@@ -24,7 +24,7 @@ export default function Quantity({ initialValue, valueHandler }: Props) {
   }, [valueNum]);
 
   const oneLess = () => {
-    setValueNum(valueNum - 1);
+    setValueNum(Math.max(1, valueNum - 1));
   };
 
   const oneMore = () => {
@@ -45,6 +45,7 @@ export default function Quantity({ initialValue, valueHandler }: Props) {
       disableElevation
     >
       <Button
+        disabled={valueNum > 1 ? false : true}
         sx={styledButton}
         data-cy="decrease-quantity-button"
         onClick={oneLess}
@@ -58,7 +59,7 @@ export default function Quantity({ initialValue, valueHandler }: Props) {
         inputMode="numeric"
         onChange={handleInputChange}
         onBlur={handleBlur}
-        error
+        error={error}
       />
       <Button
         data-cy="increase-quantity-button"
