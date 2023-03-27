@@ -1,4 +1,5 @@
 import { Button, ButtonGroup, TextField } from '@mui/material';
+import { CSSProperties } from '@mui/styled-engine';
 import { useEffect, useState } from 'react';
 
 interface Props {
@@ -9,19 +10,18 @@ interface Props {
 export default function Quantity({ initialValue, valueHandler }: Props) {
   const [valueString, setValueString] = useState('');
   const [valueNum, setValueNum] = useState(initialValue);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const parsedValue = parseInt(valueString);
     !isNaN(parsedValue)
-      ? (valueHandler(parsedValue), setValueNum(parsedValue))
-      : null;
+      ? (valueHandler(parsedValue), setValueNum(parsedValue), setError(false))
+      : setError(true);
   }, [valueString]);
 
   useEffect(() => {
     setValueString(valueNum.toString());
   }, [valueNum]);
-
-  useEffect;
 
   const oneLess = () => {
     setValueNum(valueNum - 1);
@@ -35,23 +35,30 @@ export default function Quantity({ initialValue, valueHandler }: Props) {
     setValueString(event.target.value);
   };
 
+  const handleBlur = () => {
+    setValueString(valueNum.toString());
+  };
+
   return (
     <ButtonGroup
       sx={styledButtonGroup}
       disableElevation
     >
       <Button
-        data-cy="decrease-quantity-button"
         sx={styledButton}
+        data-cy="decrease-quantity-button"
         onClick={oneLess}
       >
         -
       </Button>
       <TextField
+        sx={error ? styledTextFieldError : styledTextField}
         data-cy="product-quantity"
         value={valueString}
         inputMode="numeric"
         onChange={handleInputChange}
+        onBlur={handleBlur}
+        error
       />
       <Button
         data-cy="increase-quantity-button"
@@ -64,7 +71,24 @@ export default function Quantity({ initialValue, valueHandler }: Props) {
   );
 }
 
-const styledButtonGroup = {
+const styledTextFieldError = {
+  '& *': {
+    textAlign: 'center',
+  },
+  width: '4rem',
+};
+
+const styledTextField = {
+  '& fieldset': {
+    border: 'none',
+  },
+  '& *': {
+    textAlign: 'center',
+  },
+  width: '4rem',
+};
+
+const styledButtonGroup: CSSProperties = {
   border: '1px solid black',
   borderRadius: '5px',
   fontFamily: '"DM Sans", sans-serif',
