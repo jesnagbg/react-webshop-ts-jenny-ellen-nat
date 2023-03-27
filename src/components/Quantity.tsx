@@ -5,9 +5,10 @@ import { useEffect, useState } from 'react';
 interface Props {
   initialValue: number;
   valueHandler: (value: number) => void;
+  min: number;
 }
 
-export default function Quantity({ initialValue, valueHandler }: Props) {
+export default function Quantity({ initialValue, valueHandler, min }: Props) {
   const [valueString, setValueString] = useState('');
   const [valueNum, setValueNum] = useState(initialValue);
   const [error, setError] = useState(false);
@@ -24,7 +25,7 @@ export default function Quantity({ initialValue, valueHandler }: Props) {
   }, [valueNum]);
 
   const oneLess = () => {
-    setValueNum(Math.max(1, valueNum - 1));
+    setValueNum(Math.max(min, valueNum - 1));
   };
 
   const oneMore = () => {
@@ -45,7 +46,7 @@ export default function Quantity({ initialValue, valueHandler }: Props) {
       disableElevation
     >
       <Button
-        disabled={valueNum > 1 ? false : true}
+        disabled={valueNum > min ? false : true}
         sx={styledButton}
         data-cy="decrease-quantity-button"
         onClick={oneLess}

@@ -26,6 +26,7 @@ export default function ProductAdd() {
       <Quantity
         initialValue={quantity}
         valueHandler={setQuantity}
+        min={1}
       />
       <AddToCartButton onAdd={onAdd} />
     </Box>
