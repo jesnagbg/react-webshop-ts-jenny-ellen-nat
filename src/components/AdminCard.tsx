@@ -78,6 +78,7 @@ export default function AdminCard({ product }: Props) {
         <Link
           to={`/admin/product/${product.id}`}
           data-cy="admin-edit-product"
+          style={styledLink}
         >
           <Typography sx={styledLink}>Edit</Typography>
         </Link>

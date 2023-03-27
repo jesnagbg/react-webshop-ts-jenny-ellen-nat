@@ -124,7 +124,6 @@ export default function AdminProductForm({
             noValidate
             autoComplete="off"
             data-cy="product-form"
-            // id="product-form"
           >
             <TextField
               fullWidth

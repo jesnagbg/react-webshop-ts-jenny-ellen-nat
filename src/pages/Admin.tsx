@@ -41,12 +41,12 @@ export default function Admin() {
               xs={12}
               md={6}
               lg={6}
+              key={product.id}
             >
               <Box>
                 <Divider />
                 <AdminCard
                   product={product}
-                  key={product.id}
                 />
               </Box>
             </Grid>
