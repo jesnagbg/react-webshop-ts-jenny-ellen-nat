@@ -2,7 +2,7 @@ import {
   Box, Dialog, DialogActions, DialogContent, DialogTitle, FormHelperTextProps, TextField
 } from '@mui/material';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as yup from 'yup';
 import { Product } from '../../data';
 import { useProducts } from '../contexts/ProductsContext';
@@ -11,7 +11,6 @@ import AdminButton from './AdminButton';
 //--------------------------Interfaces------------------------------//
 
 interface AdminProductFormProps {
-  product?: Product;
   open: boolean;
   onClose?: () => void;
   mode: 'add' | 'edit';
@@ -49,27 +48,26 @@ function generateShortId(length: number = 8) {
 //--------------------------Function------------------------------//
 
 export default function AdminProductForm({
-  product,
   open,
   onClose,
   mode,
 }: AdminProductFormProps) {
   const navigate = useNavigate();
-  const { products, setProducts, selectedProduct } = useProducts();
+  const { products, setProducts } = useProducts();
   const isEdit = mode === 'edit';
-
-  //const { productId } = useParams<{ productId: string }>();
+  const { id } = useParams<{ id: string }>();
+  const productFromId = products.find((p) => p.id === id) || null;
 
   const formik = useFormik<ProductCreate>({
     initialValues:
-      isEdit && selectedProduct
+      isEdit && productFromId
         ? {
-            title: selectedProduct.title,
-            image: selectedProduct.image,
-            images: selectedProduct.images,
-            price: selectedProduct.price,
-            pieces: selectedProduct.pieces,
-            description: selectedProduct.description,
+            title: productFromId.title,
+            image: productFromId.image,
+            images: productFromId.images,
+            price: productFromId.price,
+            pieces: productFromId.pieces,
+            description: productFromId.description,
           }
         : {
             title: '',
@@ -82,7 +80,7 @@ export default function AdminProductForm({
     validationSchema: validationSchema,
     onSubmit: (values) => {
       const newProduct: Product = {
-        id: isEdit && selectedProduct ? selectedProduct.id : generateShortId(),
+        id: isEdit && productFromId ? productFromId.id : generateShortId(),
         image: values.image,
         title: values.title,
         description: values.description,
