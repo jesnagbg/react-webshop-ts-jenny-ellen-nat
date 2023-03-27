@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, TextField } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Props {
   initialValue: number;
@@ -7,20 +7,32 @@ interface Props {
 }
 
 export default function Quantity({ initialValue, valueHandler }: Props) {
-  const [quantity, setQuantity] = useState(initialValue);
-
-  const ref = useRef();
+  const [valueString, setValueString] = useState('');
+  const [valueNum, setValueNum] = useState(initialValue);
 
   useEffect(() => {
-    valueHandler(quantity);
-  }, [quantity]);
+    const parsedValue = parseInt(valueString);
+    !isNaN(parsedValue)
+      ? (valueHandler(parsedValue), setValueNum(parsedValue))
+      : null;
+  }, [valueString]);
+
+  useEffect(() => {
+    setValueString(valueNum.toString());
+  }, [valueNum]);
+
+  useEffect;
 
   const oneLess = () => {
-    setQuantity(quantity - 1);
+    setValueNum(valueNum - 1);
   };
 
   const oneMore = () => {
-    setQuantity(quantity + 1);
+    setValueNum(valueNum + 1);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValueString(event.target.value);
   };
 
   return (
@@ -37,7 +49,9 @@ export default function Quantity({ initialValue, valueHandler }: Props) {
       </Button>
       <TextField
         data-cy="product-quantity"
-        value={quantity}
+        value={valueString}
+        inputMode="numeric"
+        onChange={handleInputChange}
       />
       <Button
         data-cy="increase-quantity-button"
