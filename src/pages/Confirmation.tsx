@@ -52,7 +52,7 @@ export default function Confirmation() {
           <Divider />
           {order.cart.map((item) => {
             return (
-              <Fragment>
+              <Fragment key={item.id}>
                 <CheckoutCard
                   item={item}
                   readonly={true}
