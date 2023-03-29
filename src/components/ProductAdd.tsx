@@ -26,15 +26,22 @@ export default function ProductAdd({ product }: Props) {
       >
         {product?.price} SEK
       </Typography>
-      <Quantity
-        initialValue={quantity}
-        valueHandler={setQuantity}
-        min={1}
-      />
-      <AddToCartButton onAdd={onAdd} />
+      <Box sx={styledBox}>
+        <Quantity
+          initialValue={quantity}
+          valueHandler={setQuantity}
+          min={1}
+        />
+        <AddToCartButton onAdd={onAdd} />
+      </Box>
     </Box>
   );
 }
+
+const styledBox = {
+  display: 'flex',
+  gap: '1rem',
+};
 
 const styledPrice = {
   fontWeight: 'bold',
