@@ -4,8 +4,8 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface ContextValue {
   products: Product[];
-  product: Product | null;
-  setProduct: React.Dispatch<React.SetStateAction<Product | null>>;
+  // product: Product | null;
+  // setProduct: React.Dispatch<React.SetStateAction<Product | null>>;
   setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
 }
 
@@ -21,12 +21,12 @@ export default function ProductsProvider({ children }: Props) {
     'products',
     products
   );
-  const [product, setProduct] = useLocalStorage<Product | null>('order', null);
+  // const [product, setProduct] = useLocalStorage<Product | null>('order', null);
 
   const contextValue = {
     products: allProducts,
-    product,
-    setProduct,
+    // product,
+    // setProduct,
     setProducts,
   };
 

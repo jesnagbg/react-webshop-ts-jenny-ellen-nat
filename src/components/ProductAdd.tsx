@@ -1,12 +1,15 @@
 import { Box, Typography } from '@mui/material';
 import { useState } from 'react';
+import { Product } from '../../data';
 import { useCart } from '../contexts/CartContext';
-import { useProducts } from '../contexts/ProductsContext';
 import AddToCartButton from './AddToCartButton';
 import Quantity from './Quantity';
 
-export default function ProductAdd() {
-  const { product } = useProducts();
+interface Props {
+  product: Product;
+}
+
+export default function ProductAdd({ product }: Props) {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
 

@@ -45,7 +45,7 @@ export default function Product() {
             </Grid>
           </Grid>
           <Box sx={styledAddProducts}>
-            <ProductAdd />
+            <ProductAdd product={product} />
           </Box>
         </Fragment>
       ) : (
