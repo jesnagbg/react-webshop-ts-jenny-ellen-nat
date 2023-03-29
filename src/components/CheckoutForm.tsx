@@ -8,12 +8,14 @@ import { styled } from '@mui/system';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
+import { useCart } from '../contexts/CartContext';
 import { useOrder } from '../contexts/OrderContext';
 import { theme } from '../theme';
 
 export default function CheckoutForm() {
   const navigate = useNavigate();
   const { order, updateOrder } = useOrder();
+  const { emptyCart } = useCart();
 
   const formik = useFormik({
     initialValues: {
@@ -43,6 +45,7 @@ export default function CheckoutForm() {
       };
       updateOrder(updatedOrder);
       localStorage.removeItem('cart');
+      emptyCart();
       navigate(`/confirmation`);
     },
   });

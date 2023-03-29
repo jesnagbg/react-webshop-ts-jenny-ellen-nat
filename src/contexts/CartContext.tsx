@@ -9,6 +9,7 @@ interface ContextValue {
   addToCart: (product: Product, quantity: number) => void;
   removeFromCart: (targetItem: CartItem) => void;
   changeQuantity: (targetItem: CartItem, quantity: number) => void;
+  emptyCart: () => void;
 }
 
 const CartContext = createContext<ContextValue>(null as any);
@@ -68,9 +69,19 @@ export default function CartProvider({ children }: Props) {
     updateCartAndOrder(newCartItems);
   };
 
+  const emptyCart = () => {
+    updateCartAndOrder([]);
+  };
+
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, changeQuantity }}
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        changeQuantity,
+        emptyCart,
+      }}
     >
       {children}
       <Toast
