@@ -10,7 +10,6 @@ import {
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../data';
-import { useProducts } from '../contexts/ProductsContext';
 import { theme } from '../theme';
 import ConfirmDelete from './ConfirmDelete';
 
@@ -19,7 +18,6 @@ interface Props {
 }
 
 export default function AdminCard({ product }: Props) {
-  const { setSelectedProduct } = useProducts();
   const { id, title, image, images, price, pieces } = product;
   const [confirmOpen, setConfirmOpen] = useState(false);
 
@@ -28,11 +26,6 @@ export default function AdminCard({ product }: Props) {
   };
 
   const anchorRef = useRef(null);
-
-  const handleEditButtonClick = () => {
-    setSelectedProduct(product);
-    console.log(product);
-  };
 
   return (
     <Card
@@ -85,7 +78,7 @@ export default function AdminCard({ product }: Props) {
         <Link
           to={`/admin/product/${product.id}`}
           data-cy="admin-edit-product"
-          onClick={handleEditButtonClick}
+          style={styledLink}
         >
           <Typography sx={styledLink}>Edit</Typography>
         </Link>
