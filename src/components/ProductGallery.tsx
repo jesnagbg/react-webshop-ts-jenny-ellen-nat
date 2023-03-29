@@ -1,27 +1,22 @@
 import { Box, Stack } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useProducts } from '../contexts/ProductsContext';
+import { useState } from 'react';
+import { Product } from '../../data';
 import { theme } from '../theme';
 
-export default function ProductGallery() {
-  const { product } = useProducts();
-  const [mainImg, setMainImg] = useState(product?.image || '');
-  const [, setCurrentSmallImg] = useState(product?.images ? [0] : '');
+interface Props {
+  product: Product;
+}
 
-  // Set image and images[] from product to allImages array
-  const allImages = product?.image
-    ? [product?.image, ...(product?.images ?? [])]
-    : [];
+export default function ProductGallery({
+  product: { image, images, title },
+}: Props) {
+  const [mainImg, setMainImg] = useState(image || '');
+  const [, setCurrentSmallImg] = useState(images ? [0] : '');
 
-  // Filter out the current main image from the small images array
+  const allImages = image ? [image, ...(images ?? [])] : [];
+
   const smallImages = allImages.filter((imgSrc) => imgSrc !== mainImg);
 
-  // Update the main image if the product changes
-  useEffect(() => {
-    setMainImg(product?.image || '');
-  }, [product]);
-
-  // Set the clicked small image as the main image
   const setAsMainImg = (imgSrc: string | undefined) => {
     if (imgSrc !== undefined) {
       setMainImg(imgSrc);
@@ -32,12 +27,14 @@ export default function ProductGallery() {
   return (
     <Stack spacing={2}>
       <Box sx={styledBackground}>
-        <Box
-          sx={styledBigImg}
-          component="img"
-          alt={`Image of a puzzle called ${product?.title}.`}
-          src={`${mainImg}`}
-        />
+        <Box sx={styledInnerFrame}>
+          <Box
+            sx={styledBigImg}
+            component="img"
+            alt={`Image of a puzzle called ${title}.`}
+            src={`${mainImg}`}
+          />
+        </Box>
       </Box>
 
       <Box sx={styledSmallImgs}>
@@ -45,7 +42,7 @@ export default function ProductGallery() {
           <Box
             sx={styledImg}
             component="img"
-            alt={`Image of a puzzle called ${product?.title}.`}
+            alt={`Image of a puzzle called ${title}.`}
             src={`${imgSrc}`}
             onClick={() => setAsMainImg(imgSrc)}
           />
@@ -56,29 +53,27 @@ export default function ProductGallery() {
 }
 
 const styledBackground = {
-  position: 'relative',
-  width: 'calc(100% -16px)',
-  height: '100%',
   background: theme.palette.lightGrey.main,
+  padding: '1rem',
+};
+
+const styledInnerFrame = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '100% 1rem 1rem 1rem',
+  height: '60vh',
+};
+
+const styledBigImg = {
+  maxWidth: '90%',
+  maxHeight: 'calc(60vh - 1rem)',
+  objectFit: 'contain',
 };
 
 const styledImg = {
   maxWidth: '100%',
   aspectRatio: '1/1',
   objectFit: 'cover',
-};
-
-const styledBigImg = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  maxWidth: '70%',
-  objectFit: 'contain',
 };
 
 const styledSmallImgs = {
