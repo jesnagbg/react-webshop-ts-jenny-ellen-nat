@@ -1,5 +1,5 @@
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ProductAdd from '../components/ProductAdd';
 import ProductDescription from '../components/ProductDescription';
@@ -9,7 +9,7 @@ import { useProducts } from '../contexts/ProductsContext';
 export default function Product() {
   const { id } = useParams<{ id: string }>();
   const { products } = useProducts();
-  const [product, setProduct] = useState(products.find((p) => p.id === id));
+  const product = products.find((p) => p.id === id);
   const navigate = useNavigate();
 
   return (
