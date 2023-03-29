@@ -51,7 +51,7 @@ export default function Product() {
 }
 
 const styledContainer = {
-  margin: '100px 0 0 0',
+  margin: '100px auto 0 auto',
   position: 'relative',
   maxWidth: '1200px',
 };
