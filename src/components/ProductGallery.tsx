@@ -56,13 +56,14 @@ export default function ProductGallery() {
 }
 
 const styledBackground = {
+  position: 'relative',
   width: 'calc(100% -16px)',
   height: '100%',
   background: theme.palette.lightGrey.main,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '1rem',
+  padding: '100% 1rem 1rem 1rem',
 };
 
 const styledImg = {
@@ -70,7 +71,12 @@ const styledImg = {
   aspectRatio: '1/1',
   objectFit: 'cover',
 };
+
 const styledBigImg = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   maxWidth: '70%',
   objectFit: 'contain',
 };
@@ -79,4 +85,5 @@ const styledSmallImgs = {
   display: 'flex',
   maxWidth: '25%',
   gap: '1rem',
+  cursor: 'pointer',
 };
