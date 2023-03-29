@@ -44,6 +44,7 @@ export default function ProductGallery({
             component="img"
             alt={`Image of a puzzle called ${title}.`}
             src={`${imgSrc}`}
+            key={`smImg${smallImages.indexOf(imgSrc)}`}
             onClick={() => setAsMainImg(imgSrc)}
           />
         ))}
