@@ -10,7 +10,6 @@ interface Props {
   type?: 'button' | 'reset' | 'submit';
 }
 
-// Inte säker på om vi vill lägga in länkning här eller när den används, kan alltid ändra det senare.
 export default function AdminButton({ to = "", children, onClick, "data-cy": dataCy, type = 'button' }: Props) {
   return (
     <Link to={to} style={styledLink}>
