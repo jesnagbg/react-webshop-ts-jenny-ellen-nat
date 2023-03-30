@@ -1,7 +1,15 @@
 import {
-  Box, Dialog, DialogActions, DialogContent, DialogTitle, FormHelperTextProps, TextField
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormHelperTextProps,
+  TextField
 } from '@mui/material';
 import { useFormik } from 'formik';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as yup from 'yup';
 import { Product } from '../../data';
@@ -22,11 +30,15 @@ const validationSchema = yup.object({
     .string()
     .min(2, 'Title must be at least two characters')
     .required('Title required'),
-    image: yup
+  image: yup
     .string()
-    .url('Image must be a valid URL')
+    //.url('Image must be a valid URL')
     .required('Image required'),
-  //images: yup.array(yup.string()),
+  images: yup
+    .array()
+    //.of(yup.string().url('Image must be a valid URL'))
+    .max(4, 'You can add up to 4 extra images')
+    .optional(),
   price: yup
     .number()
     .min(1, 'Price must be greater than 0')
@@ -58,6 +70,22 @@ export default function AdminProductForm({
   const { id } = useParams<{ id: string }>();
   const productFromId = products.find((p) => p.id === id) || null;
 
+  const [extraImages, setExtraImages] = useState<string[]>(
+    isEdit && productFromId && productFromId.images ? productFromId.images : []
+  );
+
+  const handleExtraImageChange = (index: number, newImageUrl: string) => {
+    const updatedExtraImages = extraImages.map((imageUrl, i) =>
+      i === index ? newImageUrl : imageUrl
+    );
+    setExtraImages(updatedExtraImages);
+    formik.setFieldValue('images', updatedExtraImages);
+  };
+
+  const addExtraImage = () => {
+    setExtraImages([...extraImages, '']);
+  };
+
   const formik = useFormik<ProductCreate>({
     initialValues:
       isEdit && productFromId
@@ -88,6 +116,8 @@ export default function AdminProductForm({
         pieces: values.pieces,
         images: values.images,
       };
+
+      console.log(newProduct);
 
       if (isEdit) {
         setProducts(
@@ -190,6 +220,35 @@ export default function AdminProductForm({
               fullWidth
               margin="normal"
               variant="standard"
+              id="description"
+              name="description"
+              inputProps={{
+                'data-cy': 'product-description',
+              }}
+              label={
+                <>
+                  Description<span style={requiredIndicator}>*</span>
+                </>
+              }
+              value={formik.values.description}
+              error={
+                formik.touched.description && Boolean(formik.errors.description)
+              }
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              helperText={
+                formik.touched.description && formik.errors.description
+              }
+              FormHelperTextProps={
+                {
+                  'data-cy': 'product-description-error',
+                } as FormHelperTextProps
+              }
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="standard"
               id="image"
               name="image"
               inputProps={{
@@ -209,38 +268,25 @@ export default function AdminProductForm({
                 { 'data-cy': 'product-image-error' } as FormHelperTextProps
               }
             />
-            <TextField
-              fullWidth
-              margin="normal"
-              variant="standard"
-              id="description"
-              name="description"
-              inputProps={{
-                'data-cy': 'product-description',
-              }}
-              label="Description"
-              value={formik.values.description}
-              error={
-                formik.touched.description && Boolean(formik.errors.description)
-              }
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              helperText={
-                formik.touched.description && formik.errors.description
-              }
-              FormHelperTextProps={
-                {
-                  'data-cy': 'product-description-error',
-                } as FormHelperTextProps
-              }
-            />
-            {/* <Button
-            onClick={() =>
-              formik.setFieldValue('images', [...formik.values.images, ''])
-            }
-          >
-            Add more images
-          </Button> */}
+            {extraImages.map((imageUrl, index) => (
+              <TextField
+                key={index}
+                fullWidth
+                margin="normal"
+                variant="standard"
+                id={`extra-image-${index}`}
+                name={`extra-image-${index}`}
+                label={`Extra Image ${index + 1}`}
+                value={imageUrl}
+                onChange={(e) => handleExtraImageChange(index, e.target.value)}
+              />
+            ))}
+            <Button
+              onClick={addExtraImage}
+              disabled={extraImages.length >= 4}
+            >
+              Add more images
+            </Button>            
           </Box>
         </DialogContent>
         <DialogActions sx={buttonContainer}>
