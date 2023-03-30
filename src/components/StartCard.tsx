@@ -6,7 +6,7 @@ import {
   CardMedia,
   Grid,
   IconButton,
-  Typography
+  Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -74,7 +74,7 @@ export default function StartCard({ product }: Props) {
             sx={linkedBoxStyling}
           >
             <Typography
-              variant="h5"
+              variant="h6"
               sx={titleStyling}
               data-cy="product-title"
             >
@@ -135,7 +135,6 @@ const shoppingButton = {
 const titleStyling = {
   fontFamily: theme.typography.fontFamily,
   fontWeight: 500,
-  fontSize: theme.typography.body1.fontSize,
 };
 
 const priceStyling = {

@@ -38,7 +38,7 @@ export default function Confirmation() {
             Thank you for your order!
           </Typography>
           <Typography
-            variant="body2"
+            variant="body1"
             sx={styledType}
           >
             Dear {order.deliveryAddress.name}, thank you for your order! We are
@@ -53,7 +53,12 @@ export default function Confirmation() {
           xs={12}
           md={6}
         >
-          <Typography variant="h4">Order #{order.id}</Typography>
+          <Typography
+            sx={styledOrderTitle}
+            variant="h4"
+          >
+            Order #{order.id}
+          </Typography>
           <Divider />
           {order.cart.map((item) => {
             return (
@@ -128,4 +133,8 @@ const styledContainer = {
 const styledButton = {
   marginTop: '2rem',
   border: '1px solid black',
+};
+
+const styledOrderTitle = {
+  marginBottom: '1rem',
 };

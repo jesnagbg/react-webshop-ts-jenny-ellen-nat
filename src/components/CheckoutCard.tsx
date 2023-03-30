@@ -42,7 +42,7 @@ export default function CheckoutCard({ item, readonly }: Props) {
         <CardContent sx={styledCardContent}>
           <Typography
             data-cy="product-title"
-            variant="h5"
+            variant="h4"
           >
             {item.title}
           </Typography>

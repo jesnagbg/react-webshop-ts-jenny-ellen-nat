@@ -46,7 +46,7 @@ export default function Header() {
           sx={styledLink}
         >
           <Typography
-            variant="h6"
+            variant="h5"
             sx={styledLogo}
           >
             Piece by Piece
@@ -85,8 +85,6 @@ export default function Header() {
 const styledAppBar = {
   height: 80,
   bgcolor: '#fff',
-  marginBottom: '100px',
-  boxShadow: 'none',
 };
 
 const styledContainer = {
