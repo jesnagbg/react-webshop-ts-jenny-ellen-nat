@@ -2,8 +2,8 @@
   "tests": [
     {
       "name": "Krav G",
-      "setup": "exit 1 && npm install",
-      "run": "npx plugga test -- .g.",
+      "setup": "npm install",
+      "run": "npx plugga test --run .g.",
       "input": "",
       "output": "",
       "comparison": "included",
@@ -12,8 +12,8 @@
     },
     {
       "name": "Krav VG",
-      "setup": "exit 1 && npm install",
-      "run": "npx plugga test -- .vg.",
+      "setup": "npm install",
+      "run": "npx plugga test --run .vg.",
       "input": "",
       "output": "",
       "comparison": "included",
