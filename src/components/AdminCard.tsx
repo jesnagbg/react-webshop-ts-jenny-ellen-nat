@@ -5,7 +5,7 @@ import {
   CardContent,
   CardMedia,
   IconButton,
-  Typography,
+  Typography
 } from '@mui/material';
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -111,7 +111,7 @@ const styledCard = {
 };
 
 const styledCardMedia = {
-  maxWidth: 0.3,
+  maxWidth: { xs: 0.4, md: 0.5, lg: 0.3, },
 };
 
 const styledCardContent = {
@@ -159,8 +159,8 @@ const imageContainer = {
 };
 
 const extraImageStyle = {
-  width: '50px',
-  height: '50px',
+  height: { xs: 20, sm: 50 },
+  width: { xs: 20, sm: 50 },
   objectFit: 'cover',
   marginLeft: '0.5rem',
 };
