@@ -58,7 +58,7 @@ export default function Toast({ snackpack, setSnackpack }: Props) {
       data-cy="added-to-cart-toast"
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       open={open}
-      autoHideDuration={1000000}
+      autoHideDuration={5000}
       onClose={handleClose}
       TransitionProps={{ onExited: handleExited }}
       sx={styledSnackbar}
@@ -109,6 +109,7 @@ const styledSnackbar = {
     backgroundColor: 'white',
     color: 'black',
     border: '1px solid black',
+    flexWrap: 'nowrap',
     alignItems: 'start',
   },
 };
