@@ -125,7 +125,7 @@ const styledContainerBox = {
 const styledImgBox = {
   maxWidth: '30%',
   marginRight: '1rem',
-  objectFit: 'contain',
+  objectFit: 'cover',
   objectPosition: '50% 0',
 };
 
