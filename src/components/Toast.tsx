@@ -125,6 +125,8 @@ const styledContainerBox = {
 const styledImgBox = {
   maxWidth: '30%',
   marginRight: '1rem',
+  objectFit: 'contain',
+  objectPosition: '50% 0',
 };
 
 const styledTextBox = {
@@ -140,6 +142,7 @@ const styledType = {
 };
 
 const styledButton = {
+  marginTop: '0.5rem',
   border: '1px solid black',
   maxWidth: '8rem',
   color: 'black',
