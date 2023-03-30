@@ -85,8 +85,6 @@ export default function Header() {
 const styledAppBar = {
   height: 80,
   bgcolor: '#fff',
-  marginBottom: '100px',
-  boxShadow: 'none',
 };
 
 const styledContainer = {
