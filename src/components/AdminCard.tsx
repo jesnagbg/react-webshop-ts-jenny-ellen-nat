@@ -5,7 +5,7 @@ import {
   CardContent,
   CardMedia,
   IconButton,
-  Typography
+  Typography,
 } from '@mui/material';
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -49,7 +49,7 @@ export default function AdminCard({ product }: Props) {
       <Box sx={styledBox}>
         <CardContent sx={styledCardContent}>
           <Typography
-            variant="h5"
+            variant="h4"
             data-cy="product-title"
           >
             {title}
@@ -93,7 +93,12 @@ export default function AdminCard({ product }: Props) {
           data-cy="admin-edit-product"
           style={styledLink}
         >
-          <Typography sx={styledLink}>Edit</Typography>
+          <Typography
+            variant="h6"
+            sx={styledLink}
+          >
+            Edit
+          </Typography>
         </Link>
       </Box>
     </Card>
@@ -111,6 +116,9 @@ const styledCardMedia = {
 
 const styledCardContent = {
   padding: '0 1rem',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px',
 };
 
 const styledBox = {
@@ -141,8 +149,6 @@ const rightContainer = {
 const styledLink = {
   textDecorationColor: theme.palette.primary.main,
   color: theme.palette.primary.main,
-  display: 'flex',
-  alignItems: 'center',
   fontFamily: 'DM Sans',
 };
 

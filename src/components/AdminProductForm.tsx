@@ -148,7 +148,9 @@ export default function AdminProductForm({
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle>{isEdit ? 'Edit item' : 'Add new item'}</DialogTitle>
+        <DialogTitle variant="h4">
+          {isEdit ? 'Edit item' : 'Add new item'}
+        </DialogTitle>
         <DialogContent>
           <Box
             component="form"

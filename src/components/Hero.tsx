@@ -75,15 +75,6 @@ const styledTitle = {
   textAlign: 'center',
   padding: '4rem 0 0 0',
   maxWidth: 670,
-
-  '@media (max-width: 899px)': {
-    fontSize: '1.6rem',
-  },
-
-  // Temp breakpoint
-  '@media (max-width: 499px)': {
-    fontSize: '1.2rem',
-  },
 };
 
 const styledImg = {

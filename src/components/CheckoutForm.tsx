@@ -221,6 +221,10 @@ const styledButton = {
   padding: '.6rem 2rem',
   background: theme.palette.secondary.main,
   color: theme.palette.primary.main,
+
+  '&: hover': {
+    color: '#fff',
+  },
 };
 
 const StyledForm = styled('form')({
