@@ -32,7 +32,6 @@ const validationSchema = yup.object({
     .string()
     .url('Image must be a valid URL')
     .required('Image required'),
-  //images: yup.array(yup.string()),
   price: yup
     .number()
     .min(1, 'Price must be greater than 0')
@@ -47,10 +46,6 @@ const validationSchema = yup.object({
     .required('Description required'),
 });
 
-function generateShortId(length: number = 8) {
-  return Math.random().toString(36).substring(2, length);
-}
-
 //--------------------------Function------------------------------//
 
 export default function AdminProductForm({
@@ -59,7 +54,7 @@ export default function AdminProductForm({
   mode,
 }: AdminProductFormProps) {
   const navigate = useNavigate();
-  const { products, setProducts } = useProducts();
+  const { products, setProducts, generateShortId } = useProducts();
   const isEdit = mode === 'edit';
   const { id } = useParams<{ id: string }>();
   const productFromId = products.find((p) => p.id === id) || null;

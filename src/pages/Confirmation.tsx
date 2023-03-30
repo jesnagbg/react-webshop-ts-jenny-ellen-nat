@@ -3,17 +3,22 @@ import {
   Container,
   Divider,
   Grid,
-  Link,
   Stack,
   Typography,
 } from '@mui/material';
 import { Fragment } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CheckoutCard from '../components/CheckoutCard';
 import { useOrder } from '../contexts/OrderContext';
 
 export default function Confirmation() {
   const { order } = useOrder();
+
+  const navigate = useNavigate();
+
+  const ETGoHome = () => {
+    navigate('/');
+  };
 
   return (
     <Container sx={styledContainer}>
@@ -96,12 +101,12 @@ export default function Confirmation() {
               {order.deliveryAddress.phone}
             </Typography>
           </Stack>
-          <Link
-            component={RouterLink}
-            to="/"
+          <Button
+            onClick={ETGoHome}
+            sx={styledButton}
           >
-            <Button sx={styledButton}>Back to home</Button>
-          </Link>
+            Back to home
+          </Button>
         </Grid>
       </Grid>
     </Container>
