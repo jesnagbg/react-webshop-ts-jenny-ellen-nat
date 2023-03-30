@@ -20,4 +20,8 @@ export default function AddToCartButton({ onAdd }: Props) {
 const styledButton = {
   padding: '.6rem 2rem',
   whiteSpace: 'no-wrap',
+  '@media (max-width: 350px)': {
+    fontSize: '12px',
+    padding: '.4rem 1rem',
+  },
 };
