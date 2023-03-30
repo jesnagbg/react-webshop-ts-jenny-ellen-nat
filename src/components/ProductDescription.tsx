@@ -12,7 +12,7 @@ export default function ProductDescription({
     <Box>
       <Box sx={styledHeadings}>
         <Typography
-          variant="h4"
+          variant="h3"
           data-cy="product-title"
         >
           {title}
@@ -37,6 +37,5 @@ const styledHeadings = {
 };
 
 const styledParagraph = {
-  fontSize: '20px',
   marginBottom: '1.2rem',
 };

@@ -46,7 +46,7 @@ export default function Header() {
           sx={styledLink}
         >
           <Typography
-            variant="h6"
+            variant="h5"
             sx={styledLogo}
           >
             Piece by Piece

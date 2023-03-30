@@ -19,9 +19,9 @@ export default function Footer() {
             xl={4}
             sx={styledGridBox}
           >
-            <Typography variant="h6">Content</Typography>
+            <Typography variant="h4">Content</Typography>
             <Typography
-              variant="body1"
+              variant="body2"
               sx={styledParagraph}
             >
               All content for this project is from
@@ -43,7 +43,7 @@ export default function Footer() {
             xl={4}
             sx={styledGridBox}
           >
-            <Typography variant="h6">Made by</Typography>
+            <Typography variant="h4">Made by</Typography>
             <Link
               href="https://github.com/ellensofia"
               sx={styledLink}
@@ -98,6 +98,7 @@ const styledLink = {
 
 const styledParagraph = {
   maxWidth: '150px',
+  fontSize: '16px',
 };
 
 const styledGridBox = {
@@ -110,8 +111,8 @@ const styledGridBox = {
 };
 
 const styledContainer = {
-  paddingBottom: '3rem',
-  paddingTop: '3rem',
+  paddingBottom: '2.5rem',
+  paddingTop: '2.5rem',
 };
 
 const styledLogo = {

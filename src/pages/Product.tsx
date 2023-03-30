@@ -1,10 +1,12 @@
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import { Box, Container, Grid, Link, Typography } from '@mui/material';
 import { Fragment } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 import ProductAdd from '../components/ProductAdd';
 import ProductDescription from '../components/ProductDescription';
 import ProductGallery from '../components/ProductGallery';
 import { useProducts } from '../contexts/ProductsContext';
+import { theme } from '../theme';
 
 export default function Product() {
   const { id } = useParams<{ id: string }>();
@@ -17,12 +19,14 @@ export default function Product() {
       maxWidth={'lg'}
       sx={styledContainer}
     >
-      <Button
-        sx={styledButton}
-        onClick={() => navigate(-1)}
+      <Link
+        component={RouterLink}
+        sx={StyledLink}
+        to="/"
       >
+        <KeyboardArrowLeft />
         Back
-      </Button>
+      </Link>
       {product ? (
         <Fragment>
           <Grid
@@ -58,13 +62,9 @@ export default function Product() {
 }
 
 const styledContainer = {
-  marginTop: '100px',
+  marginTop: '90px',
   position: 'relative',
   maxWidth: '1200px',
-};
-
-const styledButton = {
-  margin: '0 0 10px 0',
 };
 
 const styledAddProducts = {
@@ -77,4 +77,13 @@ const styledAddProducts = {
     width: '100%',
     bottom: 0,
   },
+};
+
+const StyledLink = {
+  display: 'flex',
+  fontFamily: theme.typography.fontFamily,
+  alignItems: 'center',
+  width: 'fit-content',
+  marginBottom: '1rem',
+  textDecorationColor: theme.palette.primary.main,
 };
