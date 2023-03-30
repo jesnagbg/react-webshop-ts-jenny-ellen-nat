@@ -12,12 +12,12 @@ export default function ProductDescription({
     <Box>
       <Box sx={styledHeadings}>
         <Typography
-          variant="h4"
+          variant="h3"
           data-cy="product-title"
         >
           {title}
         </Typography>
-        <Typography variant="body1">{pieces} Pieces</Typography>
+        <Typography variant="body2">{pieces} Pieces</Typography>
       </Box>
       <Typography
         sx={styledParagraph}
@@ -37,6 +37,5 @@ const styledHeadings = {
 };
 
 const styledParagraph = {
-  fontSize: '20px',
   marginBottom: '1.2rem',
 };

@@ -1,5 +1,11 @@
 import {
-  Box, Dialog, DialogActions, DialogContent, DialogTitle, FormHelperTextProps, TextField
+  Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormHelperTextProps,
+  TextField,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -22,7 +28,7 @@ const validationSchema = yup.object({
     .string()
     .min(2, 'Title must be at least two characters')
     .required('Title required'),
-    image: yup
+  image: yup
     .string()
     .url('Image must be a valid URL')
     .required('Image required'),
@@ -116,7 +122,9 @@ export default function AdminProductForm({
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle>{isEdit ? 'Edit item' : 'Add new item'}</DialogTitle>
+        <DialogTitle variant="h4">
+          {isEdit ? 'Edit item' : 'Add new item'}
+        </DialogTitle>
         <DialogContent>
           <Box
             component="form"
