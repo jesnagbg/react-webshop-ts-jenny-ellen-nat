@@ -1,7 +1,7 @@
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import { Box, Container, Grid, Link, Typography } from '@mui/material';
 import { Fragment } from 'react';
-import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 import ProductAdd from '../components/ProductAdd';
 import ProductDescription from '../components/ProductDescription';
 import ProductGallery from '../components/ProductGallery';
@@ -12,7 +12,6 @@ export default function Product() {
   const { id } = useParams<{ id: string }>();
   const { products } = useProducts();
   const product = products.find((p) => p.id === id);
-  const navigate = useNavigate();
 
   return (
     <Container

@@ -5,7 +5,7 @@ import {
   CardContent,
   CardMedia,
   IconButton,
-  Typography,
+  Typography
 } from '@mui/material';
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -26,6 +26,7 @@ export default function AdminCard({ product }: Props) {
   };
 
   const anchorRef = useRef(null);
+  
 
   return (
     <Card
@@ -43,7 +44,7 @@ export default function AdminCard({ product }: Props) {
         sx={styledCardMedia}
         component="img"
         image={image}
-        alt="Image thumbnail"
+        alt={`${image} thumbnail`}
       />
       <Box sx={styledBox}>
         <CardContent sx={styledCardContent}>
@@ -64,6 +65,19 @@ export default function AdminCard({ product }: Props) {
             {price} SEK
           </Typography>
         </CardContent>
+        {images && (
+          <Box sx={imageContainer}>
+            {images.map((imageUrl, index) => (
+              <CardMedia
+                key={index}
+                component="img"
+                image={imageUrl}
+                alt={`Extra Image ${index + 1}`}
+                sx={extraImageStyle}
+              />
+            ))}
+          </Box>
+        )}
       </Box>
       <Box sx={rightContainer}>
         <IconButton
@@ -74,7 +88,6 @@ export default function AdminCard({ product }: Props) {
         >
           <Clear />
         </IconButton>
-        {/* <Link to={`/admin/edit/${product.id}`} data-cy="admin-edit-product"> */}
         <Link
           to={`/admin/product/${product.id}`}
           data-cy="admin-edit-product"
@@ -98,7 +111,7 @@ const styledCard = {
 };
 
 const styledCardMedia = {
-  maxWidth: 0.3,
+  maxWidth: { xs: 0.4, md: 0.5, lg: 0.3, },
 };
 
 const styledCardContent = {
@@ -112,6 +125,7 @@ const styledBox = {
   display: 'flex',
   flexDirection: 'column',
   flex: '1',
+  justifyContent: "space-between"
 };
 
 const removeButton = {
@@ -125,8 +139,6 @@ const removeButton = {
   },
 };
 
-const editLink = {};
-
 const rightContainer = {
   display: 'flex',
   flexDirection: 'column',
@@ -138,4 +150,17 @@ const styledLink = {
   textDecorationColor: theme.palette.primary.main,
   color: theme.palette.primary.main,
   fontFamily: 'DM Sans',
+};
+
+const imageContainer = {
+  display: 'flex',
+  flexDirection: 'row',
+  width: '30%',
+};
+
+const extraImageStyle = {
+  height: { xs: 30, sm: 50 },
+  width: { xs: 30, sm: 50 },
+  objectFit: 'cover',
+  marginLeft: '0.5rem',
 };

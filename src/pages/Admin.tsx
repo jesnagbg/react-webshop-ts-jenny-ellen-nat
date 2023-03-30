@@ -14,8 +14,6 @@ export default function Admin() {
       sx={topSpace}
     >
       <main>
-        {/* Är nog så här man ska göra egentligen men fick inte riktigt till det med routing, återkommer! */}
-       {/* <AdminButton onClick={handleOpen}>Add new item</AdminButton> */}
        <AdminButton data-cy="admin-add-product" to="/admin/product/new">Add new item</AdminButton>
        <Outlet />
         <Grid

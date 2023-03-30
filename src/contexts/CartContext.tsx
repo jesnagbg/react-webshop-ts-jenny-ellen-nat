@@ -52,7 +52,6 @@ export default function CartProvider({ children }: Props) {
 
   const displayToast = (targetItem: CartItem, remove: boolean) => {
     const newSnackbarMessage: SnackbarData = {
-      // Create the object here or in the other functions?
       cartItem: targetItem,
       remove: remove,
     };

@@ -10,7 +10,6 @@ interface Props {
   type?: 'button' | 'reset' | 'submit';
 }
 
-// Inte säker på om vi vill lägga in länkning här eller när den används, kan alltid ändra det senare.
 export default function AdminButton({ to = "", children, onClick, "data-cy": dataCy, type = 'button' }: Props) {
   return (
     <Link to={to} style={styledLink}>
@@ -28,7 +27,7 @@ export default function AdminButton({ to = "", children, onClick, "data-cy": dat
 }
 
 const styledButton = {
-  padding: '.4rem 2.6rem',
+  padding: { xs: '.4rem 2rem', sm: '.4rem 2.6rem' },
   marginBottom: 2,
   whiteSpace: 'no-wrap',
   backgroundColor: 'white',
@@ -43,3 +42,4 @@ const styledButton = {
 const styledLink = {
   textDecoration: "none",
 }
+
