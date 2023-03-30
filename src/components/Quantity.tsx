@@ -94,6 +94,9 @@ const styledTextField = {
     padding: '0',
   },
   width: '4rem',
+  '@media (max-width: 350px)': {
+    width: '2rem',
+  },
 };
 
 const styledButtonGroup: CSSProperties = {
