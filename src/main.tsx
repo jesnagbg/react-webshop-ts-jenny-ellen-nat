@@ -1,24 +1,19 @@
-import { ThemeProvider } from '@emotion/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider
+  RouterProvider,
 } from 'react-router-dom';
 import App from './App';
 import AdminProductForm from './components/AdminProductForm';
-import CartProvider from './contexts/CartContext';
-import OrderProvider from './contexts/OrderContext';
-import ProductsProvider from './contexts/ProductsContext';
 import './index.css';
 import Admin from './pages/Admin';
 import Checkout from './pages/Checkout';
 import Confirmation from './pages/Confirmation';
 import Product from './pages/Product';
 import Start from './pages/Start';
-import { theme } from './theme';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,24 +33,24 @@ const router = createBrowserRouter(
         path="/admin"
         element={<Admin />}
       >
-      <Route
-        path="product/new"
-        element={
-          <AdminProductForm
-            open
-            mode="add"
-          />
-        }
-      />
-      <Route
-        path="product/:id"
-        element={
-          <AdminProductForm
-            open
-            mode="edit"
-          />
-        }
-      />
+        <Route
+          path="product/new"
+          element={
+            <AdminProductForm
+              open
+              mode="add"
+            />
+          }
+        />
+        <Route
+          path="product/:id"
+          element={
+            <AdminProductForm
+              open
+              mode="edit"
+            />
+          }
+        />
       </Route>
       <Route
         path="/checkout"
@@ -75,14 +70,6 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <ProductsProvider>
-        <CartProvider>
-          <OrderProvider>
-            <RouterProvider router={router} />
-          </OrderProvider>
-        </CartProvider>
-      </ProductsProvider>
-    </ThemeProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
