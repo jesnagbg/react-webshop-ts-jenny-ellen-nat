@@ -159,8 +159,8 @@ const imageContainer = {
 };
 
 const extraImageStyle = {
-  height: { xs: 20, sm: 50 },
-  width: { xs: 20, sm: 50 },
+  height: { xs: 30, sm: 50 },
+  width: { xs: 30, sm: 50 },
   objectFit: 'cover',
   marginLeft: '0.5rem',
 };
