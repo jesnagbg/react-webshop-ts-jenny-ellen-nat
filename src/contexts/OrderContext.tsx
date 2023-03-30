@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { v4 } from 'uuid';
 import { CartItem } from '../../data';
 import { useCart } from './CartContext';
+import { useProducts } from './ProductsContext';
 
 interface Props {
   children: ReactNode;
@@ -51,9 +51,10 @@ export const useOrder = () => useContext(OrderContext);
 export default function OrderProvider({ children }: Props) {
   const [order, setOrder] = useState<Order>(initialOrderValues);
   const { cartItems } = useCart();
+  const { generateShortId } = useProducts();
 
   const updateOrder = (newOrder: Order) => {
-    setOrder({ ...newOrder, id: v4(), cart: cartItems });
+    setOrder({ ...newOrder, id: generateShortId(), cart: cartItems });
   };
 
   return (
