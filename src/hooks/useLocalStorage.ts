@@ -14,8 +14,6 @@ export const useLocalStorage = <Type>(
     return getLocalCart(key, defaultValue);
   });
 
-  console.log('Local storage ran.', key);
-
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(cartItems));
   }, [cartItems]);
