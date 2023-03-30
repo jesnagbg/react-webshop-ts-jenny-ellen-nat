@@ -1,6 +1,11 @@
-import { createTheme, Shadows, Theme } from '@mui/material';
+import {
+  createTheme,
+  responsiveFontSizes,
+  Shadows,
+  Theme,
+} from '@mui/material';
 
-export const theme: Theme = createTheme({
+export let theme: Theme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
@@ -24,11 +29,36 @@ export const theme: Theme = createTheme({
     h1: {
       fontWeight: 400,
       fontSize: '2.25rem',
-      color: '#222222',
+    },
+    h2: {
+      fontWeight: 400,
+      fontSize: '2rem',
+    },
+    h3: {
+      fontSize: '1.75rem',
+    },
+    h4: {
+      fontSize: '1.5rem',
+    },
+    h5: {
+      fontSize: '1.25rem',
+    },
+    h6: {
+      fontSize: '1rem',
     },
     body1: {
-      fontSize: '1rem',
-      color: '#3C3C3C',
+      fontSize: '20px',
+      color: '#4f4f4f',
+      '@media (max-width: 600px)': {
+        fontSize: '16px',
+      },
+    },
+    body2: {
+      fontSize: '20px',
+      color: '#4f4f4f',
+      '@media (max-width: 600px)': {
+        fontSize: '16px',
+      },
     },
   },
   palette: {
@@ -46,17 +76,12 @@ export const theme: Theme = createTheme({
     borderRadius: 0,
   },
   components: {
-    MuiCard: {
+    MuiCssBaseline: {
       styleOverrides: {
-        root: {
-          boxShadow: 'none',
-        },
-      },
-    },
-    MuiFab: {
-      styleOverrides: {
-        root: {
-          boxShadow: 'none',
+        '@global': {
+          'h1, h2, h3, h4, h5, h6': {
+            color: '#222',
+          },
         },
       },
     },
@@ -69,6 +94,11 @@ export const theme: Theme = createTheme({
     },
   },
   shadows: Array(25).fill('none') as Shadows,
+});
+theme = responsiveFontSizes(theme, {
+  breakpoints: ['sm', 'md', 'lg'],
+  factor: 1.75,
+  variants: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
 });
 
 declare module '@mui/material/styles' {
