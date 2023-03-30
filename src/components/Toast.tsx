@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 import { SetStateAction, SyntheticEvent, useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CartItem } from '../../data';
 
 interface Props {
@@ -44,7 +44,8 @@ export default function Toast({ snackpack, setSnackpack }: Props) {
     setOpen(false);
   };
 
-  const toCheckout = () => {
+  const toCheckout = (event: SyntheticEvent | Event, reason?: string) => {
+    handleClose(event, reason);
     navigate('/checkout');
   };
 
@@ -76,27 +77,31 @@ export default function Toast({ snackpack, setSnackpack }: Props) {
                 {messageData.cartItem.quantity > 1 ? 'have' : 'has'} been{' '}
                 {messageData.remove ? 'removed from' : 'added to'} the cart.
               </Typography>
-              <Button>
-                <NavLink
-                  to={'/checkout'}
-                  onClick={handleClose}
+              {!messageData.remove ? (
+                <Button
+                  sx={styledButton}
+                  onClick={toCheckout}
                 >
                   TO CHECKOUT
-                </NavLink>
-              </Button>
+                </Button>
+              ) : null}
             </Box>
           </Box>
         }
         action={
-          <IconButton onClick={handleClose}>
-            <CloseIcon fontSize="small" />
+          <IconButton
+            onClick={handleClose}
+            sx={styledIconButton}
+          >
+            <CloseIcon
+              fontSize="small"
+              sx={styledIcon}
+            />
           </IconButton>
         }
       ></SnackbarContent>
     </Snackbar>
-  ) : (
-    <></>
-  );
+  ) : null;
 }
 
 const styledSnackbar = {
@@ -104,6 +109,7 @@ const styledSnackbar = {
     backgroundColor: 'white',
     color: 'black',
     border: '1px solid black',
+    alignItems: 'start',
   },
 };
 
@@ -122,4 +128,17 @@ const styledTextBox = {
   flexDirection: 'column',
   justifyContent: 'space-between',
   maxWith: '10rem',
+};
+
+const styledButton = {
+  border: '1px solid black',
+  maxWidth: '8rem',
+};
+
+const styledIconButton = {
+  marginTop: '2px',
+};
+
+const styledIcon = {
+  color: 'black',
 };
