@@ -1,5 +1,6 @@
 import { Box, Button, Divider, Stack, Typography } from '@mui/material';
 import { Theme } from '@mui/system';
+import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { theme } from '../theme';
@@ -19,17 +20,31 @@ export default function Basket() {
       <Typography variant="h5">Cart</Typography>
       <Divider />
       {cartItems.length ? (
-        <Stack>
-          {cartItems.map((item) => (
-            <Box key={item.id}>
-              <CheckoutCard
-                item={item}
-                readonly={false}
-              />
-              <Divider />
-            </Box>
-          ))}
-        </Stack>
+        <Fragment>
+          <Stack>
+            {cartItems.map((item) => (
+              <Box key={item.id}>
+                <CheckoutCard
+                  item={item}
+                  readonly={false}
+                />
+                <Divider />
+              </Box>
+            ))}
+          </Stack>
+          <Typography
+            variant="subtitle1"
+            sx={styledTypography}
+            data-cy="total-price"
+          >
+            Total:{' '}
+            {cartItems.reduce(
+              (total, item) => total + item.price * item.quantity,
+              0
+            )}
+            kr
+          </Typography>
+        </Fragment>
       ) : (
         <Box sx={styledEmptyFrame}>
           <Box sx={styledEmptyBox(theme)}>
@@ -38,12 +53,6 @@ export default function Basket() {
               sx={styledEmptyText}
             >
               Your cart is empty!
-            </Typography>
-            <Typography
-              variant="h5"
-              sx={styledEmptyText}
-            >
-              :(
             </Typography>
             <Button
               onClick={countryRoad}
@@ -54,18 +63,6 @@ export default function Basket() {
           </Box>
         </Box>
       )}
-      <Typography
-        variant="subtitle1"
-        sx={styledTypography}
-        data-cy="total-price"
-      >
-        Total:{' '}
-        {cartItems.reduce(
-          (total, item) => total + item.price * item.quantity,
-          0
-        )}
-        kr
-      </Typography>
     </Box>
   );
 }

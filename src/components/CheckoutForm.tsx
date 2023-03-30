@@ -15,7 +15,7 @@ import { theme } from '../theme';
 export default function CheckoutForm() {
   const navigate = useNavigate();
   const { order, updateOrder } = useOrder();
-  const { emptyCart } = useCart();
+  const { emptyCart, cartItems } = useCart();
 
   const formik = useFormik({
     initialValues: {
