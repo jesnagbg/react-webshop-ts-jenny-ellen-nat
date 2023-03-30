@@ -1,8 +1,11 @@
 import { Container, Grid, Typography } from '@mui/material';
 import Basket from '../components/Basket';
 import CheckoutForm from '../components/CheckoutForm';
+import { useCart } from '../contexts/CartContext';
 
 export default function Checkout() {
+  const { cartItems } = useCart();
+
   return (
     <Container maxWidth={'lg'}>
       <Grid
@@ -32,7 +35,7 @@ export default function Checkout() {
           md={5}
           sx={{ gridColumnStart: 8 }}
         >
-          <CheckoutForm />
+          {cartItems.length ? <CheckoutForm /> : null}
         </Grid>
       </Grid>
     </Container>
