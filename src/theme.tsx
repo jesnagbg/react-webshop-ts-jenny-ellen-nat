@@ -39,6 +39,7 @@ export let theme: Theme = createTheme({
     },
     h4: {
       fontSize: '1.5rem',
+      fontWeight: 500,
     },
     h5: {
       fontSize: '1.25rem',
@@ -47,13 +48,6 @@ export let theme: Theme = createTheme({
       fontSize: '1rem',
     },
     body1: {
-      fontSize: '20px',
-      color: '#4f4f4f',
-      '@media (max-width: 600px)': {
-        fontSize: '16px',
-      },
-    },
-    body2: {
       fontSize: '20px',
       color: '#4f4f4f',
       '@media (max-width: 600px)': {
@@ -82,13 +76,6 @@ export let theme: Theme = createTheme({
           'h1, h2, h3, h4, h5, h6': {
             color: '#222',
           },
-        },
-      },
-    },
-    MuiLink: {
-      styleOverrides: {
-        root: {
-          textDecorationLine: 'none',
         },
       },
     },
