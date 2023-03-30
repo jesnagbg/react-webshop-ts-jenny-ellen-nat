@@ -26,6 +26,7 @@ export default function AdminCard({ product }: Props) {
   };
 
   const anchorRef = useRef(null);
+  
 
   return (
     <Card
@@ -43,7 +44,7 @@ export default function AdminCard({ product }: Props) {
         sx={styledCardMedia}
         component="img"
         image={image}
-        alt="Image thumbnail"
+        alt={`${image} thumbnail`}
       />
       <Box sx={styledBox}>
         <CardContent sx={styledCardContent}>
@@ -53,8 +54,8 @@ export default function AdminCard({ product }: Props) {
           >
             {title}
           </Typography>
-          <Typography variant="body1">            
-            Article number: <span data-cy="product-id">{id}</span>          
+          <Typography variant="body1">
+            Article number: <span data-cy="product-id">{id}</span>
           </Typography>
           <Typography variant="body1">Pieces: {pieces}</Typography>
           <Typography
@@ -64,6 +65,19 @@ export default function AdminCard({ product }: Props) {
             {price} SEK
           </Typography>
         </CardContent>
+        {images && (
+          <Box sx={imageContainer}>
+            {images.map((imageUrl, index) => (
+              <CardMedia
+                key={index}
+                component="img"
+                image={imageUrl}
+                alt={`Extra Image ${index + 1}`}
+                sx={extraImageStyle}
+              />
+            ))}
+          </Box>
+        )}
       </Box>
       <Box sx={rightContainer}>
         <IconButton
@@ -74,7 +88,6 @@ export default function AdminCard({ product }: Props) {
         >
           <Clear />
         </IconButton>
-        {/* <Link to={`/admin/edit/${product.id}`} data-cy="admin-edit-product"> */}
         <Link
           to={`/admin/product/${product.id}`}
           data-cy="admin-edit-product"
@@ -104,6 +117,7 @@ const styledBox = {
   display: 'flex',
   flexDirection: 'column',
   flex: '1',
+  justifyContent: "space-between"
 };
 
 const removeButton = {
@@ -116,8 +130,6 @@ const removeButton = {
     backgroundColor: theme.palette.lightGrey.main,
   },
 };
-
-const editLink = {};
 
 const rightContainer = {
   display: 'flex',
@@ -132,4 +144,17 @@ const styledLink = {
   display: 'flex',
   alignItems: 'center',
   fontFamily: 'DM Sans',
+};
+
+const imageContainer = {
+  display: 'flex',
+  flexDirection: 'row',
+  width: '30%',
+};
+
+const extraImageStyle = {
+  width: '50px',
+  height: '50px',
+  objectFit: 'cover',
+  marginLeft: '0.5rem',
 };

@@ -107,6 +107,10 @@ export default function AdminProductForm({
           },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      const filteredImages = (values.images || []).filter(
+        (image) => image.trim() !== ''
+      );
+
       const newProduct: Product = {
         id: isEdit && productFromId ? productFromId.id : generateShortId(),
         image: values.image,
@@ -114,7 +118,7 @@ export default function AdminProductForm({
         description: values.description,
         price: values.price,
         pieces: values.pieces,
-        images: values.images,
+        images: filteredImages,
       };
 
       if (isEdit) {
@@ -284,7 +288,7 @@ export default function AdminProductForm({
               disabled={extraImages.length >= 4}
             >
               Add more images
-            </Button>            
+            </Button>
           </Box>
         </DialogContent>
         <DialogActions sx={buttonContainer}>
