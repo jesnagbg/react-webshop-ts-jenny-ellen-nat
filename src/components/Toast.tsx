@@ -72,7 +72,10 @@ export default function Toast({ snackpack, setSnackpack }: Props) {
               sx={styledImgBox}
             />
             <Box sx={styledTextBox}>
-              <Typography variant="body1">
+              <Typography
+                variant="body1"
+                sx={styledType}
+              >
                 {messageData.cartItem.quantity}x {messageData.cartItem.title}{' '}
                 {messageData.cartItem.quantity > 1 ? 'have' : 'has'} been{' '}
                 {messageData.remove ? 'removed from' : 'added to'} the cart.
@@ -129,11 +132,17 @@ const styledTextBox = {
   flexDirection: 'column',
   justifyContent: 'space-between',
   maxWith: '10rem',
+  color: 'black',
+};
+
+const styledType = {
+  color: 'black',
 };
 
 const styledButton = {
   border: '1px solid black',
   maxWidth: '8rem',
+  color: 'black',
 };
 
 const styledIconButton = {

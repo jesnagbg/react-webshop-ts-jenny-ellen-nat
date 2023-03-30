@@ -101,6 +101,7 @@ const styledLink = {
 
 const styledLogo = {
   fontFamily: 'Adamina',
+  color: 'black',
 };
 
 const styledPersonOutlined = {

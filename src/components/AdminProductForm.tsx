@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogTitle,
   FormHelperTextProps,
-  TextField
+  TextField,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import { useState } from 'react';
@@ -15,8 +15,6 @@ import * as yup from 'yup';
 import { Product } from '../../data';
 import { useProducts } from '../contexts/ProductsContext';
 import AdminButton from './AdminButton';
-
-//--------------------------Interfaces------------------------------//
 
 interface AdminProductFormProps {
   open: boolean;
@@ -34,11 +32,7 @@ const validationSchema = yup.object({
     .string()
     .url('Image must be a valid URL')
     .required('Image required'),
-  images: yup
-    .array()
-    //.of(yup.string().url('Image must be a valid URL'))
-    .max(4, 'You can add up to 4 extra images')
-    .optional(),
+  images: yup.array().max(4, 'You can add up to 4 extra images').optional(),
   price: yup
     .number()
     .min(1, 'Price must be greater than 0')
@@ -52,8 +46,6 @@ const validationSchema = yup.object({
     .min(4, 'Description must be at least four characterns')
     .required('Description required'),
 });
-
-//--------------------------Function------------------------------//
 
 export default function AdminProductForm({
   open,
@@ -133,8 +125,6 @@ export default function AdminProductForm({
       navigate('/admin');
     },
   });
-
-  //--------------------------Return------------------------------//
 
   return (
     <Box>

@@ -28,7 +28,6 @@ export default function CheckoutForm() {
     },
     validationSchema: validationSchema,
 
-    // create new order with updated name
     onSubmit: (values) => {
       const updatedOrder = {
         ...order,
