@@ -17,7 +17,7 @@ export default function ProductDescription({
         >
           {title}
         </Typography>
-        <Typography variant="body1">{pieces} Pieces</Typography>
+        <Typography variant="body2">{pieces} Pieces</Typography>
       </Box>
       <Typography
         sx={styledParagraph}
