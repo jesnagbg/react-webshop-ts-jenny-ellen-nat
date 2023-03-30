@@ -3,7 +3,7 @@
     {
       "name": "Krav G",
       "setup": "npm install",
-      "run": "npx plugga test -- .g.",
+      "run": "npx plugga test --run .g.",
       "input": "",
       "output": "",
       "comparison": "included",
@@ -13,7 +13,7 @@
     {
       "name": "Krav VG",
       "setup": "npm install",
-      "run": "npx plugga test -- .vg.",
+      "run": "npx plugga test --run .vg.",
       "input": "",
       "output": "",
       "comparison": "included",
