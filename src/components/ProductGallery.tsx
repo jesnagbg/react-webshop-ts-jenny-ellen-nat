@@ -56,6 +56,9 @@ export default function ProductGallery({
 const styledBackground = {
   background: theme.palette.lightGrey.main,
   padding: '1rem',
+  '@media (max-width: 400px)': {
+    padding: '10px',
+  },
 };
 
 const styledInnerFrame = {
@@ -63,6 +66,9 @@ const styledInnerFrame = {
   justifyContent: 'center',
   alignItems: 'center',
   height: '60vh',
+  '@media (max-width: 1200px)': {
+    height: 'unset',
+  },
 };
 
 const styledBigImg = {
