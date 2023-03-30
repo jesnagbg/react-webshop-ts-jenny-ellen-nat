@@ -29,6 +29,7 @@ export let theme: Theme = createTheme({
     h1: {
       fontWeight: 400,
       fontSize: '2.25rem',
+      color: 'black',
     },
     h2: {
       fontWeight: 400,
@@ -63,7 +64,7 @@ export let theme: Theme = createTheme({
       main: '#C7D8B7',
     },
     lightGrey: {
-      main: '#F6F6F6',
+      main: '#e7e7e7',
     },
   },
   shape: {
