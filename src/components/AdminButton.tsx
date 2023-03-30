@@ -27,7 +27,8 @@ export default function AdminButton({ to = "", children, onClick, "data-cy": dat
 }
 
 const styledButton = {
-  padding: '.4rem 2.6rem',
+  //padding: '.4rem 2.6rem',
+  padding: { xs: '.4rem 2rem', sm: '.4rem 2.6rem' },
   marginBottom: 2,
   whiteSpace: 'no-wrap',
   backgroundColor: 'white',
@@ -42,3 +43,4 @@ const styledButton = {
 const styledLink = {
   textDecoration: "none",
 }
+
