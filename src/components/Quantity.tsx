@@ -55,12 +55,14 @@ export default function Quantity({ initialValue, valueHandler, min }: Props) {
       </Button>
       <TextField
         sx={error ? styledTextFieldError : styledTextField}
-        data-cy="product-quantity"
         value={valueString}
         inputMode="numeric"
         onChange={handleInputChange}
         onBlur={handleBlur}
         error={error}
+        inputProps={{
+          'data-cy': 'product-quantity',
+        }}
       />
       <Button
         data-cy="increase-quantity-button"

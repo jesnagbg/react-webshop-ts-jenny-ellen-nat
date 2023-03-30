@@ -1,12 +1,14 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { IconButton, Snackbar } from '@mui/material';
 import {
-  Fragment,
-  SetStateAction,
-  SyntheticEvent,
-  useEffect,
-  useState,
-} from 'react';
+  Box,
+  Button,
+  IconButton,
+  Snackbar,
+  SnackbarContent,
+  Typography,
+} from '@mui/material';
+import { SetStateAction, SyntheticEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartItem } from '../../data';
 
 interface Props {
@@ -25,6 +27,8 @@ export default function Toast({ snackpack, setSnackpack }: Props) {
     undefined
   );
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (snackpack.length && !messageData) {
       setMessageData({ ...snackpack[0] });
@@ -40,17 +44,14 @@ export default function Toast({ snackpack, setSnackpack }: Props) {
     setOpen(false);
   };
 
+  const toCheckout = (event: SyntheticEvent | Event, reason?: string) => {
+    handleClose(event, reason);
+    navigate('/checkout');
+  };
+
   const handleExited = () => {
     setMessageData(undefined);
   };
-
-  const action = (
-    <Fragment>
-      <IconButton onClick={handleClose}>
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </Fragment>
-  );
 
   return messageData ? (
     <Snackbar
@@ -59,15 +60,86 @@ export default function Toast({ snackpack, setSnackpack }: Props) {
       open={open}
       autoHideDuration={5000}
       onClose={handleClose}
-      message={`${messageData.cartItem.quantity}x ${
-        messageData.cartItem.title
-      } ${messageData.cartItem.quantity > 1 ? 'have' : 'has'} been ${
-        messageData.remove ? 'removed from' : 'added to'
-      } the cart.`}
-      action={action}
       TransitionProps={{ onExited: handleExited }}
-    />
-  ) : (
-    <></>
-  );
+      sx={styledSnackbar}
+    >
+      <SnackbarContent
+        message={
+          <Box sx={styledContainerBox}>
+            <Box
+              component="img"
+              src={messageData.cartItem.image}
+              sx={styledImgBox}
+            />
+            <Box sx={styledTextBox}>
+              <Typography variant="body1">
+                {messageData.cartItem.quantity}x {messageData.cartItem.title}{' '}
+                {messageData.cartItem.quantity > 1 ? 'have' : 'has'} been{' '}
+                {messageData.remove ? 'removed from' : 'added to'} the cart.
+              </Typography>
+              {!messageData.remove ? (
+                <Button
+                  sx={styledButton}
+                  onClick={toCheckout}
+                >
+                  TO CHECKOUT
+                </Button>
+              ) : null}
+            </Box>
+          </Box>
+        }
+        action={
+          <IconButton
+            onClick={handleClose}
+            sx={styledIconButton}
+          >
+            <CloseIcon
+              fontSize="small"
+              sx={styledIcon}
+            />
+          </IconButton>
+        }
+      ></SnackbarContent>
+    </Snackbar>
+  ) : null;
 }
+
+const styledSnackbar = {
+  '& .MuiSnackbarContent-root': {
+    backgroundColor: 'white',
+    color: 'black',
+    border: '1px solid black',
+    flexWrap: 'nowrap',
+    alignItems: 'start',
+  },
+};
+
+const styledContainerBox = {
+  display: 'flex',
+  maxWidth: '20rem',
+};
+
+const styledImgBox = {
+  maxWidth: '30%',
+  marginRight: '1rem',
+};
+
+const styledTextBox = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  maxWith: '10rem',
+};
+
+const styledButton = {
+  border: '1px solid black',
+  maxWidth: '8rem',
+};
+
+const styledIconButton = {
+  marginTop: '2px',
+};
+
+const styledIcon = {
+  color: 'black',
+};
