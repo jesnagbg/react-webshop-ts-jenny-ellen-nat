@@ -36,7 +36,7 @@ const validationSchema = yup.object({
     .required('Image required'),
   images: yup
     .array()
-    .of(yup.string().url('Image must be a valid URL'))
+    //.of(yup.string().url('Image must be a valid URL'))
     .max(4, 'You can add up to 4 extra images')
     .optional(),
   price: yup
