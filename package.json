@@ -1,11 +1,8 @@
 {
-  "name": "@plugga-tech/react-webshop-ts",
   "description": "En inlämningsuppgift där de studerande bygger en webbshop i react & ts.",
   "version": "1.0.0",
   "type": "module",
   "keywords": [],
-  "author": "Plugga Tech",
-  "license": "ISC",
   "scripts": {
     "postinstall": "plugga init",
     "dev": "vite",
